@@ -2,43 +2,33 @@ import axios from 'axios';
 
 import * as reducers from './reducers';
 
-import R from 'ramda';
-
-//import { devTools, persistState } from 'redux-devtools';
+import { 
+  createStore,
+  compose,
+  combineReducers,
+  applyMiddleware,
+  bindActionCreators
+} from 'redux';
 
 import thunk from 'redux-thunk';
 
-import { createStore, compose, combineReducers, applyMiddleware, bindActionCreators } from 'redux';
+import * as actions from './actions';
 
-import * as actions from './actions'
+import { is } from './helpers';
 
-const createHistory = require('history/lib/createHashHistory');
+export const reducer = combineReducers(reducers)
 
-const {syncReduxAndRouter, routeReducer} = require('redux-simple-router');
-
-export const history = createHistory()
-
-export const reducer = combineReducers(Object.assign({}, reducers, {
-  routing: routeReducer
-}))
-
-const storeFn = compose(
-  applyMiddleware(thunk)
-//, devTools()
-//, persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
-);
+const storeFn = compose(applyMiddleware(thunk));
 
 export const store = storeFn(createStore)(reducer);
-
-syncReduxAndRouter(history, store)
 
 export const bind = (dispatch, creators = actions) => {
   return bindActionCreators(creators, dispatch);
 }
 
-export const processResponse = r => {
-  if (R.is(Object, r.data)) {
-    const {data} = r,
+export const processResponse = result => {
+  if (is(Object, result.data)) {
+    const {data} = result,
       {errors, messages} = data,
       messagesPresent = Array.isArray(messages) && messages.length,
       errorsPresent = Array.isArray(errors) && errors.length;
@@ -51,27 +41,23 @@ export const processResponse = r => {
       store.dispatch(actions.dumpMessagesFromResponse(messages));
     }
 
-    return r.data;
+    return result.data;
   }
-  return r;
+
+  return result;
 }
 
 export const request = (() => {
   const instance = axios;
 
-  instance.interceptors.response.use(function(response) {
+  instance.interceptors.response.use((response) => {
     return processResponse(response);
-  }, function(error) {
+  }, (error) => {
     processResponse(error);
     return Promise.reject(error);
   });
 
   return instance;
 })();
-
-window._reducer = reducer;
-window._store = store;
-window._actions = actions;
-
 
 export const bounceTime = 300;

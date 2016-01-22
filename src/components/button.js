@@ -4,8 +4,6 @@ import Icon from './icon';
 
 import Base from './base';
 
-import { Link } from 'react-router';
-
 class Button extends Base {
   static defaultProps = {
     type: "btn-default"
@@ -35,7 +33,7 @@ class Button extends Base {
 
     props.className = className.join(' ');
 
-    if(!this.props.to) {
+    if(!this.props.href) {
       return (
         <button type={ submit ? "submit" : "button" } {...props}>
           { icon }
@@ -44,10 +42,10 @@ class Button extends Base {
         );
     } else {
       return (
-        <Link {...props}>
+        <a {...props}>
           { icon }
           { this.props.children || this.props.text }
-        </Link>
+        </a>
         );
     }
   }
