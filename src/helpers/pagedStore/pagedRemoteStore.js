@@ -6,101 +6,26 @@ import thunk from 'redux-thunk';
 
 import axios from 'axios';
 
-import resultHasErrors from '../resultHasErrors';
+import url from 'url';
 
-const actions = {
-  isLoading(state = true) {
-    return {
-      type: state ? 'IS_LOADING' : 'STOP_LOADING'
-    };
-  },
-  init() {
-    return (dispatch, getState) => {
-      dispatch(actions.fetchItems());
-    }
-  },
-  fetchItems() {
-    return (dispatch, getState) => {
-      const {source, itemsPerPage, page, filter} = getState();
+class URLSource {
+  constructor(source) {
+    this.source = source;
+  }
+  build(query, limit, page) {
+    const { source } = this;
 
-      dispatch(actions.isLoading());
-
-      axios.get(source, {
-        params: {
-          count: itemsPerPage,
-          page,
-          q: filter
-        }
-      }).then((response) => {
-        if (!resultHasErrors(response)) {
-          const {parcel: {total, result}} = response;
-          dispatch(actions.setItems(result, total));
-
-          dispatch(actions.isLoading(false));
-        }
-      });
-    }
-  },
-  filter(data) {
-    return dispatch => {
-      dispatch({
-        type: 'FILTER',
-        data
-      });
-      dispatch(actions.fetchItems());
-    }
-  },
-  firstPage() {
-    return dispatch => {
-      dispatch({
-        type: 'FIRST_PAGE'
-      });
-      dispatch(actions.fetchItems());
-    }
-  },
-  nextPage() {
-    return dispatch => {
-      dispatch({
-        type: 'NEXT_PAGE'
-      });
-      dispatch(actions.fetchItems());
-    }
-  },
-  prevPage() {
-    return dispatch => {
-      dispatch({
-        type: 'PREV_PAGE'
-      });
-      dispatch(actions.fetchItems());
-    }
-  },
-  lastPage() {
-    return dispatch => {
-      dispatch({
-        type: 'LAST_PAGE'
-      });
-      dispatch(actions.fetchItems());
-    }
-  },
-  goToPage(data) {
-    return dispatch => {
-      dispatch({
-        type: 'GO_TO_PAGE',
-        data
-      });
-      dispatch(actions.fetchItems());
-    }
-  },
-  setItems(items, total) {
-    return {
-      type: 'SET_ITEMS',
-      data: {
-        items,
-        total
-      }
+    if (source instanceof Function) {
+      return source(query || '', limit, page);
+    } else {
+      return url.format(Object.assign({}, url.parse(source), {query: {
+        count: limit,
+        page,
+        q: query
+      }}))
     }
   }
-};
+}
 
 const m = (a1 = null, a2 = null) => {
   if (a1 !== null && a2 !== null) {
@@ -112,9 +37,105 @@ const m = (a1 = null, a2 = null) => {
   }
 }
 
-const dataStore = (source, itemsPerPage = 15, page = 1) => {
+const dataStore = (_source, responseFilter = _ => _, itemsPerPage = 15, page = 1) => {
+  const source = new URLSource(_source);
+
+  console.log(source);
+
+  const actions = {
+    isLoading(state = true) {
+      return {
+        type: state ? 'IS_LOADING' : 'STOP_LOADING'
+      };
+    },
+    init() {
+      return (dispatch, getState) => {
+        dispatch(actions.fetchItems());
+      }
+    },
+    fetchItems() {
+      return (dispatch, getState) => {
+        const {itemsPerPage, page, filter} = getState();
+
+        dispatch(actions.isLoading());
+
+        axios.get(source.build(filter, itemsPerPage, page)).then((response) => {
+          const { items, total } = responseFilter(response);
+
+          dispatch(actions.setItems(items, total));
+          dispatch(actions.isLoading(false));
+        }).catch((ex) => {
+          // we don't treat exception as fatal,
+          // those exception may be caused by empty querystrings,
+          // or some  "it's ok" error
+          dispatch(actions.setItems([], 0));
+          dispatch(actions.isLoading(false));
+        });
+      }
+    },
+    filter(data) {
+      return dispatch => {
+        dispatch({
+          type: 'FILTER',
+          data
+        });
+        dispatch(actions.fetchItems());
+      }
+    },
+    firstPage() {
+      return dispatch => {
+        dispatch({
+          type: 'FIRST_PAGE'
+        });
+        dispatch(actions.fetchItems());
+      }
+    },
+    nextPage() {
+      return dispatch => {
+        dispatch({
+          type: 'NEXT_PAGE'
+        });
+        dispatch(actions.fetchItems());
+      }
+    },
+    prevPage() {
+      return dispatch => {
+        dispatch({
+          type: 'PREV_PAGE'
+        });
+        dispatch(actions.fetchItems());
+      }
+    },
+    lastPage() {
+      return dispatch => {
+        dispatch({
+          type: 'LAST_PAGE'
+        });
+        dispatch(actions.fetchItems());
+      }
+    },
+    goToPage(data) {
+      return dispatch => {
+        dispatch({
+          type: 'GO_TO_PAGE',
+          data
+        });
+        dispatch(actions.fetchItems());
+      }
+    },
+    setItems(items, total) {
+      return {
+        type: 'SET_ITEMS',
+        data: {
+          items,
+          total
+        }
+      }
+    }
+  };
+
+
   const initialState = {
-    source,
     itemsPerPage,
     page,
     total: 0,
