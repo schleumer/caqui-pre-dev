@@ -2,6 +2,10 @@ import React, { PropTypes } from 'react';
 
 import Icon from '../icon';
 
+import * as Styles from '../../styles';
+
+const styles = Styles.comboBox;
+
 export default class Shadow extends React.Component {
   constructor(props) {
     super(props);
@@ -37,9 +41,9 @@ export default class Shadow extends React.Component {
     }
 
     return (
-      <div className="combobox-display" tabIndex={ data.opened ? '-1' : '0' } onFocus={ this.displayFocused } onClick={ this.displayFocused } ref="displayer">
-        { label }
-        <div className="combobox-display-icon" tabIndex="-1">
+      <div tabIndex={ data.opened ? '-1' : '0' } onFocus={ this.displayFocused } onClick={ this.displayFocused } ref="displayer" style={styles.shadow.display}>
+        <span style={styles.shadow.displayLabel}>{ label }</span>
+        <div tabIndex="-1" style={styles.shadow.displayIcon}>
           <Icon name="search" />
         </div>
       </div>

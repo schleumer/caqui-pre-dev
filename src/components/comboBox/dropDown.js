@@ -1,5 +1,11 @@
 import React, { PropTypes } from 'react';
 
+import * as Styles from '../../styles';
+
+const styles = Styles.comboBox;
+
+import TextInput from '../textInput';
+
 export default class Dropdown extends React.Component {
   constructor(props) {
     super(props);
@@ -65,8 +71,8 @@ export default class Dropdown extends React.Component {
 
   componentDidMount() {
     const {search} = this.refs;
-    search.focus();
-    search.selectionStart = search.selectionEnd = search.value.length;
+    search.dispatch("focus");
+    //search.selectionStart = search.selectionEnd = search.value.length;
   }
 
   select(item) {
@@ -86,18 +92,22 @@ export default class Dropdown extends React.Component {
     let popupMessage = null;
 
     const items = data.items.map((e, index) => {
-      const classes = [];
+      let style = styles.dropDown.listItem;
+      let anchorStyle = styles.dropDown.listItemAnchor;
+
       if (index == data.position) {
-        classes.push('active');
+        style = {...style, ...styles.dropDown.listItemActive};
+        anchorStyle = {...anchorStyle, ...styles.dropDown.listItemAnchorActive};
       }
       if (data.selected) {
         if (itemKey(data.selected) === itemKey(e)) {
-          classes.push('selected');
+          style = {...style, ...styles.dropDown.listItemSelected};
+          anchorStyle = {...anchorStyle, ...styles.dropDown.listItemAnchorSelected};
         }
       }
       return (
-        <li key={ itemKey(e) } className={ classes.join(' ') }>
-          <a href="javascript:;" onClick={ this.select(e) } tabIndex="-1">
+        <li key={ itemKey(e) } style={style}>
+          <a href="javascript:;" onClick={ this.select(e) } tabIndex="-1" style={anchorStyle}>
             { itemLabel(e) }
           </a>
         </li>
@@ -106,23 +116,31 @@ export default class Dropdown extends React.Component {
       );
 
       if (items.length < 1) {
-        popupMessage = <li className="dropdown-menu-text">Não há resultados</li>
+        popupMessage = <li style={styles.dropDown.text}>Não há resultados</li>
       }
 
       return (
-        <div style={ {  userSelect: 'none'} } ref="holder">
-          <ul className="combobox-dropdown-menu dropdown-menu" style={ {  display: 'block'} }>
-            <li className="dropdown-menu-search">
-              <input type="text" className="form-control" ref="search" defaultValue={ data.filter } onChange={ this.onInput } onBlur={ this.onBlur } onFocus={ this.onFocus }
-              onKeyDown={ this.onKeyDown } />
-            </li>
-            { items }
-            { popupMessage }
-            <li role="separator" className="divider"></li>
-            <li className="dropdown-menu-text">
-              { data.status }
-            </li>
-          </ul>
+        <div style={ styles.dropDown.holder } ref="holder">
+          <div style={styles.dropDown.menu }>
+            <ul style={ styles.dropDown.list }>
+              <li style={ styles.dropDown.listSearch}>
+                <TextInput
+                       style={styles.dropDown.listSearchInput} 
+                       ref="search"
+                       defaultValue={ data.filter }
+                       onChange={ this.onInput }
+                       onBlur={ this.onBlur }
+                       onFocus={ this.onFocus }
+                       onKeyDown={ this.onKeyDown } />
+              </li>
+              { items }
+              { popupMessage }
+              <li role="separator" style={styles.dropDown.divider}></li>
+              <li style={{...styles.dropDown.text, ...styles.dropDown.footerText}}>
+                { data.status }
+              </li>
+            </ul>
+          </div>
         </div>
         )
     }

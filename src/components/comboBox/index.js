@@ -8,6 +8,10 @@ import storeBuilder from './storeBuilder';
 import Shadow from './shadow';
 import Dropdown from './dropDown';
 
+import * as Styles from '../../styles';
+
+const styles = Styles.comboBox;
+
 class ComboBox extends React.Component {
   static propTypes = {
     form: PropTypes.string
@@ -84,24 +88,15 @@ class ComboBox extends React.Component {
   }
 
   render() {
-    const classes = ['combobox'];
     const data = this.state;
 
     const {itemKey, itemLabel} = this.props;
     let dropdown = null;
     let label = null;
-    let style = {
-      position: 'relative',
-      display: 'inline-block',
-      verticalAlign: 'middle'
-    };
-
-    if (this.props.className) {
-      classes.push(this.props.className);
-    }
+    let style = {...styles.root.holder};
 
     if (this.props.label) {
-      label = <label>{ this.props.label }</label>;
+      label = <label style={styles.root.label}>{ this.props.label }</label>;
     }
 
     style = Object.assign(style, this.props.style);
@@ -119,7 +114,7 @@ class ComboBox extends React.Component {
     return (
       <Form.Group>
         { label }
-        <div style={ style } className={ classes.join(' ') } ref="holder">
+        <div style={ style } ref="holder">
           <Shadow {...childProps} ref="shadow" />
           { dropdown }
         </div>

@@ -1,8 +1,18 @@
 import React from 'react';
-import ColumnBreakpoints from '../helpers/columnBreakpoints'
-import ColumnOffsets from '../helpers/columnOffsets'
+import ColumnBreakpoints from '../helpers/columnBreakpoints';
+import ColumnOffsets from '../helpers/columnOffsets';
+
+import * as Styles from '../styles';
+const styles = Styles.root;
 
 import Base from './base';
+
+const breakPointPriotity = {
+  "x-small": 1,
+  "small": 2,
+  "medium": 3,
+  "large": 4
+}
 
 class Column extends Base {
   constructor(props) {
@@ -10,27 +20,29 @@ class Column extends Base {
     this.displayName = 'Column';
   }
   render() {
-    // @todo better coding style
+    let currentBreakPoint = "large";
+    let size = this.props.size;
+    let offsets = null;
+    let style = {...styles.column, ...this.props.style}
 
-    const offsets = this.props.offset;
-
-    let sizes = this.props.size;
-    let classes = [];
-
-    if (!sizes) {
-      sizes = Column.from()
-    }
-
-    if (sizes && (sizes instanceof ColumnBreakpoints)) {
-      classes = classes.concat(sizes.toArray());
+    if (size && (size instanceof ColumnBreakpoints)) {
+      size = size.get();
+    } else {
+      size = Column.from().get();
     }
 
     if (offsets && (offsets instanceof ColumnOffsets)) {
-      classes = classes.concat(offsets.toArray());
+      offsets = offsets.get();
     }
 
+    if (offsets) {
+      style = {...style, marginLeft: (100 / (12 / offsets[currentBreakPoint])) + "%"}
+    }
+
+    style = {...style, width: (100 / (12 / size[currentBreakPoint])) + "%"}
+
     return (
-      <div {...this.props} className={ classes.join(' ') } style={ {  ...this.props.style} }>
+      <div {...this.props} style={ style }>
         { this.props.children }
       </div>
       );

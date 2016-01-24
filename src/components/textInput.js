@@ -10,6 +10,10 @@ import { createEvent, modelize } from '../helpers';
 
 import * as system from '../system';
 
+import * as Styles from '../styles';
+
+const styles = Styles.textInput;
+
 let objectId = 1;
 
 class TextInput extends Base {
@@ -46,6 +50,7 @@ class TextInput extends Base {
         this.props.onChange(createEvent(evt, this, newValue));
       }
     }, system.bounceTime);
+
   }
   getValue() {
     return this.state.value;
@@ -73,10 +78,15 @@ class TextInput extends Base {
     this.state.value = this.props.value || null;
     this.makeId(this.props);
   }
+  focus() {
+    this.refs.input.focus();
+  }
   render() {
     // @todo helper
     const label = this.props.label || null;
     const placeholder = this.props.placeholder || label;
+    let style = { ...styles.normal, ...this.props.style };
+    let props = this.props;
 
     let alertBox = null;
 
@@ -89,7 +99,14 @@ class TextInput extends Base {
         { label && <label>
                      { label }
                    </label> }
-        <input type="text" className="form-control" placeholder={ placeholder } onChange={ this.onChange } value={ this.state.value } ref="input" />
+        <input
+          {...props}
+          type="text"
+          style={ style }
+          placeholder={ placeholder }
+          onChange={ this.onChange }
+          value={ this.state.value }
+          ref="input" />
         { alertBox }
       </Form.Group>
       );

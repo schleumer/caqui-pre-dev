@@ -2,6 +2,10 @@ import React from 'react';
 
 import Base from '../components/base';
 
+function getDisplayName(WrappedComponent) {
+  return WrappedComponent.displayName || WrappedComponent.name || 'Component'
+}
+
 export default (WrappedElement) => {
   class ModelizeWrapper extends Base {
     static propTypes = WrappedElement.propTypes;
@@ -84,6 +88,15 @@ export default (WrappedElement) => {
         return model.getValue(name);
       } else {
         return this.refs.element.getValue();
+      }
+    }
+
+    dispatch(method, ...args) {
+      // sorry, world
+      if (WrappedElement.prototype.hasOwnProperty(method)) {
+        this.refs.element[method].apply(this.refs.element, args);
+      } else {
+        throw new ReferenceError(`${method} is not defined on ${getDisplayName(WrappedElement)}`)
       }
     }
 

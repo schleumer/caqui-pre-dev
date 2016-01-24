@@ -1,21 +1,5 @@
 import R from 'ramda';
 
-const classTemplate = "col-$1-offset-$2";
-const devicesSizes = {
-  "x-small": "xs",
-  "small": "sm",
-  "medium": "md",
-  "large": "lg"
-};
-
-const sizesObjToString = R.pipe(
-  R.toPairs,
-  R.map(s => classTemplate
-      .replace('$1', (devicesSizes.hasOwnProperty(s[0]) ? devicesSizes[s[0]] : s[0]))
-      .replace('$2', s[1])
-  ));
-
-
 class ColumnOffsets {
   constructor(large = 12, medium = 12, small = 12, extraSmall = 12) {
     this.offsets = {
@@ -26,8 +10,8 @@ class ColumnOffsets {
     };
   }
 
-  toArray() {
-    return sizesObjToString(this.offsets);
+  get() {
+    return this.offsets;
   }
 
   large(size = 12) {

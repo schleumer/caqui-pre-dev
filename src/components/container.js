@@ -2,6 +2,10 @@ import React from 'react';
 
 import Base from './base';
 
+import * as Styles from '../styles';
+
+const styles = Styles.container;
+
 class Container extends Base {
   constructor(props) {
     super(props);
@@ -9,14 +13,18 @@ class Container extends Base {
   }
   render() {
     // @todo coding style
-    const className = [this.props.fluid ? "container-fluid" : "container"];
+    let style = {
+      ...styles.normal,
+      ...this.props.style,
+      width: '1280px'
+    };
 
-    if (this.props.className) {
-      className.push(this.props.className);
-    }
+    //if (this.props.className) {
+    //  className.push(this.props.className);
+    //}
 
     return (
-      <div {...this.props} className={ className.join(' ') } style={ {  ...this.props.style} }>
+      <div {...this.props} style={ style }>
         { this.props.children }
       </div>
       );

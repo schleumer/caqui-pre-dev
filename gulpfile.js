@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const changed = require('gulp-changed');
 const watch = require('gulp-watch');
+const plumber = require('gulp-plumber');
 
 const babelConfig = {
   "plugins": [
@@ -17,6 +18,7 @@ const babelConfig = {
 
 gulp.task('babel', () => {
 	return gulp.src('src/**/*.js')
+    .pipe(plumber())
     .pipe(changed('lib'))
 		.pipe(babel(babelConfig))
 		.pipe(gulp.dest('lib'));
