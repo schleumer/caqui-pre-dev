@@ -51,6 +51,10 @@ class TextInput extends Base {
       }
     }, system.bounceTime);
 
+    if (this.props.onChange) {
+      this.props.onChange(evt);
+    }
+
   }
   getValue() {
     return this.state.value;

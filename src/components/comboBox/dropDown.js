@@ -27,7 +27,7 @@ export default class Dropdown extends React.Component {
     }
 
     this.inputDebounce = setTimeout(() => {
-      store.dispatch(store.actions.filter(this.refs.search.value));
+      store.dispatch(store.actions.filter(this.refs.search.getValue()));
     }, 300);
   }
 

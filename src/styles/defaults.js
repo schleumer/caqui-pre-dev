@@ -27,7 +27,7 @@ const stylesheet = {
     listStyle: 'none'
   },
   listItemAnchor: {
-    padding: '5px 20px',
+    padding: '12px',
     display: 'block'
   },
   dropDown: {

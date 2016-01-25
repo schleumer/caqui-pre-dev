@@ -67,6 +67,10 @@ export default (WrappedElement) => {
       const {name, model} = this.props;
 
       return ({event, target, data}) => {
+        if (this.props.onChange) {
+          this.props.onChange(event);
+        }
+
         if (model && name) {
           model.setValue(name, data);
         }
