@@ -12,6 +12,7 @@ import * as system from '../system';
 
 import * as Styles from '../styles';
 
+console.log(Styles)
 const styles = Styles.textInput;
 
 let objectId = 1;
@@ -50,11 +51,6 @@ class TextInput extends Base {
         this.props.onChange(createEvent(evt, this, newValue));
       }
     }, system.bounceTime);
-
-    if (this.props.onChange) {
-      this.props.onChange(evt);
-    }
-
   }
   getValue() {
     return this.state.value;
@@ -100,7 +96,7 @@ class TextInput extends Base {
 
     return (
       <Form.Group>
-        { label && <label>
+        { label && <label style={styles.label}>
                      { label }
                    </label> }
         <input
