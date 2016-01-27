@@ -1,6 +1,29 @@
 import root from './root';
 
 const stylesheet = {
+  button: {
+    display: 'inline-block',
+    marginBottom: 0,
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    MsTouchAction: 'manipulation',
+    touchAction: 'manipulation',
+    cursor: 'pointer',
+    backgroundImage: 'none',
+    whiteSpace: 'nowrap',
+    lineHeight: 1.42857143,
+    borderRadius: 4,
+    WebkitUserSelect: 'none',
+    MozUserSelect: 'none',
+    MsUserSelect: 'none',
+    userSelect: 'none',
+    padding: '10px 12px 7px',
+    borderWidth: '0 1px 4px 1px',
+    borderStyle: 'solid',
+    fontSize: '12px',
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
+  },
   input: {
     ...root.text,
     display: 'block',

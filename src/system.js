@@ -63,12 +63,9 @@ export const request = (() => {
 
 export const bounceTime = 300;
 
-export const m = function(...args) {
-  return args.reduce((left, right) => {
-    if(right) {
-      return Object.assign({}, left, right);
-    } else {
-      return left;
-    }
-  }, {});
-}
+export const m = (...args) =>
+  args.reduce((left, right) =>
+    right 
+      ? Object.assign({}, left, right) 
+      : left
+  , {});
