@@ -12,9 +12,10 @@ import * as system from '../system';
 
 import * as Styles from '../styles';
 
-console.log(Styles)
 const styles = Styles.textInput;
+const m = system.m;
 
+/// XXX: ?????????????
 let objectId = 1;
 
 class TextInput extends Base {
@@ -32,6 +33,8 @@ class TextInput extends Base {
     }
 
     this.onChange = this.onChange.bind(this);
+    this.onBlur = this.onBlur.bind(this);
+    this.onFocus = this.onFocus.bind(this);
 
     this.inputDebounce = null;
   }
@@ -60,7 +63,8 @@ class TextInput extends Base {
   }
   setValue(value) {
     this.setState({
-      value: value
+      value: value,
+      focused: false
     });
   }
   makeId(props) {
@@ -81,11 +85,27 @@ class TextInput extends Base {
   focus() {
     this.refs.input.focus();
   }
+  onFocus() {
+    this.setState({focused: true});
+    
+    if(this.props.onFocus) {
+      this.props.onFocus.apply(null, arguments)
+    }
+  }
+  onBlur() {
+    this.setState({focused: false});
+
+    if(this.props.onBlur) {
+      this.props.onBlur.apply(null, arguments)
+    }
+  }
   render() {
     // @todo helper
     const label = this.props.label || null;
     const placeholder = this.props.placeholder || label;
-    let style = { ...styles.normal, ...this.props.style };
+
+    let style = m({ ...styles.normal, ...this.props.style }, this.state.focused && styles.focused);
+    
     let props = this.props;
 
     let alertBox = null;
@@ -105,6 +125,8 @@ class TextInput extends Base {
           style={ style }
           placeholder={ placeholder }
           onChange={ this.onChange }
+          onFocus={ this.onFocus }
+          onBlur={ this.onBlur }
           value={ this.state.value }
           ref="input" />
         { alertBox }

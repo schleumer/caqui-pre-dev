@@ -28,20 +28,21 @@ export const bind = (dispatch, creators = actions) => {
 
 export const processResponse = result => {
   if (is(Object, result.data)) {
-    const {data} = result,
-      {errors, messages} = data,
-      messagesPresent = Array.isArray(messages) && messages.length,
-      errorsPresent = Array.isArray(errors) && errors.length;
+    const { data } = result;
+    
+    //   {errors, messages} = data,
+    //   messagesPresent = Array.isArray(messages) && messages.length,
+    //   errorsPresent = Array.isArray(errors) && errors.length;
 
-    if (errorsPresent) {
-      store.dispatch(actions.dumpErrorsFromResponse(errors));
-    }
+    // if (errorsPresent) {
+    //   store.dispatch(actions.dumpErrorsFromResponse(errors));
+    // }
 
-    if (messagesPresent) {
-      store.dispatch(actions.dumpMessagesFromResponse(messages));
-    }
+    // if (messagesPresent) {
+    //   store.dispatch(actions.dumpMessagesFromResponse(messages));
+    // }
 
-    return result.data;
+    return data;
   }
 
   return result;
@@ -61,3 +62,13 @@ export const request = (() => {
 })();
 
 export const bounceTime = 300;
+
+export const m = function(...args) {
+  return args.reduce((left, right) => {
+    if(right) {
+      return Object.assign({}, left, right);
+    } else {
+      return left;
+    }
+  }, {});
+}

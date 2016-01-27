@@ -29,7 +29,7 @@
     "reselect": "^2.0.2"
   },
   "peerDependencies": {
-    "react": "^0.14.6",
+    "react": "^0.14.0",
     "react-redux": "^4.0.6",
     "redux": "^3.0.5"
   },
