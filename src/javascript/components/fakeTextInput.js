@@ -110,13 +110,15 @@ class TextInput extends Base {
       alertBox = <AlertBox silence={ true } namespace={ this.id } />;
     }
 
+    const placeholderEl = <span className="caqui-fake-text-input-placeholder">{ placeholder || label }</span>;
+
     return (
       <Form.Group>
         { label && <label style={styles.label}>
                      { label }
                    </label> }
         <div className="caqui-fake-text-input">
-          { this.state.value || this.props.children }
+          { (this.state.value || this.props.children) || placeholderEl}
         </div>
         { alertBox }
       </Form.Group>
