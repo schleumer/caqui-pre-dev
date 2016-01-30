@@ -1,6 +1,9 @@
 # caqui
 CaqUI - totally experimental and s**ty quality coding project, please, don't use it, never.
 
+# :warning::warning: DISCLAIMER :warning::warning:
+
+It's now a trash repo, i will rebase and reupload it when the pre-dev stage ends. 
 
 TODO
 =============================
