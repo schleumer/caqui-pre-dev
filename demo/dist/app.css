@@ -7242,6 +7242,9 @@ fieldset[disabled] .caqui-button-link:focus {
   display: block;
   width: 100%;
 }
+.caqui-form-group {
+  margin-bottom: 15px;
+}
 .caqui-form-control {
   display: block;
   width: 100%;
@@ -7347,6 +7350,9 @@ textarea.caqui-fake-text-input {
 }
 .caqui-fake-text-input-placeholder {
   color: #999999;
+}
+.caqui-combobox-shadow-holder {
+  position: relative;
 }
 .caqui-page-header-icon {
   font-size: 35px;

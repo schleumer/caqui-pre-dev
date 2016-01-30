@@ -102,7 +102,6 @@ class TextInput extends Base {
     const props = this.props,
           { label, placeholder, className } = props;
     // @todo helper
-    const classNames = cx('caqui-form-control', className);
 
     let alertBox = null;
 
@@ -113,7 +112,7 @@ class TextInput extends Base {
     const placeholderEl = <span className="caqui-fake-text-input-placeholder">{ placeholder || label }</span>;
 
     return (
-      <Form.Group>
+      <Form.Group {...props}>
         { label && <label style={styles.label}>
                      { label }
                    </label> }

@@ -1,4 +1,5 @@
 import React from 'react';
+import cx from 'classnames';
 
 import Base from '../base';
 
@@ -16,7 +17,7 @@ class Group extends Base {
     const children = this.props.children;
 
     return (
-      <div style={styles.group}>
+      <div {...this.props} className={cx("caqui-form-group", this.props.className)}>
         { children }
       </div>
       );

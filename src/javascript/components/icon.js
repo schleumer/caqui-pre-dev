@@ -1,5 +1,5 @@
 import React from 'react';
-
+import cx from 'classnames';
 import Base from './base';
 
 class Icon extends Base {
@@ -16,15 +16,11 @@ class Icon extends Base {
       position: 'relative',
       ...this.props.style
     };
+    const classNames = cx("caqui-icon", this.props.className);
 
-    let classes = ["icon"];
     let name = this.props.name;
 
-    if (this.props.className) {
-      classes = classes.concat(this.props.className.split(' '));
-    }
-
-    // spacial icon ;)
+    // special icon ;)
     if (name == 'backward') {
       name = 'forward';
       style.transform = 'rotate(180deg)';
@@ -34,7 +30,7 @@ class Icon extends Base {
     }
 
     return (
-      <svg className={ classes.join(' ') } style={ style }>
+      <svg className={ classNames } style={ style }>
         <use xlinkHref={ "#icon-" + name }></use>
       </svg>
       );

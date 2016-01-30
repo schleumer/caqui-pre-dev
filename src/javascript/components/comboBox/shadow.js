@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import Icon from '../icon';
+import FakeTextInput from '../fakeTextInput';
 
 import * as Styles from '../../styles';
 
@@ -41,12 +42,17 @@ export default class Shadow extends React.Component {
     }
 
     return (
-      <div tabIndex={ data.opened ? '-1' : '0' } onFocus={ this.displayFocused } onClick={ this.displayFocused } ref="displayer" style={styles.shadow.display}>
-        <span style={styles.shadow.displayLabel}>{ label }</span>
-        <div tabIndex="-1" style={styles.shadow.displayIcon}>
+      <FakeTextInput
+        tabIndex={ data.opened ? '-1' : '0' }
+        onFocus={ this.displayFocused }
+        onClick={ this.displayFocused }
+        ref="displayer"
+        className="caqui-combobox-shadow-holder">
+        <span className="caqui-combobox-shadow">{ label }</span>
+        <div tabIndex="-1" className="caqui-combobox-shadow-icon">
           <Icon name="search" />
         </div>
-      </div>
+      </FakeTextInput>
       );
   }
 }
