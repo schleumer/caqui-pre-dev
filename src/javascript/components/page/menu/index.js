@@ -10,7 +10,7 @@ class Menu extends Base {
 
   render() {
     return (
-      <div className="page__menu">
+      <div className="caqui-page-menu">
         { this.props.children }
       </div>
       );

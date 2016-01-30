@@ -9,7 +9,7 @@ class Left extends Base {
   }
   render() {
     return (
-      <div className="pull-left">
+      <div className="caqui-page-left pull-left">
         { this.props.children }
       </div>
       );

@@ -16,6 +16,15 @@ import * as actions from './actions';
 
 import { is } from './helpers';
 
+// THIS IS WRONG, THIS IS SO WRONG
+// TODO: Another way to do this!
+const iconsFile = require('./icons.svg');
+const body = document.getElementsByTagName("body")[0];
+const iconsElement = document.createElement("div");
+iconsElement.style.display = "none";
+iconsElement.innerHTML = iconsFile;
+body.appendChild(iconsElement);
+
 export const reducer = combineReducers(reducers)
 
 const storeFn = compose(applyMiddleware(thunk));

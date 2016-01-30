@@ -54,6 +54,7 @@ var compiler = webpack({
   },
   module: {
     loaders: [
+      { test: /\.svg$/, loader: "raw" },
       {
         loader: "babel",
 

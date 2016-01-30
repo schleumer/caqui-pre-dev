@@ -26,6 +26,12 @@ gulp.task('babel', () => {
 		.pipe(gulp.dest('lib'));
 });
 
+gulp.task('copy-files', () => {
+  return gulp.src(['./src/javascript/icons.svg'])
+    .pipe(plumber())
+    .pipe(gulp.dest('lib'));
+});
+
 gulp.task('dev-less', () => {
   return gulp.src('./demo/src/less/app.less')
     .pipe(plumber())
@@ -52,5 +58,6 @@ gulp.task('default', [
   'babel',
   'dev-less',
   'watch-javascript',
-  'watch-less'
+  'watch-less',
+  'copy-files'
 ]);

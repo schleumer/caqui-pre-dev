@@ -12,7 +12,7 @@ class Container extends Base {
 
   render() {
     return (
-      <div className="page__container">
+      <div className="caqui-page-container">
         { this.props.children }
       </div>
       );

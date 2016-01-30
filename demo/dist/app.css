@@ -7348,6 +7348,18 @@ textarea.caqui-fake-text-input {
 .caqui-fake-text-input-placeholder {
   color: #999999;
 }
+.caqui-page-header-icon {
+  font-size: 35px;
+  position: relative;
+  background-color: #008cba;
+  color: #fff;
+  padding: 5px;
+  border-radius: 100%;
+  width: 45px;
+  height: 45px;
+  line-height: 35px;
+  text-align: center;
+}
 .navbar {
   border: none;
   font-size: 13px;

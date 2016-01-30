@@ -20,7 +20,7 @@ class Page extends Base {
     let body = null;
 
     if (icon) {
-      iconEl = <Icon className="app-page-header-icon" name={ icon } style={ {  width: false,  height: false,  fill: 'white',  marginRight: '10px'} } />;
+      iconEl = <Icon className="caqui-page-header-icon" name={ icon } style={ {  width: false,  height: false,  fill: 'white',  marginRight: '10px'} } />;
     }
 
     if (Array.isArray(children)) {
@@ -38,9 +38,9 @@ class Page extends Base {
     }
 
     return (
-      <div className="row-fluid app-page-header">
+      <div className="row-fluid caqui-page-header">
         <div className="row-fluid">
-          <h2 className="app-page-header-title pull-left" style={ {  marginBottom: '0px',  marginTop: '15px',  marginLeft: '15px',  marginRight: '15px'} }>
+          <h2 className="caqui-page-header-title pull-left" style={ {  marginBottom: '0px',  marginTop: '15px',  marginLeft: '15px',  marginRight: '15px'} }>
                                                                                     { iconEl }
                                                                                     <span>{ header }</span>
                                                                                   </h2>

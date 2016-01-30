@@ -9,7 +9,7 @@ class Right extends Base {
   }
   render() {
     return (
-      <div className="pull-right">
+      <div className="caqui-page-right pull-right">
         { this.props.children }
       </div>
       );
