@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect, Provider } from 'react-redux';
 
-import * as Caqui from '../../lib/index';
+import * as Caqui from '../../../lib/index';
 
 const { 
   Components: { 
-    Page, Form, TextInput, Row, Column, ModelDump, ComboBox, ListOfItems, DateTime, Container
+    Page, Form, TextInput, Row, Column, ModelDump, ComboBox, ListOfItems, DateTime, Container, FakeTextInput
   },
   Helpers: {
     createModel, PagedStore: { pagedRemoteStore }
@@ -55,6 +55,11 @@ class KitchenSink extends Component {
                 </Column>
                 <Column size={ Column.from(4) }>
                   <TextInput name="test_3" label="Campo de Teste 3" />
+                </Column>
+              </Row>
+              <Row>
+                <Column size={ Column.from(4) }>
+                  <FakeTextInput name="test_1" label="Campo fake de Teste 1" />
                 </Column>
               </Row>
               <Row>

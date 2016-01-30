@@ -42,7 +42,7 @@ var compiler = webpack({
   ],
   entry: {
     app: [
-      './demo/src/app.js',
+      './demo/src/javascript/app.js',
     ],
     vendor: vendorPackages
   },
@@ -58,7 +58,7 @@ var compiler = webpack({
         loader: "babel",
 
         include: [
-          path.resolve(__dirname, "demo", "src"),
+          path.resolve(__dirname, "demo", "src", "javascript"),
         ],
 
         test: /\.jsx?$/

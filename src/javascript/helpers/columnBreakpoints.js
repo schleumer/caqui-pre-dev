@@ -1,8 +1,24 @@
 import R from 'ramda';
 
-class ColumnOffsets {
+const classTemplate = "col-$1-$2";
+const devicesSizes = {
+  "x-small": "xs",
+  "small": "sm",
+  "medium": "md",
+  "large": "lg"
+};
+
+const sizesObjToString = R.pipe(
+  R.toPairs,
+  R.map(s => classTemplate
+      .replace('$1', (devicesSizes.hasOwnProperty(s[0]) ? devicesSizes[s[0]] : s[0]))
+      .replace('$2', s[1])
+  ));
+
+
+class ColumnBreakpoints {
   constructor(large = 12, medium = 12, small = 12, extraSmall = 12) {
-    this.offsets = {
+    this.breakPoints = {
       "large": large,
       "medium": medium,
       "small": small,
@@ -10,8 +26,8 @@ class ColumnOffsets {
     };
   }
 
-  get() {
-    return this.offsets;
+  toArray() {
+    return sizesObjToString(this.breakPoints);
   }
 
   large(size = 12) {
@@ -31,9 +47,9 @@ class ColumnOffsets {
   }
 
   put(deviceSize, size) {
-    this.offsets[deviceSize] = size;
+    this.breakPoints[deviceSize] = size;
     return this;
   }
 }
 
-export default ColumnOffsets;
+export default ColumnBreakpoints;

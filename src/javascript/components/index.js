@@ -4,6 +4,7 @@ export Header from './header';
 export Row from './row';
 export Column from './column';
 export TextInput from './textInput';
+export FakeTextInput from './fakeTextInput';
 export Password from './password';
 export Form from './form';
 export Container from './container';

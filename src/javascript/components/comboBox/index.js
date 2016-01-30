@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import cx from 'classnames';
 
 import { createEvent, modelize } from '../../helpers';
 
@@ -7,10 +8,6 @@ import Form from '../form';
 import storeBuilder from './storeBuilder';
 import Shadow from './shadow';
 import Dropdown from './dropDown';
-
-import * as Styles from '../../styles';
-
-const styles = Styles.comboBox;
 
 class ComboBox extends React.Component {
   static propTypes = {
@@ -90,16 +87,16 @@ class ComboBox extends React.Component {
   render() {
     const data = this.state;
 
-    const {itemKey, itemLabel} = this.props;
+    const {itemKey, itemLabel, className} = this.props;
+
+    const classNames = cx('caqui-combobox', 'caqui-combobox-holder', className);
+
     let dropdown = null;
     let label = null;
-    let style = {...styles.root.holder};
 
     if (this.props.label) {
-      label = <label style={styles.root.label}>{ this.props.label }</label>;
+      label = <label>{ this.props.label }</label>;
     }
-
-    style = Object.assign(style, this.props.style);
 
     const childProps = {
       itemKey,
@@ -114,7 +111,7 @@ class ComboBox extends React.Component {
     return (
       <Form.Group>
         { label }
-        <div style={ style } ref="holder">
+        <div { ...this.props } className={ classNames } ref="holder">
           <Shadow {...childProps} ref="shadow" />
           { dropdown }
         </div>

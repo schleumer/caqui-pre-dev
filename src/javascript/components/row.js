@@ -2,9 +2,6 @@ import React from 'react';
 
 import Base from './base';
 
-import * as Styles from '../styles';
-const styles = Styles.root;
-
 class Row extends Base {
   constructor(props) {
     super(props);
@@ -13,12 +10,14 @@ class Row extends Base {
 
   render() {
     // @todo coding style
-    const rowStyle = this.props.fluid ? styles.rowFluid : styles.row;
-    
-    let style = {...rowStyle, ...this.props.style};
+    const className = [this.props.fluid ? "row-fluid" : "row"];
+
+    if (this.props.className) {
+      className.push(this.props.className);
+    }
 
     return (
-      <div {...this.props} style={ style }>
+      <div {...this.props} className={ className.join(' ') } style={ {  ...this.props.style} }>
         { this.props.children }
       </div>
       );

@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 
+import cx from 'classnames';
+
 import Form from './form';
 
 import AlertBox from './alertBox';
@@ -20,7 +22,20 @@ let objectId = 1;
 
 class TextInput extends Base {
   static propTypes = {
-    form: PropTypes.string
+    form: PropTypes.string,
+    label: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.element
+    ]),
+    placeholder: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.element
+    ])
+  };
+  static defaultProps = {
+    form: null,
+    label: null,
+    placeholder: null
   };
   constructor(props) {
     super(props);
@@ -33,8 +48,6 @@ class TextInput extends Base {
     }
 
     this.onChange = this.onChange.bind(this);
-    this.onBlur = this.onBlur.bind(this);
-    this.onFocus = this.onFocus.bind(this);
 
     this.inputDebounce = null;
   }
@@ -85,28 +98,11 @@ class TextInput extends Base {
   focus() {
     this.refs.input.focus();
   }
-  onFocus() {
-    this.setState({focused: true});
-    
-    if(this.props.onFocus) {
-      this.props.onFocus.apply(null, arguments)
-    }
-  }
-  onBlur() {
-    this.setState({focused: false});
-
-    if(this.props.onBlur) {
-      this.props.onBlur.apply(null, arguments)
-    }
-  }
   render() {
+    const props = this.props,
+          { label, placeholder, className } = props;
     // @todo helper
-    const label = this.props.label || null;
-    const placeholder = this.props.placeholder || label;
-
-    let style = m({ ...styles.normal, ...this.props.style }, this.state.focused && styles.focused);
-    
-    let props = this.props;
+    const classNames = cx('caqui-form-control', className);
 
     let alertBox = null;
 
@@ -119,16 +115,9 @@ class TextInput extends Base {
         { label && <label style={styles.label}>
                      { label }
                    </label> }
-        <input
-          {...props}
-          type="text"
-          style={ style }
-          placeholder={ placeholder }
-          onChange={ this.onChange }
-          onFocus={ this.onFocus }
-          onBlur={ this.onBlur }
-          value={ this.state.value }
-          ref="input" />
+        <div className="caqui-fake-text-input">
+          { this.state.value || this.props.children }
+        </div>
         { alertBox }
       </Form.Group>
       );
