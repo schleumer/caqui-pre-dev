@@ -8,6 +8,9 @@ import DropDown from './dropDown';
 
 import { createEvent, modelize } from '../../helpers';
 
+import FakeTextInput from '../fakeTextInput';
+import Icon from '../icon';
+
 import styles from './styles';
 
 class DateTime extends React.Component {
@@ -17,7 +20,9 @@ class DateTime extends React.Component {
     time: PropTypes.bool
   };
   static defaultProps = {
-    time: true
+    time: true,
+    placeholder: "Pick a Date",
+    icon: "calendar"
   };
   constructor(props) {
     super(props);
@@ -151,22 +156,28 @@ class DateTime extends React.Component {
       label = (<label>{this.props.label}</label>);
     }
 
+          //<input style={styles.input}
+          //       type="text"
+          //       ref="input"
+          //       className="form-control"
+          //       value={displayer}
+          //       readOnly={true}
+          //       placeholder={this.props.placeholder}
+          //       onFocus={this.inputFocused}
+          //       onBlur={this.inputBlured} />
     return (
       <div className="form-group">
         { label }
         <div style={styles.root} ref="holder">
-          <input style={styles.input}
-                 type="text"
-                 ref="input"
-                 className="form-control"
-                 value={displayer}
-                 readOnly={true}
-                 placeholder={this.props.placeholder || "Pick a Date"}
-                 onFocus={this.inputFocused}
-                 onBlur={this.inputBlured} />
+          <FakeTextInput
+            ref="input"
+            value={displayer}
+            placeholder={this.props.placeholder}
+            onFocus={this.inputFocused}
+            onBlur={this.inputBlured} />
 
           <div style={styles.iconHolder}>
-            {this.props.icon}          
+            <Icon name={this.props.icon} />
           </div>
           <DropDown visible={opened} store={this.store} key={current.format("YYYY-MM")} onDatePicked={this.datePicked} onTimeChanged={this.onTimeChanged} showTime={this.props.time} />
         </div>

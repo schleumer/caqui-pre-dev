@@ -5,6 +5,16 @@ import { createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
 const actions = {
+  isLoading(state = true) {
+    return {
+      type: state ? 'IS_LOADING' : 'STOP_LOADING'
+    };
+  },
+  init() {
+    return {
+      type: 'INIT'
+    }
+  },
   firstPage() {
     return {
       type: 'FIRST_PAGE'

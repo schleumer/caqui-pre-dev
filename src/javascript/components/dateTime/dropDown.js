@@ -124,20 +124,20 @@ export default class DropDown extends React.Component {
 
     // TODO: remove?
     const weekDaysTitles = moment.weekdaysShort().map(day =>
-      <td key={day} style={styles.weekDayTitle}>
+      <th key={day} className="caqui-datetime-dropdown-weekday-title">
         <b>{day}</b>
-      </td>
+      </th>
     );
 
 
     const days = (week) => {
       return week.map((day, weekDay) => {
         if(!day) {
-          return <td key={weekDay} style={styles.dayCell}></td>;
+          return <td key={weekDay} className="caqui-datetime-dropdown-day"></td>;
         }
 
         return (
-          <td key={weekDay} style={styles.dayCell}>
+          <td key={weekDay} className="caqui-datetime-dropdown-day">
             <Day day={day} value={value} onPick={this.pickADate} />
           </td>
         )
@@ -163,19 +163,19 @@ export default class DropDown extends React.Component {
     })
     
     return (
-      <div style={styles.dropdownRoot} className="dropdown-menu" tabIndex="0">
-        <div style={{padding: '5px'}}>
+      <div className="caqui-datetime-dropdown" tabIndex="0">
+        <div className="caqui-datetime-dropdown-container">
           <Header current={current}
                   prevMonth={this.prevMonth}
                   nextMonth={this.nextMonth} />
           <div>
-            <table style={styles.daysTable} className="table table-bordered">
-              <thead style={styles.daysTableHeader}>
+            <table className="caqui-table caqui-table-bordered caqui-datetime-table">
+              <thead className="caqui-datetime-table-header">
                 <tr>
                   { weekDaysTitles }
                 </tr>
               </thead>
-              <tbody style={styles.daysTableBody}>
+              <tbody className="caqui-datetime-table-body">
                 { calendarRows }
               </tbody>
             </table>
@@ -183,7 +183,7 @@ export default class DropDown extends React.Component {
 
           {time}
         </div>
-        <a href="javascript:;" onClick={this.close} style={{textAlign: 'center', backgroundColor: 'rgba(245, 245, 245, .8)', position: 'absolute', bottom: '0px', left: '0px', right: '0px', padding: '4px'}}>
+        <a href="javascript:;" onClick={this.close} className="caqui-datetime-close">
           Fechar
         </a>
       </div>

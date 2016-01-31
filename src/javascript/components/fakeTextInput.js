@@ -89,10 +89,11 @@ class TextInput extends Base {
     }
   }
   componentWillReceiveProps(props) {
+    this.setState({value: props.value});
     this.makeId(props);
   }
   componentWillMount() {
-    this.state.value = this.props.value || null;
+    this.setState({value: this.props.value});
     this.makeId(this.props);
   }
   focus() {
@@ -116,7 +117,7 @@ class TextInput extends Base {
         { label && <label style={styles.label}>
                      { label }
                    </label> }
-        <div className="caqui-fake-text-input">
+        <div className="caqui-fake-text-input" tabIndex="0">
           { (this.state.value || this.props.children) || placeholderEl}
         </div>
         { alertBox }

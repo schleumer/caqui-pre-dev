@@ -95,7 +95,11 @@ class TextInput extends Base {
     this.makeId(this.props);
   }
   focus() {
-    this.refs.input.focus();
+    const { input } = this.refs;
+    
+    input.focus();
+    
+    input.selectionStart = input.selectionEnd = input.value.length;
   }
   render() {
     const props = this.props,

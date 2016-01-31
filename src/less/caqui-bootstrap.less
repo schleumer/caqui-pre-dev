@@ -1,8 +1,10 @@
 @import "bootstrap/less/bootstrap.less";
 
+@import "./bootstrap/table";
 @import "./bootstrap/button";
 @import "./bootstrap/form";
 @import "./bootstrap/combobox";
+@import "./bootstrap/datetime";
 
 @caqui-page-header-icon-size: 35px;
 
@@ -17,4 +19,20 @@
   height: @caqui-page-header-icon-size+10;
   line-height: @caqui-page-header-icon-size;
   text-align: center;
+}
+
+.caqui-container {
+  .container();
+}
+
+.caqui-container-fluid {
+  .container-fluid();
+}
+
+.caqui-row {
+  .row();
+}
+
+.caqui-row-fluid {
+  //.row-fluid();
 }

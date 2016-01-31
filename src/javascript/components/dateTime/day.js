@@ -53,7 +53,7 @@ export default class Day extends React.Component {
 
     return (
       <a href="javascript:;"
-         style={plug(hovered, style, styles.dayHovered)}
+         className="caqui-datetime-day"
          onMouseEnter={this.dayHovered}
          onMouseLeave={this.dayLeft}
          onClick={this.pick}>

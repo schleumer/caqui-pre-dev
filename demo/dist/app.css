@@ -6460,7 +6460,15 @@ button.close {
 .modal-header:before,
 .modal-header:after,
 .modal-footer:before,
-.modal-footer:after {
+.modal-footer:after,
+.caqui-combobox-dropdown-list:before,
+.caqui-combobox-dropdown-list:after,
+.caqui-container:before,
+.caqui-container:after,
+.caqui-container-fluid:before,
+.caqui-container-fluid:after,
+.caqui-row:before,
+.caqui-row:after {
   content: " ";
   display: table;
 }
@@ -6479,7 +6487,11 @@ button.close {
 .pager:after,
 .panel-body:after,
 .modal-header:after,
-.modal-footer:after {
+.modal-footer:after,
+.caqui-combobox-dropdown-list:after,
+.caqui-container:after,
+.caqui-container-fluid:after,
+.caqui-row:after {
   clear: both;
 }
 .center-block {
@@ -6723,6 +6735,118 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important;
+  }
+}
+.caqui-table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 21px;
+}
+.caqui-table > thead > tr > th,
+.caqui-table > tbody > tr > th,
+.caqui-table > tfoot > tr > th,
+.caqui-table > thead > tr > td,
+.caqui-table > tbody > tr > td,
+.caqui-table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.4;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+.caqui-table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+.caqui-table > caption + thead > tr:first-child > th,
+.caqui-table > colgroup + thead > tr:first-child > th,
+.caqui-table > thead:first-child > tr:first-child > th,
+.caqui-table > caption + thead > tr:first-child > td,
+.caqui-table > colgroup + thead > tr:first-child > td,
+.caqui-table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+.caqui-table > tbody + tbody {
+  border-top: 2px solid #ddd;
+}
+.caqui-table .table {
+  background-color: #fff;
+}
+.caqui-table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+.caqui-table-bordered {
+  border: 1px solid #ddd;
+}
+.caqui-table-bordered > thead > tr > th,
+.caqui-table-bordered > tbody > tr > th,
+.caqui-table-bordered > tfoot > tr > th,
+.caqui-table-bordered > thead > tr > td,
+.caqui-table-bordered > tbody > tr > td,
+.caqui-table-bordered > tfoot > tr > td {
+  border: 1px solid #ddd;
+}
+.caqui-table-bordered > thead > tr > th,
+.caqui-table-bordered > thead > tr > td {
+  border-bottom-width: 2px;
+}
+.caqui-table-hover > tbody > tr:hover {
+  background-color: #f5f5f5;
+}
+.caqui-table-condensed > thead > tr > th,
+.caqui-table-condensed > tbody > tr > th,
+.caqui-table-condensed > tfoot > tr > th,
+.caqui-table-condensed > thead > tr > td,
+.caqui-table-condensed > tbody > tr > td,
+.caqui-table-condensed > tfoot > tr > td {
+  padding: 5px;
+}
+.caqui-table-responsive {
+  overflow-x: auto;
+  min-height: 0.01%;
+}
+@media screen and (max-width: 767px) {
+  .caqui-table-responsive {
+    width: 100%;
+    margin-bottom: 15.75px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+  }
+  .caqui-table-responsive > .table {
+    margin-bottom: 0;
+  }
+  .caqui-table-responsive > .table > thead > tr > th,
+  .caqui-table-responsive > .table > tbody > tr > th,
+  .caqui-table-responsive > .table > tfoot > tr > th,
+  .caqui-table-responsive > .table > thead > tr > td,
+  .caqui-table-responsive > .table > tbody > tr > td,
+  .caqui-table-responsive > .table > tfoot > tr > td {
+    white-space: nowrap;
+  }
+  .caqui-table-responsive > .table-bordered {
+    border: 0;
+  }
+  .caqui-table-responsive > .table-bordered > thead > tr > th:first-child,
+  .caqui-table-responsive > .table-bordered > tbody > tr > th:first-child,
+  .caqui-table-responsive > .table-bordered > tfoot > tr > th:first-child,
+  .caqui-table-responsive > .table-bordered > thead > tr > td:first-child,
+  .caqui-table-responsive > .table-bordered > tbody > tr > td:first-child,
+  .caqui-table-responsive > .table-bordered > tfoot > tr > td:first-child {
+    border-left: 0;
+  }
+  .caqui-table-responsive > .table-bordered > thead > tr > th:last-child,
+  .caqui-table-responsive > .table-bordered > tbody > tr > th:last-child,
+  .caqui-table-responsive > .table-bordered > tfoot > tr > th:last-child,
+  .caqui-table-responsive > .table-bordered > thead > tr > td:last-child,
+  .caqui-table-responsive > .table-bordered > tbody > tr > td:last-child,
+  .caqui-table-responsive > .table-bordered > tfoot > tr > td:last-child {
+    border-right: 0;
+  }
+  .caqui-table-responsive > .table-bordered > tbody > tr:last-child > th,
+  .caqui-table-responsive > .table-bordered > tfoot > tr:last-child > th,
+  .caqui-table-responsive > .table-bordered > tbody > tr:last-child > td,
+  .caqui-table-responsive > .table-bordered > tfoot > tr:last-child > td {
+    border-bottom: 0;
   }
 }
 .caqui-button {
@@ -7351,8 +7475,251 @@ textarea.caqui-fake-text-input {
 .caqui-fake-text-input-placeholder {
   color: #999999;
 }
+.caqui-combobox {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.caqui-combobox.full {
+  position: fixed;
+  padding: 10px;
+  bottom: 0px;
+  font-size: 20px;
+  z-index: 999999999999;
+}
+.caqui-combobox.full input {
+  font-size: 30px;
+  height: 60px;
+}
+.caqui-combobox-holder {
+  position: relative;
+}
 .caqui-combobox-shadow-holder {
   position: relative;
+}
+.caqui-combobox-shadow-icon {
+  position: absolute;
+  top: 50%;
+  height: 16px;
+  margin-top: -8px;
+  right: 15px;
+}
+.caqui-combobox-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 15px;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  display: block;
+  top: -18px;
+  left: -16px;
+  right: -16px;
+}
+.caqui-combobox-dropdown.pull-right {
+  right: 0;
+  left: auto;
+}
+.caqui-combobox-dropdown .divider {
+  height: 1px;
+  margin: 9.5px 0;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.caqui-combobox-dropdown > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.4;
+  color: #555;
+  white-space: nowrap;
+}
+.caqui-combobox-dropdown-list {
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+  font-weight: 300;
+}
+.caqui-combobox-dropdown-list > li {
+  position: relative;
+  display: block;
+}
+.caqui-combobox-dropdown-list > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+.caqui-combobox-dropdown-list > li > a:hover,
+.caqui-combobox-dropdown-list > li > a:focus {
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+.caqui-combobox-dropdown-list > li.disabled > a {
+  color: #999999;
+}
+.caqui-combobox-dropdown-list > li.disabled > a:hover,
+.caqui-combobox-dropdown-list > li.disabled > a:focus {
+  color: #999999;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: not-allowed;
+}
+.caqui-combobox-dropdown-list .open > a,
+.caqui-combobox-dropdown-list .open > a:hover,
+.caqui-combobox-dropdown-list .open > a:focus {
+  background-color: #eeeeee;
+  border-color: #008cba;
+}
+.caqui-combobox-dropdown-list .nav-divider {
+  height: 1px;
+  margin: 9.5px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.caqui-combobox-dropdown-list > li > a > img {
+  max-width: none;
+}
+.caqui-combobox-dropdown-list .open > a,
+.caqui-combobox-dropdown-list .open > a:hover,
+.caqui-combobox-dropdown-list .open > a:focus {
+  border-color: transparent;
+}
+.caqui-combobox-dropdown-list > li {
+  float: left;
+}
+.caqui-combobox-dropdown-list > li > a {
+  border-radius: 0;
+}
+.caqui-combobox-dropdown-list > li + li {
+  margin-left: 2px;
+}
+.caqui-combobox-dropdown-list > li.active > a,
+.caqui-combobox-dropdown-list > li.active > a:hover,
+.caqui-combobox-dropdown-list > li.active > a:focus {
+  color: #fff;
+  background-color: #008cba;
+}
+.caqui-combobox-dropdown-list > li {
+  float: none;
+}
+.caqui-combobox-dropdown-list > li + li {
+  margin-top: 2px;
+  margin-left: 0;
+}
+.caqui-combobox-dropdown-list-item {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.caqui-combobox-dropdown-list-item.selected {
+  border-left: 4px solid #5bc0de;
+}
+.caqui-combobox-dropdown-list-item > a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+.caqui-combobox-dropdown-list-text {
+  padding: 10px 15px;
+}
+.caqui-combobox-dropdown-list-search {
+  padding: 10px 15px;
+}
+.caqui-combobox-dropdown-list-search .caqui-form-group {
+  margin-bottom: 0px;
+}
+@media (max-width: 900px) {
+  .caqui-combobox-dropdown {
+    position: fixed;
+    padding: 10px;
+    bottom: 0px;
+  }
+}
+.caqui-datetime {
+  width: auto;
+  right: auto;
+}
+.caqui-datetime-close {
+  text-align: center;
+  background-color: rgba(245, 245, 245, 0.8);
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 4px;
+}
+.caqui-datetime-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  font-size: 15px;
+  text-align: left;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+  display: block;
+  padding: 5px;
+  padding-bottom: 28px;
+}
+.caqui-datetime-dropdown.pull-right {
+  right: 0;
+  left: auto;
+}
+.caqui-datetime-dropdown .divider {
+  height: 1px;
+  margin: 9.5px 0;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.caqui-datetime-dropdown > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.4;
+  color: #555;
+  white-space: nowrap;
+}
+.caqui-datetime-table > tbody > tr > .caqui-datetime-dropdown-day {
+  padding: 0px;
+  text-align: center;
+  font-size: 15px;
+}
+.caqui-datetime-table > tbody > tr > .caqui-datetime-dropdown-day > a {
+  padding: 10px 10px;
+  display: block;
+}
+.caqui-datetime-table > thead > tr > th {
+  padding: 4px;
+  text-align: center;
 }
 .caqui-page-header-icon {
   font-size: 35px;
@@ -7365,6 +7732,61 @@ textarea.caqui-fake-text-input {
   height: 45px;
   line-height: 35px;
   text-align: center;
+}
+.caqui-container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+@media (min-width: 768px) {
+  .caqui-container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .caqui-container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .caqui-container {
+    width: 1170px;
+  }
+}
+.caqui-container > .navbar-header,
+.caqui-container > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+@media (min-width: 768px) {
+  .caqui-container > .navbar-header,
+  .caqui-container > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+.caqui-container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.caqui-container-fluid > .navbar-header,
+.caqui-container-fluid > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+@media (min-width: 768px) {
+  .caqui-container-fluid > .navbar-header,
+  .caqui-container-fluid > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+.caqui-row {
+  margin-left: -15px;
+  margin-right: -15px;
 }
 .navbar {
   border: none;

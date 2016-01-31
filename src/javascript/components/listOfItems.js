@@ -112,13 +112,13 @@ class ListOfItems extends React.Component {
     return (
       <div>
         <Row>
-          <Column size={ Column.from(8) }>
+          <Column size={ Column.from(8, 8, 8, 8) }>
             { React.cloneElement(child, {
                 ref: 'input'
               }) }
           </Column>
-          <Column size={ Column.from(4) }>
-            <Button onClick={ this.onAdd }>Adicionar</Button>
+          <Column size={ Column.from(4, 4, 4, 4) }>
+            <Button onClick={ this.onAdd } block={true}>Adicionar</Button>
           </Column>
         </Row>
         <Row>

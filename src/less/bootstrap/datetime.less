@@ -1,0 +1,42 @@
+
+
+.caqui {
+  &-datetime {
+    width: auto;
+    right: auto;
+    &-close {
+      text-align: center;
+      background-color: rgba(245, 245, 245, .8);
+      position: absolute;
+      bottom: 0px;
+      left: 0px;
+      right: 0px;
+      padding: 4px;
+    }
+
+    &-dropdown {
+      .dropdown-menu();
+      display: block;
+      padding: 5px;
+      padding-bottom: 28px;
+    }
+
+    &-table {
+      & > tbody > tr > .caqui-datetime-dropdown-day {
+        padding: 0px;
+        text-align: center;
+        font-size: 15px;
+
+        > a {
+          padding: 10px 10px;
+          display: block;
+        }
+      }
+
+      & > thead > tr > th {
+        padding: 4px;
+        text-align: center;
+      }
+    }
+  }
+}

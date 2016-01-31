@@ -27,7 +27,7 @@ export default class Shadow extends React.Component {
   }
 
   focus() {
-    this.refs.displayer.focus("lel");
+    this.refs.displayer.focus();
   }
 
   render() {
@@ -43,13 +43,13 @@ export default class Shadow extends React.Component {
 
     return (
       <FakeTextInput
-        tabIndex={ data.opened ? '-1' : '0' }
+        tabIndex={ data.open ? '-1' : '0' }
         onFocus={ this.displayFocused }
         onClick={ this.displayFocused }
         ref="displayer"
         className="caqui-combobox-shadow-holder">
         <span className="caqui-combobox-shadow">{ label }</span>
-        <div tabIndex="-1" className="caqui-combobox-shadow-icon">
+        <div className="caqui-combobox-shadow-icon">
           <Icon name="search" />
         </div>
       </FakeTextInput>

@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import cx from 'classnames';
 
 import * as Styles from '../../styles';
 
@@ -85,7 +86,7 @@ export default class Dropdown extends React.Component {
   }
 
   render() {
-    const {itemKey, itemLabel, store} = this.props;
+    const {itemKey, itemLabel, store, className} = this.props;
 
     const data = store.getState();
 
@@ -94,20 +95,14 @@ export default class Dropdown extends React.Component {
     const items = data.items.map((e, index) => {
       let style = styles.dropDown.listItem;
       let anchorStyle = styles.dropDown.listItemAnchor;
+      const classNames = cx("caqui-combobox-dropdown-list-item", {
+        active: index == data.position,
+        selected: data.selected && itemKey(data.selected) === itemKey(e)
+      });
 
-      if (index == data.position) {
-        style = {...style, ...styles.dropDown.listItemActive};
-        anchorStyle = {...anchorStyle, ...styles.dropDown.listItemAnchorActive};
-      }
-      if (data.selected) {
-        if (itemKey(data.selected) === itemKey(e)) {
-          style = {...style, ...styles.dropDown.listItemSelected};
-          anchorStyle = {...anchorStyle, ...styles.dropDown.listItemAnchorSelected};
-        }
-      }
       return (
-        <li key={ itemKey(e) } style={style}>
-          <a href="javascript:;" onClick={ this.select(e) } tabIndex="-1" style={anchorStyle}>
+        <li key={ itemKey(e) } className={classNames}>
+          <a href="javascript:;" onClick={ this.select(e) } tabIndex="-1" className="caqui-combobox-dropdown-list-item-anchor">
             { itemLabel(e) }
           </a>
         </li>
@@ -116,16 +111,16 @@ export default class Dropdown extends React.Component {
       );
 
       if (items.length < 1) {
-        popupMessage = <li style={styles.dropDown.text}>Não há resultados</li>
+        popupMessage = <li className="caqui-combobox-dropdown-list-text">Não há resultados</li>
       }
 
       return (
-        <div style={ styles.dropDown.holder } ref="holder">
-          <div style={styles.dropDown.menu }>
-            <ul style={ styles.dropDown.list }>
-              <li style={ styles.dropDown.listSearch}>
+        <div className={cx("caqui-combobox-dropdown-holder", className)} ref="holder">
+          <div className="caqui-combobox-dropdown">
+            <ul className="caqui-combobox-dropdown-list">
+              <li className="caqui-combobox-dropdown-list-search">
                 <TextInput
-                       style={styles.dropDown.listSearchInput} 
+                       className="caqui-combobox-dropdown-search-input"
                        ref="search"
                        defaultValue={ data.filter }
                        onChange={ this.onInput }
@@ -135,8 +130,8 @@ export default class Dropdown extends React.Component {
               </li>
               { items }
               { popupMessage }
-              <li role="separator" style={styles.dropDown.divider}></li>
-              <li style={{...styles.dropDown.text, ...styles.dropDown.footerText}}>
+              <li role="separator" className="caqui-combobox-dropdown-list-separator"></li>
+              <li className="caqui-combobox-dropdown-list-text">
                 { data.status }
               </li>
             </ul>

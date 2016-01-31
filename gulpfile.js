@@ -18,6 +18,13 @@ const babelConfig = {
   ]
 };
 
+const end = () => ({
+        errorHandler: function (err) {
+            console.log(err);
+            this.emit('end');
+        }
+    });
+
 gulp.task('babel', () => {
 	return gulp.src('src/javascript/**/*.js')
     .pipe(plumber())
@@ -34,7 +41,7 @@ gulp.task('copy-files', () => {
 
 gulp.task('dev-less', () => {
   return gulp.src('./demo/src/less/app.less')
-    .pipe(plumber())
+    .pipe(plumber(end()))
     .pipe(less({
       paths: [ path.join(__dirname, 'node_modules') ]
     }))

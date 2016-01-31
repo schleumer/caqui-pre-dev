@@ -1,10 +1,7 @@
 import React from 'react';
+import cx from 'classnames';
 
 import Base from './base';
-
-import * as Styles from '../styles';
-
-const styles = Styles.container;
 
 class Container extends Base {
   constructor(props) {
@@ -13,18 +10,16 @@ class Container extends Base {
   }
   render() {
     // @todo coding style
-    let style = {
-      ...styles.normal,
-      ...this.props.style,
-      width: '1280px'
-    };
 
     //if (this.props.className) {
     //  className.push(this.props.className);
     //}
 
     return (
-      <div {...this.props} style={ style }>
+      <div {...this.props} className={cx(this.props.className, {
+        "caqui-container": !this.props.fluid,
+        "caqui-container-fluid": this.props.fluid
+      })}>
         { this.props.children }
       </div>
       );

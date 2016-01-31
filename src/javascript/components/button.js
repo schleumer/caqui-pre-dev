@@ -31,10 +31,13 @@ class Button extends Base {
       to,
       submit,
       text,
-      children
+      children,
+      block
     } = this.props;
 
-    const classNames = cx("caqui-button", type, className, size);
+    const classNames = cx("caqui-button", type, className, size, {
+      "caqui-button-block": block
+    });
 
     let iconEl = null;
 

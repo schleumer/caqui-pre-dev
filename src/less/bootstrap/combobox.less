@@ -1,15 +1,83 @@
 .caqui-combobox {
+  .user-select(none);
 
-}
+  &.full {
+    position: fixed;
+    padding: 10px;
+    bottom: 0px;
+    font-size: 20px;
+    z-index: 999999999999;
+    input {
+      font-size: 30px;
+      height: 60px;
+    }
+  }
 
-.caqui-combobox-holder {
+  &-holder {
+    position: relative;
+  }
+  
+  &-shadow {
+    &-holder {
+      position: relative;
+    }
 
-}
+    &-icon {
+      position: absolute;
+      top: 50%;
+      height: 16px;
+      margin-top: -8px;
+      right: 15px;
+    }
+  }
 
-.caqui-combobox-shadow {
+  &-dropdown {
+    .dropdown-menu();
+    display: block;
+    top: -18px;
+    left: -16px;
+    right: -16px;
+    
+    &-list {
+      .nav();
+      .nav-pills();
+      .nav-stacked();
 
-}
+      &-item {
+        .user-select(none);
+        &.selected {
+          border-left: 4px solid @brand-info;
+        }
+        > a {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 100%;
+        }
+      }
 
-.caqui-combobox-shadow-holder {
-  position: relative;
+      &-text {
+        padding: @nav-link-padding;
+      }
+
+      &-search {
+        padding: @nav-link-padding;
+        &-input {
+
+        }
+
+        .caqui-form-group {
+          margin-bottom: 0px;
+        }
+      }
+    }
+  }
+  
+  @media (max-width : 900px) {
+    &-dropdown {
+      position: fixed;
+      padding: 10px;
+      bottom: 0px;
+    }
+  }
 }
