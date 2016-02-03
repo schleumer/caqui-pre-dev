@@ -163,29 +163,32 @@ export default class DropDown extends React.Component {
     })
     
     return (
-      <div className="caqui-datetime-dropdown" tabIndex="0">
-        <div className="caqui-datetime-dropdown-container">
-          <Header current={current}
-                  prevMonth={this.prevMonth}
-                  nextMonth={this.nextMonth} />
-          <div>
-            <table className="caqui-table caqui-table-bordered caqui-datetime-table">
-              <thead className="caqui-datetime-table-header">
-                <tr>
-                  { weekDaysTitles }
-                </tr>
-              </thead>
-              <tbody className="caqui-datetime-table-body">
-                { calendarRows }
-              </tbody>
-            </table>
-          </div>
+      <div>
+        <div className="caqui-datetime-dropdown-backdrop" />
+        <div className="caqui-datetime-dropdown" tabIndex="0">
+          <div className="caqui-datetime-dropdown-container">
+            <Header current={current}
+                    prevMonth={this.prevMonth}
+                    nextMonth={this.nextMonth} />
+            <div>
+              <table className="caqui-table caqui-table-bordered caqui-datetime-table">
+                <thead className="caqui-datetime-table-header">
+                  <tr>
+                    { weekDaysTitles }
+                  </tr>
+                </thead>
+                <tbody className="caqui-datetime-table-body">
+                  { calendarRows }
+                </tbody>
+              </table>
+            </div>
 
-          {time}
+            {time}
+          </div>
+          <a href="javascript:;" onClick={this.close} className="caqui-datetime-close">
+            Fechar
+          </a>
         </div>
-        <a href="javascript:;" onClick={this.close} className="caqui-datetime-close">
-          Fechar
-        </a>
       </div>
     );
   }

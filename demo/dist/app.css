@@ -7685,9 +7685,15 @@ textarea.caqui-fake-text-input {
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   background-clip: padding-box;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  margin-left: -175px;
+  width: 350px;
   display: block;
   padding: 5px;
   padding-bottom: 28px;
+  z-index: 9999;
 }
 .caqui-datetime-dropdown.pull-right {
   right: 0;
@@ -7707,6 +7713,16 @@ textarea.caqui-fake-text-input {
   line-height: 1.4;
   color: #555;
   white-space: nowrap;
+}
+.caqui-datetime-dropdown-backdrop {
+  position: fixed;
+  z-index: 9998;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  content: ' ';
 }
 .caqui-datetime-table > tbody > tr > .caqui-datetime-dropdown-day {
   padding: 0px;

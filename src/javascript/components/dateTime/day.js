@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 
-import { today, plug } from './system';
+import cx from 'classnames';
 
-import styles from './styles';
+import { today, plug } from './system';
 
 // TODO: beautify, maybe change the anchor(<a />) element
 export default class Day extends React.Component {
@@ -41,19 +41,14 @@ export default class Day extends React.Component {
     const { day, value } = this.props;
     const { hovered } = this.state;
 
-    let style = styles.day;
-
-    if (day.format("YYYY-MM-DD") === value.format("YYYY-MM-DD")) {
-      style = {...style, ...styles.selectedDay};
-    }
-
-    if(day.format("YYYY-MM-DD") === today.format("YYYY-MM-DD")) {
-      style = {...style, ...styles.dayToday};
-    }
+    const classNames = cx("caqui-datetime-day", {
+      "caqui-datetime-day-selected": day.format("YYYY-MM-DD") === value.format("YYYY-MM-DD"),
+      "caqui-datetime-day-today": day.format("YYYY-MM-DD") === today.format("YYYY-MM-DD")
+    });
 
     return (
       <a href="javascript:;"
-         className="caqui-datetime-day"
+         className={classNames}
          onMouseEnter={this.dayHovered}
          onMouseLeave={this.dayLeft}
          onClick={this.pick}>

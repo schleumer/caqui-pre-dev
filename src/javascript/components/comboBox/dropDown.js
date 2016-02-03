@@ -1,10 +1,6 @@
 import React, { PropTypes } from 'react';
 import cx from 'classnames';
 
-import * as Styles from '../../styles';
-
-const styles = Styles.comboBox;
-
 import TextInput from '../textInput';
 
 export default class Dropdown extends React.Component {
@@ -93,8 +89,6 @@ export default class Dropdown extends React.Component {
     let popupMessage = null;
 
     const items = data.items.map((e, index) => {
-      let style = styles.dropDown.listItem;
-      let anchorStyle = styles.dropDown.listItemAnchor;
       const classNames = cx("caqui-combobox-dropdown-list-item", {
         active: index == data.position,
         selected: data.selected && itemKey(data.selected) === itemKey(e)
@@ -116,25 +110,27 @@ export default class Dropdown extends React.Component {
 
       return (
         <div className={cx("caqui-combobox-dropdown-holder", className)} ref="holder">
-          <div className="caqui-combobox-dropdown">
-            <ul className="caqui-combobox-dropdown-list">
-              <li className="caqui-combobox-dropdown-list-search">
-                <TextInput
-                       className="caqui-combobox-dropdown-search-input"
-                       ref="search"
-                       defaultValue={ data.filter }
-                       onChange={ this.onInput }
-                       onBlur={ this.onBlur }
-                       onFocus={ this.onFocus }
-                       onKeyDown={ this.onKeyDown } />
-              </li>
-              { items }
-              { popupMessage }
-              <li role="separator" className="caqui-combobox-dropdown-list-separator"></li>
-              <li className="caqui-combobox-dropdown-list-text">
-                { data.status }
-              </li>
-            </ul>
+          <div className="caqui-combobox-dropdown-backdrop">
+            <div className="caqui-combobox-dropdown">
+              <ul className="caqui-combobox-dropdown-list">
+                <li className="caqui-combobox-dropdown-list-search">
+                  <TextInput
+                         className="caqui-combobox-dropdown-search-input"
+                         ref="search"
+                         defaultValue={ data.filter }
+                         onChange={ this.onInput }
+                         onBlur={ this.onBlur }
+                         onFocus={ this.onFocus }
+                         onKeyDown={ this.onKeyDown } />
+                </li>
+                { items }
+                { popupMessage }
+                <li role="separator" className="caqui-combobox-dropdown-list-separator"></li>
+                <li className="caqui-combobox-dropdown-list-text">
+                  { data.status }
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         )

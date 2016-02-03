@@ -3,10 +3,6 @@ import React, { PropTypes } from 'react';
 import Icon from '../icon';
 import FakeTextInput from '../fakeTextInput';
 
-import * as Styles from '../../styles';
-
-const styles = Styles.comboBox;
-
 export default class Shadow extends React.Component {
   constructor(props) {
     super(props);
