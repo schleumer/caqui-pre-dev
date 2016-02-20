@@ -69,6 +69,7 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "files": [
-    "lib"
+    "lib",
+    "src/less"
   ]
 }
