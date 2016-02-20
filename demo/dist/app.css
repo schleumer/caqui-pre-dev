@@ -7636,6 +7636,7 @@ textarea.caqui-fake-text-input {
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
+  border-radius: 0px;
 }
 .caqui-combobox-dropdown-list-text {
   padding: 10px 15px;
