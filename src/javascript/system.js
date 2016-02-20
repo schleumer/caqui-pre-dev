@@ -19,7 +19,7 @@ import { is } from './helpers';
 // THIS IS WRONG, THIS IS SO WRONG
 // https://www.youtube.com/v/bW8FbKswSRU&start=101&end=128
 // TODO: Another way to do this!
-const iconsFile = require('./icons.svg');
+const iconsFile = require('./icons.js');
 const body = document.getElementsByTagName("body")[0];
 const iconsElement = document.createElement("div");
 iconsElement.style.display = "none";
