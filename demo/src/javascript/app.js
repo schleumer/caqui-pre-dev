@@ -18,8 +18,8 @@ const {
 } = Caqui;
 
 const githubApi = (query, limit, page) =>
-  `https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&page=${page}`;
-  //`/example.json`;
+  //`https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&page=${page}`;
+  `/example.json`;
 
 const githubApiResponse = (data) => {
   return ({ items: data.items, total: data.total_count })
