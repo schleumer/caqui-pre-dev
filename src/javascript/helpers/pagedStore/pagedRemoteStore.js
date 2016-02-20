@@ -40,8 +40,6 @@ const m = (a1 = null, a2 = null) => {
 const dataStore = (_source, responseFilter = _ => _, itemsPerPage = 15, page = 1) => {
   const source = new URLSource(_source);
 
-  console.log(source);
-
   const actions = {
     isLoading(state = true) {
       return {
@@ -62,7 +60,7 @@ const dataStore = (_source, responseFilter = _ => _, itemsPerPage = 15, page = 1
         axios.get(source.build(filter, itemsPerPage, page)).then((response) => {
           const { items, total } = responseFilter(response);
 
-          dispatch(actions.setItems(items, total));
+          dispatch(actions.setItems(items.slice(0, itemsPerPage), total));
           dispatch(actions.isLoading(false));
         }).catch((ex) => {
           // we don't treat exception as fatal,
@@ -193,7 +191,8 @@ const dataStore = (_source, responseFilter = _ => _, itemsPerPage = 15, page = 1
       case 'FILTER':
         return m("FILTEr", {
           ...state,
-          filter: data
+          filter: data,
+          page: getFirstPage()
         });
       case 'FIRST_PAGE':
         return m("FIRST_PAGE", {

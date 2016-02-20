@@ -7656,6 +7656,16 @@ textarea.caqui-fake-text-input {
   width: auto;
   right: auto;
 }
+.caqui-datetime-holder {
+  position: relative;
+}
+.caqui-datetime-icon {
+  position: absolute;
+  top: 50%;
+  height: 16px;
+  margin-top: -8px;
+  right: 15px;
+}
 .caqui-datetime-close {
   text-align: center;
   background-color: rgba(245, 245, 245, 0.8);
@@ -7664,6 +7674,29 @@ textarea.caqui-fake-text-input {
   left: 0px;
   right: 0px;
   padding: 4px;
+}
+.caqui-datetime-day {
+  position: relative;
+}
+.caqui-datetime-day-selected::after {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  content: ' ';
+  width: 8px;
+  height: 8px;
+  border-left: 8px solid transparent;
+  border-bottom: 8px solid green;
+}
+.caqui-datetime-day-today::before {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  content: ' ';
+  width: 8px;
+  height: 8px;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid blue;
 }
 .caqui-datetime-dropdown {
   position: absolute;
@@ -7735,6 +7768,58 @@ textarea.caqui-fake-text-input {
 }
 .caqui-datetime-table > thead > tr > th {
   padding: 4px;
+  text-align: center;
+}
+.caqui-datetime-header-holder {
+  margin-bottom: 10px;
+}
+.caqui-datetime-header-current-day-holder {
+  margin-bottom: 10px;
+  width: 100%;
+}
+.caqui-datetime-header-current-day {
+  width: 100%;
+  text-align: center;
+}
+.caqui-datetime-footer-table {
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.caqui-datetime-footer-add-hour,
+.caqui-datetime-footer-sub-hour {
+  width: 45px;
+  text-align: center;
+  padding-right: 5px;
+}
+.caqui-datetime-footer-add-hour > button,
+.caqui-datetime-footer-sub-hour > button {
+  width: 45px;
+}
+.caqui-datetime-footer-add-minute,
+.caqui-datetime-footer-sub-minute {
+  width: 45px;
+  text-align: center;
+}
+.caqui-datetime-footer-add-minute > button,
+.caqui-datetime-footer-sub-minute > button {
+  width: 45px;
+}
+.caqui-datetime-footer-hour {
+  padding-right: 5px;
+}
+.caqui-datetime-footer-hour,
+.caqui-datetime-footer-minute {
+  width: 45px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.caqui-datetime-footer-hour > input,
+.caqui-datetime-footer-minute > input {
+  width: 45px;
+  margin: 0 auto;
   text-align: center;
 }
 .caqui-page-header-icon {

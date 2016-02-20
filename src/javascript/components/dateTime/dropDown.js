@@ -7,8 +7,6 @@ import Header from './header';
 import Footer from './footer';
 import Day from './day';
 
-import styles from './styles';
-
 export default class DropDown extends React.Component {
   static propTypes = {
     onDatePicked: PropTypes.func

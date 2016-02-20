@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react';
 
-import styles from './styles';
-
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -24,28 +22,26 @@ export default class Header extends React.Component {
     const { current } = this.props;
 
     return (
-      <div style={styles.headerHolder}>
+      <div className="caqui-datetime-header-holder">
         <table>
           <tbody>
             <tr>
               <td>
                 <button type="button" 
                         onClick={this.prevMonth}
-                        className="btn btn-xs btn-default"
-                        style={{...styles.button, ...styles.headerButtonLeft}}>
+                        className="caqui-button caqui-button-default caqui-button-xs">
                   &lt;
                 </button>
               </td>
-              <td style={styles.headerCurrentDayHolder}>
-                <div tabIndex="0" style={styles.headerCurrentDay}>
+              <td className="caqui-datetime-header-current-day-holder">
+                <div tabIndex="0" className="caqui-datetime-header-current-day">
                   { current.format("MMMM - YYYY") }
                 </div>
               </td>
               <td>
                 <button type="button"
                         onClick={this.nextMonth}
-                        className="btn btn-xs btn-default"
-                        style={{...styles.button, ...styles.headerButtonLeft}}>
+                        className="caqui-button caqui-button-default caqui-button-xs">
                   &gt;
                 </button>
               </td>

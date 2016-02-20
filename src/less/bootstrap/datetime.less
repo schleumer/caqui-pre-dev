@@ -4,6 +4,22 @@
   &-datetime {
     width: auto;
     right: auto;
+    &-root {
+      
+    }
+
+    &-holder {
+      position: relative;
+    }
+
+    &-icon {
+      position: absolute;
+      top: 50%;
+      height: 16px;
+      margin-top: -8px;
+      right: 15px;
+    }
+
     &-close {
       text-align: center;
       background-color: rgba(245, 245, 245, .8);
@@ -12,6 +28,32 @@
       left: 0px;
       right: 0px;
       padding: 4px;
+    }
+
+    &-day {
+      position: relative;
+      &-selected::after {
+        //box-shadow: inset 0px -2px 0px 0px green;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        content: ' ';
+        width: 8px; 
+        height: 8px; 
+        border-left: 8px solid transparent;
+        border-bottom: 8px solid green;
+      }
+      &-today::before {
+        //box-shadow: inset 0px -2px 0px 0px blue;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        content: ' ';
+        width: 8px; 
+        height: 8px; 
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid blue;
+      }
     }
 
     &-dropdown {
@@ -53,6 +95,66 @@
       & > thead > tr > th {
         padding: 4px;
         text-align: center;
+      }
+    }
+
+    &-header {
+      &-holder {
+        margin-bottom: 10px;
+      }
+
+      &-current-day-holder {
+        margin-bottom: 10px;
+        width: 100%;
+      }
+      
+      &-current-day {
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    &-footer {
+
+      &-table {
+        margin: 0 auto;
+        margin-bottom: 20px;
+      }
+
+      &-add, &-sub {
+        &-hour {
+          width: 45px;
+          text-align: center;
+          padding-right: 5px;
+          > button {
+            width: 45px;
+          }
+        }
+        &-minute {
+          width: 45px;
+          text-align: center;
+          > button {
+            width: 45px; 
+          }
+        }
+      }
+
+      &-hour {
+        padding-right: 5px;
+      }
+
+      &-hour, &-minute {
+        width: 45px;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        > input {
+          width: 45px;
+          margin: 0 auto;
+          text-align: center;
+        }
       }
     }
   }

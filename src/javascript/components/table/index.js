@@ -165,18 +165,20 @@ class Table extends Base {
           ];
         }
 
+        // onSubmit={ this.doTheFilter }
+
         return (
           <div>
             <div className="row" style={ {  marginBottom: '10px'} }>
               <div className="col-xs-4 pull-right">
-                <form onSubmit={ this.doTheFilter }>
+                <div >
                   <TextInput placeholder="Buscar..." ref="search" value={ filter } />
                   <div style={ {  position: 'absolute',  right: '15px',  top: '0px'} }>
-                    <button className="btn btn-link" type="submit">
+                    <button className="btn btn-link" type="button" onClick={ this.doTheFilter }>
                       <Icon name="search" style={ {  width: '20px',  'height': '20px'} } />
                     </button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
             <table className="table table-bordered table-striped">
@@ -188,13 +190,6 @@ class Table extends Base {
               <tbody>
                 { rows }
               </tbody>
-              { /*<tfoot>
-                                                  <tr>
-                                                    <td>
-
-                                                    </td>
-                                                  </tr>
-                                                </tfoot>*/ }
             </table>
             <div style={ {  textAlign: 'center',  'marginBottom': '20px'} }>
               <ul className="pagination">

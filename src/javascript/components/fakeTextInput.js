@@ -42,7 +42,7 @@ class TextInput extends Base {
     // just for control
     this.objectId = objectId++;
 
-    this.displayName = 'TextInput';
+    this.displayName = 'FakeTextInput';
     this.state = {
       value: null
     }
@@ -99,6 +99,9 @@ class TextInput extends Base {
   focus() {
     this.refs.input.focus();
   }
+  blur() {
+    this.refs.input.blur();
+  }
   render() {
     const props = this.props,
           { label, placeholder, className } = props;
@@ -117,7 +120,7 @@ class TextInput extends Base {
         { label && <label style={styles.label}>
                      { label }
                    </label> }
-        <div className="caqui-fake-text-input" tabIndex="0">
+        <div className="caqui-fake-text-input" tabIndex="0" ref="input">
           { (this.state.value || this.props.children) || placeholderEl}
         </div>
         { alertBox }

@@ -17,6 +17,7 @@ import * as actions from './actions';
 import { is } from './helpers';
 
 // THIS IS WRONG, THIS IS SO WRONG
+// https://www.youtube.com/v/bW8FbKswSRU&start=101&end=128
 // TODO: Another way to do this!
 const iconsFile = require('./icons.svg');
 const body = document.getElementsByTagName("body")[0];

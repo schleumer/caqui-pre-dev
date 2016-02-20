@@ -7,7 +7,7 @@ import * as Caqui from '../../../lib/index';
 
 const { 
   Components: { 
-    Page, Form, TextInput, Row, Column, ModelDump, ComboBox, ListOfItems, DateTime, Container, FakeTextInput
+    Page, Form, TextInput, Row, Column, ModelDump, ComboBox, ListOfItems, DateTime, Container, FakeTextInput, Table
   },
   Helpers: {
     createModel, PagedStore: { pagedRemoteStore }
@@ -18,11 +18,47 @@ const {
 } = Caqui;
 
 const githubApi = (query, limit, page) =>
-  `https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc`;
+  `https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&page=${page}`;
+  //`/example.json`;
 
 const githubApiResponse = (data) => {
-  console.log(data);
   return ({ items: data.items, total: data.total_count })
+}
+
+class KitchenSink2 extends Component {
+  constructor() {
+    super();
+
+    this.displayName = 'KitchenSink2';
+
+    this.test1Adapter = pagedRemoteStore(githubApi, githubApiResponse, 30);
+  }
+
+  render() {
+    const extraCell = (row, index) => {
+      return (
+        <a href={ `/edit/${row.id}` }>Editar</a>
+        );
+    };
+
+    return (
+      <Container>
+        <Page header="Teste de Componentes" icon="home">
+          <Page.Container>
+            <Row>
+              <Column>
+                <Table adapter={this.test1Adapter}>
+                  <Table.Column name={ "Nome" } cell={ <Table.SimpleCell valueKey="name" /> } />
+                  <Table.Column name={ "Nome 2" } cell={ <Table.SimpleCell valueKey="full_name" /> } />
+                  <Table.Column name={ "Controles" } cell={ extraCell } />
+                </Table>
+              </Column>
+            </Row>
+          </Page.Container>
+        </Page>
+      </Container>
+    )
+  }
 }
 
 class KitchenSink extends Component {
@@ -126,6 +162,7 @@ function select(state) {
 }
 
 KitchenSink = connect(select)(KitchenSink)
+KitchenSink2 = connect(select)(KitchenSink2)
 
 class App extends Component {
   render() {

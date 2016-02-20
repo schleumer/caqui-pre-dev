@@ -11,8 +11,6 @@ import { createEvent, modelize } from '../../helpers';
 import FakeTextInput from '../fakeTextInput';
 import Icon from '../icon';
 
-import styles from './styles';
-
 class DateTime extends React.Component {
   static propTypes = {
     form: PropTypes.string,
@@ -81,7 +79,7 @@ class DateTime extends React.Component {
     const { actions, dispatch } = this.store;
     dispatch(actions.setValue(value, false));
     // TODO: ???
-    this.refs.input.blur();
+    this.refs.input.dispatch("blur");
 
     if(this.props.onChange) {
       this.props.onChange(createEvent(null, this, value));
@@ -156,19 +154,10 @@ class DateTime extends React.Component {
       label = (<label>{this.props.label}</label>);
     }
 
-          //<input style={styles.input}
-          //       type="text"
-          //       ref="input"
-          //       className="form-control"
-          //       value={displayer}
-          //       readOnly={true}
-          //       placeholder={this.props.placeholder}
-          //       onFocus={this.inputFocused}
-          //       onBlur={this.inputBlured} />
     return (
-      <div className="form-group">
+      <div className="form-group caqui-datetime-holder">
         { label }
-        <div style={styles.root} ref="holder">
+        <div className="caqui-datetime-holder" ref="holder">
           <FakeTextInput
             ref="input"
             value={displayer}
@@ -176,7 +165,7 @@ class DateTime extends React.Component {
             onFocus={this.inputFocused}
             onBlur={this.inputBlured} />
 
-          <div style={styles.iconHolder}>
+          <div className="caqui-datetime-icon">
             <Icon name={this.props.icon} />
           </div>
           <DropDown visible={opened} store={this.store} key={current.format("YYYY-MM")} onDatePicked={this.datePicked} onTimeChanged={this.onTimeChanged} showTime={this.props.time} />
