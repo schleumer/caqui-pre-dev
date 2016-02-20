@@ -79,7 +79,7 @@ class ListOfItems extends React.Component {
   render() {
     console.log("ListOfItems rendered");
 
-    const {input, itemLabel, itemKey, children} = this.props;
+    const {input, itemLabel, itemKey, children, label} = this.props;
 
     const child = children || input;
 
@@ -111,6 +111,13 @@ class ListOfItems extends React.Component {
 
     return (
       <div>
+        <Row>
+          <Column>
+            { label && <label>
+                     { label }
+                   </label> }
+          </Column>
+        </Row>
         <Row>
           <Column size={ Column.from(8, 8, 8, 8) }>
             { React.cloneElement(child, {
