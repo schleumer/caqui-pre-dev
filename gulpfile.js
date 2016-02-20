@@ -8,7 +8,8 @@ const less = require('gulp-less');
 
 const babelConfig = {
   "plugins": [
-    "transform-class-properties"
+    "transform-class-properties",
+    "transform-runtime"
   ],
   "presets": [
     "es2015",
