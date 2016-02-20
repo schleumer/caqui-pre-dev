@@ -7499,6 +7499,7 @@ textarea.caqui-fake-text-input {
   position: relative;
 }
 .caqui-combobox-shadow-icon {
+  line-height: 0;
   position: absolute;
   top: 50%;
   height: 16px;
@@ -7660,6 +7661,7 @@ textarea.caqui-fake-text-input {
   position: relative;
 }
 .caqui-datetime-icon {
+  line-height: 0;
   position: absolute;
   top: 50%;
   height: 16px;
