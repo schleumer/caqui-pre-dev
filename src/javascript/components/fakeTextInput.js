@@ -120,7 +120,7 @@ class TextInput extends Base {
         { label && <label style={styles.label}>
                      { label }
                    </label> }
-        <div className="caqui-fake-text-input" tabIndex="0" ref="input">
+        <div className="caqui-fake-text-input" tabIndex={props.tabIndex || "0"} ref="input">
           { (this.state.value || this.props.children) || placeholderEl}
         </div>
         { alertBox }

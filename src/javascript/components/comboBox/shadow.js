@@ -23,7 +23,7 @@ export default class Shadow extends React.Component {
   }
 
   focus() {
-    this.refs.displayer.focus();
+    this.refs.displayer.dispatch('focus');
   }
 
   render() {
@@ -32,23 +32,30 @@ export default class Shadow extends React.Component {
     const data = store.getState();
 
     let label = "Selecione uma opção";
+    let value = null;
 
     if (data.selected) {
-      label = itemLabel(data.selected);
+      value = itemLabel(data.selected);
     }
 
+    console.log(label, value);
+
+    //<span className="caqui-combobox-shadow">{ label }</span>
     return (
-      <FakeTextInput
-        tabIndex={ data.open ? '-1' : '0' }
-        onFocus={ this.displayFocused }
-        onClick={ this.displayFocused }
-        ref="displayer"
-        className="caqui-combobox-shadow-holder">
-        <span className="caqui-combobox-shadow">{ label }</span>
+      <div style={{position: 'relative'}}>
+        <FakeTextInput
+          tabIndex={ data.open ? '-1' : '0' }
+          onFocus={ this.displayFocused }
+          onClick={ this.displayFocused }
+          ref="displayer"
+          className="caqui-combobox-shadow-holder"
+          value={value}
+          placeholder={label}>
+        </FakeTextInput>
         <div className="caqui-combobox-shadow-icon">
           <Icon name="search" />
         </div>
-      </FakeTextInput>
+      </div>
       );
   }
 }

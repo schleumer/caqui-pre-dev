@@ -103,7 +103,7 @@ class ListOfItems extends React.Component {
 
     if (!items.length) {
       items = (
-        <tr>
+        <tr className="list-of-items-empty">
           <td>Lista vázia</td>
         </tr>
       );

@@ -7485,6 +7485,9 @@ textarea.caqui-fake-text-input {
 .caqui-combobox-holder {
   position: relative;
 }
+.caqui-combobox-shadow {
+  color: #999;
+}
 .caqui-combobox-shadow-holder {
   position: relative;
 }
@@ -7709,7 +7712,7 @@ textarea.caqui-fake-text-input {
   top: 10%;
   left: 50%;
   margin-left: -175px;
-  width: 350px;
+  width: 450px;
   display: block;
   padding: 5px;
   padding-bottom: 28px;
@@ -7808,6 +7811,9 @@ textarea.caqui-fake-text-input {
   width: 45px;
   margin: 0 auto;
   text-align: center;
+}
+.list-of-items-empty {
+  color: #999;
 }
 .caqui-page-header-icon {
   font-size: 35px;

@@ -6,6 +6,8 @@ import { buildCalendar } from './system';
 import Header from './header';
 import Footer from './footer';
 import Day from './day';
+import Row from '../row';
+import Column from '../column';
 
 export default class DropDown extends React.Component {
   static propTypes = {
@@ -143,13 +145,15 @@ export default class DropDown extends React.Component {
     }
 
     const time = this.props.showTime ? (
-      <Footer current={current}
-                  addHour={this.addHour}
-                  subHour={this.subHour}
-                  addMinute={this.addMinute}
-                  subMinute={this.subMinute}
-                  setHour={this.setHour}
-                  setMinute={this.setMinute} />
+      <Column size={Column.from(6, 6, 12, 12)}>
+        <Footer current={current}
+                    addHour={this.addHour}
+                    subHour={this.subHour}
+                    addMinute={this.addMinute}
+                    subMinute={this.subMinute}
+                    setHour={this.setHour}
+                    setMinute={this.setMinute} />
+      </Column>
     ) : null;
 
     const calendarRows = calendar.map((week, which) => {
@@ -168,20 +172,21 @@ export default class DropDown extends React.Component {
             <Header current={current}
                     prevMonth={this.prevMonth}
                     nextMonth={this.nextMonth} />
-            <div>
-              <table className="caqui-table caqui-table-bordered caqui-datetime-table">
-                <thead className="caqui-datetime-table-header">
-                  <tr>
-                    { weekDaysTitles }
-                  </tr>
-                </thead>
-                <tbody className="caqui-datetime-table-body">
-                  { calendarRows }
-                </tbody>
-              </table>
-            </div>
-
-            {time}
+            <Row>
+              <Column size={Column.from(time ? 6 : 12, time ? 6 : 12,12,12)}>
+                <table className="caqui-table caqui-table-bordered caqui-datetime-table">
+                  <thead className="caqui-datetime-table-header">
+                    <tr>
+                      { weekDaysTitles }
+                    </tr>
+                  </thead>
+                  <tbody className="caqui-datetime-table-body">
+                    { calendarRows }
+                  </tbody>
+                </table>
+              </Column>
+              {time}
+            </Row>
           </div>
           <a href="javascript:;" onClick={this.close} className="caqui-datetime-close">
             Fechar

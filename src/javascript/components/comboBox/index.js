@@ -57,8 +57,8 @@ class ComboBox extends React.Component {
     store.dispatch(store.actions.select(item));
 
     this.props.onChange && this.props.onChange(createEvent(null, this, item));
-    this.refs.shadow.unfocus();
-    //this.store.dispatch(actions.close());
+    //this.refs.shadow.focus();
+    this.store.dispatch(store.actions.close());
   }
 
   onDropDownBlur(evt, id, originalEvent) {
@@ -77,7 +77,7 @@ class ComboBox extends React.Component {
 
       if (!b) {
         this.store.dispatch(actions.close());
-        this.refs.shadow.unfocus();
+        //this.refs.shadow.unfocus();
       } else {
         this.store.dispatch(actions.open());
       }
@@ -93,6 +93,7 @@ class ComboBox extends React.Component {
 
     let dropdown = null;
     let label = null;
+    let shadow = null;
 
     if (this.props.label) {
       label = <label>{ this.props.label }</label>;
@@ -113,7 +114,9 @@ class ComboBox extends React.Component {
         { label }
         <div { ...this.props } className={ classNames } ref="holder">
           <Shadow {...childProps} ref="shadow" />
-          { dropdown }
+          <div>
+            { dropdown }
+          </div>
         </div>
       </Form.Group>
       );
