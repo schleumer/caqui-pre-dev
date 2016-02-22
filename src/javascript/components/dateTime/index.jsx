@@ -154,6 +154,12 @@ class DateTime extends React.Component {
       label = (<label>{this.props.label}</label>);
     }
 
+    let dropDown = null;
+
+    if(opened) {
+      dropDown = <DropDown store={this.store} key={current.format("YYYY-MM")} onDatePicked={this.datePicked} onTimeChanged={this.onTimeChanged} showTime={this.props.time} />;
+    }
+
     return (
       <div className="form-group caqui-datetime-holder">
         { label }
@@ -168,7 +174,7 @@ class DateTime extends React.Component {
           <div className="caqui-datetime-icon">
             <Icon name={this.props.icon} />
           </div>
-          <DropDown visible={opened} store={this.store} key={current.format("YYYY-MM")} onDatePicked={this.datePicked} onTimeChanged={this.onTimeChanged} showTime={this.props.time} />
+          {dropDown}
         </div>
       </div>
     );

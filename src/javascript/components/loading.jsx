@@ -23,9 +23,9 @@ class Loading extends Base {
       return null;
 
     return (
-      <div className="app-loading">
-        <div className="app-loading__holder">
-          <div className="logo-loading">
+      <div className="caqui-loading">
+        <div className="caqui-loading-holder">
+          <div className="caqui-logo-loading">
             <div className="circle-1"></div>
             <div className="circle-2"></div>
           </div>

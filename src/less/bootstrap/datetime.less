@@ -33,6 +33,7 @@
 
     &-day {
       position: relative;
+      min-width: 50px;
       &-selected::after {
         //box-shadow: inset 0px -2px 0px 0px green;
         position: absolute;
@@ -59,14 +60,13 @@
 
     &-dropdown {
       .dropdown-menu();
-      position: fixed;
-      top: 10%;
-      left: 50%;
-      margin-left: -175px;
-      width: 450px;
+      position: relative;
+      margin: 5% auto;
+      max-width: 700px;
       display: block;
-      padding: 5px;
+      padding: 15px;
       padding-bottom: 28px;
+      float: none;
       z-index: 9999;
 
       &-backdrop {
@@ -79,6 +79,32 @@
         bottom: 0px;
         content: ' ';
       }
+
+      &-holder {
+        position: fixed;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        z-index: 9999;
+        overflow: auto;
+      }
+    }
+
+    @media (max-width: 760px) {
+      &-close {
+        position: fixed;
+      }
+      &-dropdown {
+        position: fixed;
+        margin: 0;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        max-width: 100%;
+        overflow: auto;
+      } 
     }
 
     &-table {

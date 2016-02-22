@@ -27,7 +27,7 @@ const end = () => ({
     });
 
 gulp.task('babel', () => {
-	return gulp.src('src/javascript/**/*.js')
+	return gulp.src(['src/javascript/**/*.js', 'src/javascript/**/*.jsx'])
     .pipe(plumber())
     .pipe(changed('lib'))
 		.pipe(babel(babelConfig))
@@ -50,7 +50,7 @@ gulp.task('dev-less', () => {
 });
 
 gulp.task('watch-javascript', () => {
-  return watch('src/javascript/**/*.js', () => {
+  return watch(['src/javascript/**/*.js', 'src/javascript/**/*.jsx'], () => {
     gulp.start("babel");
   });
 });

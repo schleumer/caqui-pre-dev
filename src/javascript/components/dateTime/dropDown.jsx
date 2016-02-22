@@ -33,6 +33,24 @@ export default class DropDown extends React.Component {
     this.close = this.close.bind(this);
   }
 
+  componentWillMount() {
+    document.documentElement.className = document
+      .documentElement
+      .className
+      .split(' ')
+      .concat("caqui-scroll-disabled")
+      .join(' ');
+  }
+
+  componentWillUnmount() {
+    document.documentElement.className = document
+      .documentElement
+      .className
+      .split(' ')
+      .filter(e => e != "caqui-scroll-disabled")
+      .join(' ');
+  }
+
   prevMonth() {
     const { dispatch, actions } = this.props.store;
 
@@ -116,9 +134,9 @@ export default class DropDown extends React.Component {
 
     const value = state.value || current.clone();
     
-    if(!this.props.visible) {
-      return null;
-    }
+    //if(!this.props.visible) {
+    //  return null;
+    //}
 
     const calendar = buildCalendar(current);
 
@@ -167,30 +185,32 @@ export default class DropDown extends React.Component {
     return (
       <div>
         <div className="caqui-datetime-dropdown-backdrop" />
-        <div className="caqui-datetime-dropdown" tabIndex="0">
-          <div className="caqui-datetime-dropdown-container">
-            <Header current={current}
-                    prevMonth={this.prevMonth}
-                    nextMonth={this.nextMonth} />
-            <Row>
-              <Column size={Column.from(time ? 6 : 12, time ? 6 : 12,12,12)}>
-                <table className="caqui-table caqui-table-bordered caqui-datetime-table">
-                  <thead className="caqui-datetime-table-header">
-                    <tr>
-                      { weekDaysTitles }
-                    </tr>
-                  </thead>
-                  <tbody className="caqui-datetime-table-body">
-                    { calendarRows }
-                  </tbody>
-                </table>
-              </Column>
-              {time}
-            </Row>
+        <div className="caqui-datetime-dropdown-holder">
+          <div className="caqui-datetime-dropdown" tabIndex="0">
+            <div className="caqui-datetime-dropdown-container">
+              <Header current={current}
+                      prevMonth={this.prevMonth}
+                      nextMonth={this.nextMonth} />
+              <Row>
+                <Column size={Column.from(time ? 6 : 12, time ? 6 : 12,12,12)}>
+                  <table className="caqui-table caqui-table-bordered caqui-datetime-table">
+                    <thead className="caqui-datetime-table-header">
+                      <tr>
+                        { weekDaysTitles }
+                      </tr>
+                    </thead>
+                    <tbody className="caqui-datetime-table-body">
+                      { calendarRows }
+                    </tbody>
+                  </table>
+                </Column>
+                {time}
+              </Row>
+            </div>
+            <a href="javascript:;" onClick={this.close} className="caqui-datetime-close">
+              Fechar
+            </a>
           </div>
-          <a href="javascript:;" onClick={this.close} className="caqui-datetime-close">
-            Fechar
-          </a>
         </div>
       </div>
     );

@@ -77,8 +77,6 @@ class ListOfItems extends React.Component {
     }
   }
   render() {
-    console.log("ListOfItems rendered");
-
     const {input, itemLabel, itemKey, children, label} = this.props;
 
     const child = children || input;

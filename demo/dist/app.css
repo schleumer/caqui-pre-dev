@@ -7667,6 +7667,7 @@ textarea.caqui-fake-text-input {
 }
 .caqui-datetime-day {
   position: relative;
+  min-width: 50px;
 }
 .caqui-datetime-day-selected::after {
   position: absolute;
@@ -7708,14 +7709,13 @@ textarea.caqui-fake-text-input {
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   background-clip: padding-box;
-  position: fixed;
-  top: 10%;
-  left: 50%;
-  margin-left: -175px;
-  width: 450px;
+  position: relative;
+  margin: 5% auto;
+  max-width: 700px;
   display: block;
-  padding: 5px;
+  padding: 15px;
   padding-bottom: 28px;
+  float: none;
   z-index: 9999;
 }
 .caqui-datetime-dropdown.pull-right {
@@ -7746,6 +7746,30 @@ textarea.caqui-fake-text-input {
   right: 0px;
   bottom: 0px;
   content: ' ';
+}
+.caqui-datetime-dropdown-holder {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  z-index: 9999;
+  overflow: auto;
+}
+@media (max-width: 760px) {
+  .caqui-datetime-close {
+    position: fixed;
+  }
+  .caqui-datetime-dropdown {
+    position: fixed;
+    margin: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    overflow: auto;
+  }
 }
 .caqui-datetime-table > tbody > tr > .caqui-datetime-dropdown-day {
   padding: 0px;
@@ -7881,4 +7905,7 @@ textarea.caqui-fake-text-input {
 .caqui-row {
   margin-left: -15px;
   margin-right: -15px;
+}
+.caqui-scroll-disabled {
+  overflow: hidden;
 }

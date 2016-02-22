@@ -38,8 +38,6 @@ export default class Shadow extends React.Component {
       value = itemLabel(data.selected);
     }
 
-    console.log(label, value);
-
     //<span className="caqui-combobox-shadow">{ label }</span>
     return (
       <div style={{position: 'relative'}}>

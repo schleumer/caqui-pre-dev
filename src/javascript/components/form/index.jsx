@@ -34,8 +34,6 @@ class Form extends Component {
   }
 
   render() {
-    console.log("Form rendered");
-
     let children = this.props.children;
 
     if (Array.isArray(children)) {
