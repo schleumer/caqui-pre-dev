@@ -22,7 +22,7 @@ let objectId = 1;
 
 class TextInput extends Base {
   static propTypes = {
-    form: PropTypes.string,
+    relatedForm: PropTypes.string,
     label: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.element
@@ -33,7 +33,7 @@ class TextInput extends Base {
     ])
   };
   static defaultProps = {
-    form: null,
+    relatedForm: null,
     label: null,
     placeholder: null
   };
@@ -81,7 +81,7 @@ class TextInput extends Base {
     });
   }
   makeId(props) {
-    const nextId = [props.form, props.name].filter(x => !!x);
+    const nextId = [props.relatedForm, props.name].filter(x => !!x);
     if (nextId.length) {
       this.id = nextId.join('.');
     } else {

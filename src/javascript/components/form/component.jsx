@@ -21,8 +21,8 @@ export default class Component extends Base {
       };
 
       if (child.type.propTypes) {
-        if (child.type.propTypes.form) {
-          props.form = this.props.name;
+        if (child.type.propTypes.relatedForm) {
+          props.relatedForm = this.props.name;
           if (this.props.model) {
             props.model = this.props.model;
           }
@@ -45,7 +45,7 @@ export default class Component extends Base {
 
       return React.cloneElement(child, {
         ...props,
-        form: this.props.name
+        relatedForm: this.props.name
       });
     }
 

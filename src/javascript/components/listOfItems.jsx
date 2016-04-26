@@ -8,7 +8,7 @@ import Button from './button';
 
 class ListOfItems extends React.Component {
   static propTypes = {
-    form: PropTypes.string,
+    relatedForm: PropTypes.string,
     uniqueBy: PropTypes.func,
     before: PropTypes.func
   };

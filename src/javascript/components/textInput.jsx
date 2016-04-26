@@ -21,7 +21,7 @@ let objectId = 1;
 
 class TextInput extends Base {
   static propTypes = {
-    form: PropTypes.string,
+    relatedForm: PropTypes.string,
     label: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.element
@@ -32,7 +32,7 @@ class TextInput extends Base {
     ])
   };
   static defaultProps = {
-    form: null,
+    relatedForm: null,
     label: null,
     placeholder: null
   };
@@ -61,11 +61,13 @@ class TextInput extends Base {
 
     // to avoid junk throw
     // TODO: maybe a helper for debounce would be cool
-    this.inputDebounce = setTimeout(() => {
-      if (this.props.onChange) {
-        this.props.onChange(createEvent(evt, this, newValue));
-      }
-    }, system.bounceTime);
+    //this.inputDebounce = setTimeout(() => {
+    //  if (this.props.onChange) {
+    //    this.props.onChange(createEvent(evt, this, newValue));
+    //  }
+    //}, system.bounceTime);
+
+    this.props.onChange(createEvent(evt, this, newValue));
   }
   getValue() {
     return this.state.value;
@@ -80,7 +82,7 @@ class TextInput extends Base {
     });
   }
   makeId(props) {
-    const nextId = [props.form, props.name].filter(x => !!x);
+    const nextId = [props.relatedForm, props.name].filter(x => !!x);
     if (nextId.length) {
       this.id = nextId.join('.');
     } else {
@@ -120,7 +122,7 @@ class TextInput extends Base {
                    </label> }
         <input
           {...props}
-          type="text"
+          type={props.type || "text"}
           className={ classNames }
           placeholder={ placeholder || label }
           onChange={ this.onChange }

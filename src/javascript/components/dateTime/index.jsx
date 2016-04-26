@@ -13,7 +13,7 @@ import Icon from '../icon';
 
 class DateTime extends React.Component {
   static propTypes = {
-    form: PropTypes.string,
+    relatedForm: PropTypes.string,
     displayFormat: PropTypes.string,
     time: PropTypes.bool
   };

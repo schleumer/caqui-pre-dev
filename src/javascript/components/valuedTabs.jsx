@@ -6,7 +6,7 @@ import { createEvent, modelize } from '../helpers';
 
 class ValuedTabs extends Base {
   static propTypes = {
-    form: PropTypes.string
+    relatedForm: PropTypes.string
   };
 
   constructor(props) {

@@ -11,7 +11,7 @@ import Dropdown from './dropDown';
 
 class ComboBox extends React.Component {
   static propTypes = {
-    form: PropTypes.string
+    relatedForm: PropTypes.string
   };
   static defaultProps = {
     itemKey: _ => _.id,

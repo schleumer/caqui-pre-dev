@@ -32,7 +32,7 @@ class TextInput extends Base {
   }
 
   componentWillReceiveProps(nextProps) {
-    const nextId = [nextProps.form, nextProps.name].filter(x => !!x);
+    const nextId = [nextProps.relatedForm, nextProps.name].filter(x => !!x);
     if (nextId.length) {
       this.id = nextId.join('.');
     } else {

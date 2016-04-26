@@ -4,7 +4,7 @@ import { createEvent, modelize } from '../helpers';
 
 class ModelDump extends React.Component {
   static propTypes = {
-    form: PropTypes.string
+    relatedForm: PropTypes.string
   };
   constructor(props) {
     super(props);
