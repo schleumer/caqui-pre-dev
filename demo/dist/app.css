@@ -7839,6 +7839,12 @@ textarea.caqui-fake-text-input {
 .list-of-items-empty {
   color: #999;
 }
+.caqui-icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: bottom;
+  position: relative;
+}
 .caqui-page-header-icon {
   font-size: 35px;
   position: relative;

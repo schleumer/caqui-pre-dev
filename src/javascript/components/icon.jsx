@@ -10,10 +10,10 @@ class Icon extends Base {
 
   render() {
     const style = {
-      width: '16px',
-      height: '16px',
-      verticalAlign: 'text-bottom',
-      position: 'relative',
+      //width: '16px',
+      //height: '16px',
+      //verticalAlign: 'text-bottom',
+      //position: 'relative',
       ...this.props.style
     };
     const classNames = cx("caqui-icon", this.props.className);
@@ -31,7 +31,7 @@ class Icon extends Base {
 
     return (
       <svg className={ classNames } style={ style }>
-        <use xlinkHref={ "#icon-" + name }></use>
+        <use xlinkHref={ "#" + name }></use>
       </svg>
       );
   }
