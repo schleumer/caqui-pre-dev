@@ -7844,6 +7844,7 @@ textarea.caqui-fake-text-input {
   height: 16px;
   vertical-align: bottom;
   position: relative;
+  fill: currentColor;
 }
 .caqui-page-header-icon {
   font-size: 35px;

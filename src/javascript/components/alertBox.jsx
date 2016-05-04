@@ -45,14 +45,14 @@ class MessageBox extends Base {
     if (this.props.silence) {
       return (
         <div className="text-info" onClick={ this.props.onClick }>
-          <Icon name="info" style={ {  marginRight: '5px'} } />
+          <Icon name="information" style={ {  marginRight: '5px'} } />
           <span>{ this.props.item.message }</span>
         </div>
         );
     } else {
       return (
         <div className="alert alert-info" onClick={ this.props.onClick }>
-          <Icon name="info" style={ {  marginRight: '5px'} } />
+          <Icon name="information" style={ {  marginRight: '5px'} } />
           <span>{ this.props.item.message }</span>
         </div>
         );
