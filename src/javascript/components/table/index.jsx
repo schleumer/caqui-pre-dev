@@ -66,6 +66,16 @@ class Table extends Base {
 
         // sorry, world
         this.unsafeUnmounted = false;
+
+        this.hasFirst = this.hasFirst.bind(this);
+        this.hasPrev = this.hasPrev.bind(this);
+        this.hasNext = this.hasNext.bind(this);
+        this.hasLast = this.hasLast.bind(this);
+        this.firstPage = this.firstPage.bind(this);
+        this.prevPage = this.prevPage.bind(this);
+        this.nextPage = this.nextPage.bind(this);
+        this.lastPage = this.lastPage.bind(this);
+        this.goToPage = this.goToPage.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -91,10 +101,65 @@ class Table extends Base {
             if (this.unsafeUnmounted) {
                 return;
             }
+
             this.setState(adapter.getState());
         });
 
+        adapter.touch();
+
         this.setState(adapter.getState());
+    }
+
+    adapterWillChange(promise) {
+        if (promise.then) {
+            promise.then(() => {
+                const state = this.props.adapter.getState();
+
+                this.props.queryUpdated && this.props.queryUpdated({
+                    limit: state.itemsPerPage,
+                    page: state.page,
+                    ...(state.filter ? {query: state.filter} : {})
+                })
+            });
+        }
+    }
+
+    hasFirst() {
+        return this.props.adapter.hasFirst();
+    }
+
+    hasPrev() {
+        return this.props.adapter.hasPrev();
+    }
+
+    hasNext() {
+        return this.props.adapter.hasNext();
+    }
+
+    hasLast() {
+        return this.props.adapter.hasLast();
+    }
+
+    firstPage() {
+        this.adapterWillChange(this.props.adapter.firstPage());
+    }
+
+    prevPage() {
+        this.adapterWillChange(this.props.adapter.prevPage());
+    }
+
+    nextPage() {
+        this.adapterWillChange(this.props.adapter.nextPage());
+    }
+
+    lastPage() {
+        this.adapterWillChange(this.props.adapter.lastPage());
+    }
+
+    goToPage(page) {
+        return () => {
+            this.adapterWillChange(this.props.adapter.goToPage(page));
+        }
     }
 
     render() {
@@ -151,7 +216,7 @@ class Table extends Base {
             }).map((item) => {
                 return (
                     <PaginationButton active={ (item) == page } disabled={ (item) == page } key={ "page." + item }
-                                      onClick={ adapter.goToPage(item) }>
+                                      onClick={ this.goToPage(item) }>
                         { item }
                     </PaginationButton>
                 );
@@ -194,17 +259,17 @@ class Table extends Base {
                 </table>
                 <div style={ {  textAlign: 'center',  'marginBottom': '20px'} }>
                     <ul className="pagination">
-                        <PaginationButton disabled={ !adapter.hasFirst() } onClick={ adapter.firstPage }>
+                        <PaginationButton disabled={ !this.hasFirst() } onClick={ this.firstPage }>
                             <Icon name="rewind"/>
                         </PaginationButton>
-                        <PaginationButton disabled={ !adapter.hasPrev() } onClick={ adapter.prevPage }>
+                        <PaginationButton disabled={ !this.hasPrev() } onClick={ this.prevPage }>
                             <Icon name="backward"/>
                         </PaginationButton>
                         { pageButtons }
-                        <PaginationButton disabled={ !adapter.hasNext() } onClick={ adapter.nextPage }>
+                        <PaginationButton disabled={ !this.hasNext() } onClick={ this.nextPage }>
                             <Icon name="forward"/>
                         </PaginationButton>
-                        <PaginationButton disabled={ !adapter.hasLast() } onClick={ adapter.lastPage }>
+                        <PaginationButton disabled={ !this.hasLast() } onClick={ this.lastPage }>
                             <Icon name="fast-forward"/>
                         </PaginationButton>
                     </ul>
