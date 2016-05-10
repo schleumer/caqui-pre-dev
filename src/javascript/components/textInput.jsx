@@ -46,6 +46,7 @@ class TextInput extends Base {
     constructor(props) {
         super(props);
         // just for control
+
         this.objectId = objectId++;
 
         this.displayName = 'TextInput';
@@ -74,6 +75,8 @@ class TextInput extends Base {
         //    this.props.onChange(createEvent(evt, this, newValue));
         //  }
         //}, system.bounceTime);
+
+        console.log(newValue);
 
         this.props.onChange(createEvent(evt, this, newValue));
     }
