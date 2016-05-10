@@ -6848,6 +6848,73 @@ button.close {
     border-bottom: 0;
   }
 }
+.caqui-alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.caqui-alert h4 {
+  margin-top: 0;
+  color: inherit;
+}
+.caqui-alert .alert-link {
+  font-weight: bold;
+}
+.caqui-alert > p,
+.caqui-alert > ul {
+  margin-bottom: 0;
+}
+.caqui-alert > p + p {
+  margin-top: 5px;
+}
+.caqui-alert-success {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  color: #3c763d;
+}
+.caqui-alert-success hr {
+  border-top-color: #c9e2b3;
+}
+.caqui-alert-success .alert-link {
+  color: #2b542c;
+}
+.caqui-alert-info {
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+  color: #31708f;
+}
+.caqui-alert-info hr {
+  border-top-color: #a6e1ec;
+}
+.caqui-alert-info .alert-link {
+  color: #245269;
+}
+.caqui-alert-danger {
+  background-color: #f2dede;
+  border-color: #ebccd1;
+  color: #a94442;
+}
+.caqui-alert-danger hr {
+  border-top-color: #e4b9c0;
+}
+.caqui-alert-danger .alert-link {
+  color: #843534;
+}
+.caqui-alert-warning {
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+  color: #8a6d3b;
+}
+.caqui-alert-warning hr {
+  border-top-color: #f7e1b5;
+}
+.caqui-alert-warning .alert-link {
+  color: #66512c;
+}
+.caqui-alert-hint {
+  padding: 4px;
+}
 .caqui-button {
   display: inline-block;
   margin-bottom: 0;
@@ -7409,6 +7476,32 @@ fieldset[disabled] .caqui-form-control {
 }
 textarea.caqui-form-control {
   height: auto;
+}
+.caqui-form-control-holder {
+  position: relative;
+}
+.caqui-form-control-hint .hint {
+  max-width: 200px;
+  padding: 3px 8px;
+  color: #fff;
+  text-align: center;
+  background-color: #000;
+  border-radius: 4px;
+  display: none;
+  position: absolute;
+  right: 0;
+  margin-top: 5px;
+  max-width: none;
+  min-width: 100px;
+}
+.caqui-form-control-hint .hint-icon {
+  position: absolute;
+  bottom: 50%;
+  margin-bottom: -8px;
+  right: 10px;
+}
+.caqui-form-control-hint:hover .hint {
+  display: block;
 }
 .caqui-fake-text-input {
   display: block;

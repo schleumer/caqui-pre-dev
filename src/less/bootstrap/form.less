@@ -4,6 +4,36 @@
 
 .caqui-form-control {
   .form-control();
+
+  &-holder {
+    position: relative;
+  }
+
+  &-hint {
+    .hint {
+      .tooltip-inner();
+
+      display: none;
+      position: absolute;
+      right: 0;
+      margin-top: 5px;
+      max-width: none;
+      min-width: 100px;
+
+      &-icon {
+        position: absolute;
+        bottom: 50%;
+        margin-bottom: -8px;
+        right: 10px;
+      }
+    }
+
+    &:hover {
+      .hint {
+        display: block;
+      }
+    }
+  }
 }
 
 .caqui-fake-text-input {

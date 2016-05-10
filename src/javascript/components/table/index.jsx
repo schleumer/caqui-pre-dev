@@ -164,6 +164,7 @@ class Table extends Base {
 
     render() {
         const {adapter} = this.props;
+
         const {loading, items, totalOfPages, page, filter} = this.state;
 
         if (loading) {

@@ -147,7 +147,8 @@ const dataStore = (_source, responseFilter = _ => _, itemsPerPage = 15, page = 1
                     data: query
                 });
 
-                // "avoid" multiple trash throw
+                query = {...{limit: itemsPerPage, page: page, query: filter}, ...query};
+
                 if (query.limit != itemsPerPage || query.page != page || query.query != filter) {
                     return dispatch(actions.fetchItems());
                 } else {
