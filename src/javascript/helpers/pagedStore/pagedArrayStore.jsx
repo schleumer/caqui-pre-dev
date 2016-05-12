@@ -45,10 +45,10 @@ const actions = {
 
 const m = (a1 = null, a2 = null) => {
     if (a1 !== null && a2 !== null) {
-        console.log(a1, a2);
+        //console.log(a1, a2);
         return a2;
     } else {
-        console.log(a1);
+        //console.log(a1);
         return a1;
     }
 }

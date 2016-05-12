@@ -48,8 +48,6 @@ class ComboBox extends React.Component {
     }
 
     setValue(value) {
-        console.trace(value);
-
         const store = this.store;
         store.dispatch(store.actions.select(value));
         return value;
@@ -66,14 +64,15 @@ class ComboBox extends React.Component {
     }
 
     onDropDownBlur(evt, id, originalEvent) {
+        // events are dropped if not persisted https://fb.me/react-event-pooling
+        const relatedTarget = evt.relatedTarget ||
+                      originalEvent.relatedTarget ||
+                      document.activeElement;
+
         // SORRY, WORLD :(
         // https://github.com/facebook/react/issues/2011
         setTimeout(() => {
             const {actions} = this.store;
-
-            const relatedTarget = evt.relatedTarget ||
-                                  originalEvent.relatedTarget ||
-                                  document.activeElement;
 
             const holderDom = this.refs.holder,
                   a = relatedTarget,

@@ -91,15 +91,15 @@ class DateTime extends React.Component {
       return;
     }
 
+    const relatedTarget = evt.relatedTarget ||
+        originalEvent.relatedTarget ||
+        document.activeElement;
+
     // TODO: this is wrong too, but out of my control.
     // SORRY, WORLD :(
     // https://github.com/facebook/react/issues/2011
     setTimeout(() => {
       const {actions} = this.store;
-
-      const relatedTarget = evt.relatedTarget ||
-        originalEvent.relatedTarget ||
-        document.activeElement;
 
       const holderDom = this.refs.holder,
         a = relatedTarget,

@@ -75,9 +75,7 @@ class TextInput extends Base {
         //    this.props.onChange(createEvent(evt, this, newValue));
         //  }
         //}, system.bounceTime);
-
-        console.log(newValue);
-
+        
         this.props.onChange(createEvent(evt, this, newValue));
     }
 
@@ -123,7 +121,7 @@ class TextInput extends Base {
     }
 
     render() {
-        const props = this.props,
+        const props = {...this.props},
             {label, placeholder, className, hint} = props;
         // @todo helper
         const classNames = cx('caqui-form-control', className);
@@ -145,6 +143,10 @@ class TextInput extends Base {
                 )
         }
 
+        if (!props.hasOwnProperty("defaultValue")) {
+            props.value = this.state.value || "";
+        }
+
         return (
             <Form.Group>
                 { label && <label style={styles.label}>
@@ -157,7 +159,6 @@ class TextInput extends Base {
                         className={ classNames }
                         placeholder={ placeholder || label }
                         onChange={ this.onChange }
-                        value={ this.state.value }
                         ref="input"/>
                     { hintBox }
                 </div>

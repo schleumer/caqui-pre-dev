@@ -51,7 +51,7 @@ export default class Shadow extends React.Component {
                     placeholder={label}>
                 </FakeTextInput>
                 <div className="caqui-combobox-shadow-icon">
-                    <Icon name="search" />
+                    <Icon name="magnify" />
                 </div>
             </div>
         );

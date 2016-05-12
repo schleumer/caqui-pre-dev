@@ -7591,6 +7591,7 @@ textarea.caqui-fake-text-input {
   height: 16px;
   margin-top: -8px;
   right: 15px;
+  pointer-events: none;
 }
 .caqui-combobox-dropdown {
   position: absolute;

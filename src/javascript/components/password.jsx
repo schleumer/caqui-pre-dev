@@ -59,7 +59,7 @@ class TextInput extends Base {
         { label && <label>
                      { label }
                    </label> }
-        <input type="password" className="form-control" placeholder={ placeholder } onChange={ this.onChange } value={ this.state.value } />
+        <input type="password" className="form-control" placeholder={ placeholder } onChange={ this.onChange } value={ this.state.value || "" } />
         { alertBox }
       </Form.Group>
       );
