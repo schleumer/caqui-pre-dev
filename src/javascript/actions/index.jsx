@@ -1,5 +1,4 @@
 import * as constants from '../constants';
-import { request } from '../system';
 import * as system from '../system';
 
 export function loading(state, message = null, subMessage = null) {

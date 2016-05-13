@@ -74,12 +74,12 @@ class AlertBox extends Base {
   }
   forgetError(item) {
     return () => {
-      this.props.dispatch(actions.forgetError(item));
+      this.props.dispatch(actions.messages.forgetError(item));
     }
   }
   forgetMessage(item) {
     return () => {
-      this.props.dispatch(actions.forgetMessage(item));
+      this.props.dispatch(actions.messages.forgetMessage(item));
     }
   }
   render() {

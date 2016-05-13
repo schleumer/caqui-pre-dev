@@ -6,6 +6,8 @@ import thunk from 'redux-thunk';
 
 import undoable, { ActionCreators } from 'redux-undo'
 
+import slowUndo from './slowUndo'
+
 const actions = {
   setValue(field, value, version) {
     return {
@@ -51,7 +53,8 @@ function buildStore(initial) {
   const reducers = undoable(reducer, {
     limit: 10,
     initialState,
-    debug: false
+    debug: false,
+    filter: slowUndo
   });
 
   const store = compose(

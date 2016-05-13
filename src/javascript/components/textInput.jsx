@@ -55,7 +55,6 @@ class TextInput extends Base {
         }
 
         this.onChange = this.onChange.bind(this);
-        this.onBlur = this.onBlur.bind(this);
 
         this.inputDebounce = null;
     }
@@ -69,29 +68,9 @@ class TextInput extends Base {
             clearTimeout(this.inputDebounce);
         }
 
-        // to avoid junk throw
-        // TODO: maybe a helper for debounce would be cool
-        this.inputDebounce = setTimeout(() => {
-          if (this.props.onChange) {
-            this.props.onChange(createEvent(evt, this, newValue));
-          }
-        }, system.bounceTime);
-        
-        //this.props.onChange(createEvent(evt, this, newValue));
-    }
-
-    onBlur(evt) {
-        const newValue = evt.target.value;
-
-        this.setValue(newValue);
-
-        if (this.inputDebounce) {
-            clearTimeout(this.inputDebounce);
-        }
-
         if (this.props.onChange) {
             this.props.onChange(createEvent(evt, this, newValue));
-        }      
+        }
     }
 
     getValue() {
@@ -174,7 +153,6 @@ class TextInput extends Base {
                         className={ classNames }
                         placeholder={ placeholder || label }
                         onChange={ this.onChange }
-                        onBlur={ this.onBlur }
                         ref="input"/>
                     { hintBox }
                 </div>

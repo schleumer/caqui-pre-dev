@@ -33,12 +33,12 @@ export const bind = (dispatch, creators = actions) => {
 }
 
 export const request = (() => {
-  const instance = axios;
+  const instance = axios.create();
 
   instance.interceptors.response.use((response) => {
-    return processResponse(response);
+    console.log("a");
+    return response;
   }, (error) => {
-    processResponse(error);
     return Promise.reject(error);
   });
 
