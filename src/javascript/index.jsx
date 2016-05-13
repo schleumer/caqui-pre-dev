@@ -5,3 +5,8 @@ export * as Constants from './constants';
 export * as Reducers from './reducers';
 export * as System from './system';
 export * as Styles from './styles';
+
+export const DefaultState = {
+  errors: [],
+  messages: []
+};

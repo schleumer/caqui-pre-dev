@@ -22,7 +22,14 @@ class Form extends Component {
   submit(e) {
     e.preventDefault();
 
-    this.props.onSubmit && this.props.onSubmit(e);
+    const {model} = this.props;
+    let value = null;
+
+    if (model) {
+      value = model.getValue();
+    }
+
+    this.props.onSubmit && this.props.onSubmit(value, e);
   }
 
   undo() {
@@ -43,8 +50,8 @@ class Form extends Component {
     }
 
     const props = {
-      onSubmit: this.submit,
-      ...this.props
+      ...this.props,
+      onSubmit: this.submit
     }
 
     return (
