@@ -58,6 +58,7 @@ class Form extends Component {
       <form {...props}>
         <AlertBox namespace={ this.props.name } />
         { children }
+        <button onClick={this.undo} type="button">desfazer</button>
       </form>
       );
   }
