@@ -43,11 +43,11 @@ class Form extends Component {
   render() {
     let children = this.props.children;
 
-    if (Array.isArray(children)) {
-      children = this.walkThroughChildren(children);
-    } else {
-      children = this.walkThroughChildren([children]);
-    }
+    //if (Array.isArray(children)) {
+    //  children = this.walkThroughChildren(children);
+    //} else {
+    //  children = this.walkThroughChildren([children]);
+    //}
 
     const props = {
       ...this.props,

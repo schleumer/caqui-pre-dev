@@ -42,7 +42,7 @@ var compiler = webpack({
   ],
   entry: {
     app: [
-      './demo/src/javascript/app.js',
+      './demo/src/javascript/app.jsx',
     ],
     vendor: vendorPackages
   },

@@ -3,6 +3,8 @@ import cx from 'classnames';
 
 import TextInput from '../textInput';
 
+import Cage from '../cage';
+
 export default class Dropdown extends React.Component {
     constructor(props) {
         super(props);
@@ -114,15 +116,17 @@ export default class Dropdown extends React.Component {
                     <div className="caqui-combobox-dropdown">
                         <ul className="caqui-combobox-dropdown-list">
                             <li className="caqui-combobox-dropdown-list-search">
-                                <TextInput
-                                    className="caqui-combobox-dropdown-search-input"
-                                    ref="search"
-                                    name="combobox-dropdown-search"
-                                    defaultValue={ data.filter }
-                                    onChange={ this.onInput }
-                                    onBlur={ this.onBlur }
-                                    onFocus={ this.onFocus }
-                                    onKeyDown={ this.onKeyDown } />
+                                <Cage>
+                                    <TextInput
+                                        className="caqui-combobox-dropdown-search-input"
+                                        ref="search"
+                                        name="combobox-dropdown-search"
+                                        defaultValue={ data.filter }
+                                        onChange={ this.onInput }
+                                        onBlur={ this.onBlur }
+                                        onFocus={ this.onFocus }
+                                        onKeyDown={ this.onKeyDown } />
+                                </Cage>
                             </li>
                             { items }
                             { popupMessage }

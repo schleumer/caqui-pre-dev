@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 
 import ReactDOM from 'react-dom';
 import { connect, Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+
+import {createStore, combineReducers, applyMiddleware, compose, bindActionCreators} from 'redux';
+import {Router, Route, hashHistory} from 'react-router';
+import {syncHistoryWithStore, routerReducer, routerMiddleware} from 'react-router-redux';
 
 import * as Caqui from '../../../lib/index';
 
@@ -11,11 +16,22 @@ const {
   },
   Helpers: {
     createModel, PagedStore: { pagedRemoteStore }
-  },
-  System: {
-    store // THIS IS WRONG
   }
 } = Caqui;
+
+export const reducer = combineReducers(Object.assign({}, {
+    routing: routerReducer
+}, Caqui.Reducers));
+
+const storeFn = compose(
+    applyMiddleware(thunk),
+    applyMiddleware(routerMiddleware(hashHistory))
+//, devTools()
+//, persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
+);
+
+export const store = storeFn(createStore)(reducer);
+
 
 const githubApi = (query, limit, page) =>
   //`https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&page=${page}`;

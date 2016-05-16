@@ -3,8 +3,8 @@ import React, { PropTypes } from 'react';
 import { createEvent, modelize } from '../helpers';
 
 class ModelDump extends React.Component {
-  static propTypes = {
-    relatedForm: PropTypes.string
+  static contextTypes = {
+    caquiRelatedForm: PropTypes.string
   };
   constructor(props) {
     super(props);

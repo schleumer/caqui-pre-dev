@@ -23,7 +23,6 @@ let objectId = 1;
 
 class TextInput extends Base {
     static propTypes = {
-        relatedForm: PropTypes.string,
         label: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.element
@@ -37,11 +36,16 @@ class TextInput extends Base {
             React.PropTypes.element
         ])
     };
+    
     static defaultProps = {
-        relatedForm: null,
         label: null,
         placeholder: null
     };
+
+    static contextTypes = {
+        caquiRelatedForm: React.PropTypes.string,
+        caquiModel: React.PropTypes.any
+    }
 
     constructor(props) {
         super(props);
@@ -89,7 +93,10 @@ class TextInput extends Base {
     }
 
     makeId(props) {
-        const nextId = [props.relatedForm, props.name].filter(x => !!x);
+        const {caquiRelatedForm, caquiModel} = this.context;
+
+        const nextId = [caquiRelatedForm, caquiModel].filter(x => !!x);
+
         if (nextId.length) {
             this.id = nextId.join('.');
         } else {
@@ -117,6 +124,7 @@ class TextInput extends Base {
     render() {
         const props = {...this.props},
             {label, placeholder, className, hint} = props;
+
         // @todo helper
         const classNames = cx('caqui-form-control', className);
 

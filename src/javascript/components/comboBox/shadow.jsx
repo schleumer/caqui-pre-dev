@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 
 import Icon from '../icon';
+import Cage from '../cage';
 import FakeTextInput from '../fakeTextInput';
 
 export default class Shadow extends React.Component {
@@ -41,15 +42,17 @@ export default class Shadow extends React.Component {
         //<span className="caqui-combobox-shadow">{ label }</span>
         return (
             <div style={{position: 'relative'}}>
-                <FakeTextInput
-                    tabIndex={ data.open ? '-1' : '0' }
-                    onFocus={ this.displayFocused }
-                    onClick={ this.displayFocused }
-                    ref="displayer"
-                    className="caqui-combobox-shadow-holder"
-                    value={value}
-                    placeholder={label}>
-                </FakeTextInput>
+                <Cage>
+                    <FakeTextInput
+                        tabIndex={ data.open ? '-1' : '0' }
+                        onFocus={ this.displayFocused }
+                        onClick={ this.displayFocused }
+                        ref="displayer"
+                        className="caqui-combobox-shadow-holder"
+                        value={value}
+                        placeholder={label}>
+                    </FakeTextInput>
+                </Cage>
                 <div className="caqui-combobox-shadow-icon">
                     <Icon name="magnify" />
                 </div>

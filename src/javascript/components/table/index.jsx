@@ -13,6 +13,11 @@ import Base from '../base';
 import Search from './search';
 
 class PaginationButton extends Base {
+    static contextTypes = {
+        router: React.PropTypes.any
+    }
+
+
     constructor(props) {
         super(props);
 
@@ -31,6 +36,8 @@ class PaginationButton extends Base {
     }
 
     render() {
+        console.log(this.context);
+        
         const {active, disabled, children} = this.props;
 
         const liClasses = [];

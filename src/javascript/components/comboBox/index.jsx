@@ -10,13 +10,16 @@ import Shadow from './shadow';
 import Dropdown from './dropDown';
 
 class ComboBox extends React.Component {
-    static propTypes = {
-        relatedForm: PropTypes.string
+    static contextTypes = {
+        caquiRelatedForm: PropTypes.string,
+        caquiModel: PropTypes.any
     };
+
     static defaultProps = {
         itemKey: _ => _.id,
         itemLabel: _ => _.name
     };
+
     constructor(props) {
         super(props);
         this.displayName = 'ComboBox';

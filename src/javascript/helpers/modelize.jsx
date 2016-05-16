@@ -10,6 +10,13 @@ export default (WrappedElement) => {
     class ModelizeWrapper extends Base {
         static propTypes = WrappedElement.propTypes;
         static __ignoreChildren = WrappedElement.__ignoreChildren || false;
+
+        static contextTypes = {
+            caquiRelatedForm: React.PropTypes.string,
+            caquiModel: React.PropTypes.any
+        }
+
+
         constructor(props) {
             super(props);
 
@@ -21,9 +28,14 @@ export default (WrappedElement) => {
         }
 
         componentDidMount() {
+            const {caquiModel, caquiRelatedForm} = this.context;
 
-            if (this.props.model) {
-                const {model, name} = this.props;
+            if (caquiModel) {
+                const {model, name} = {
+                    model: caquiModel,
+                    name: this.props.name
+                };
+
                 const {element} = this.refs;
 
                 const value = model.getValue(name);
@@ -66,11 +78,15 @@ export default (WrappedElement) => {
         }
 
         onChange(before) {
-            const {name, model} = this.props;
+            const {caquiModel} = this.context;
+            const {name, model} = {
+                model: caquiModel,
+                name: this.props.name
+            };
 
             return ({event, target, data}) => {
-                if (this.props.onChange) {
-                    this.props.onChange(event, data);
+                if (before) {
+                    before(event, data);
                 }
 
                 if (model && name) {
@@ -80,7 +96,12 @@ export default (WrappedElement) => {
         }
 
         setValue(value) {
-            const {name, model} = this.props;
+            const {caquiModel} = this.context;
+            const {name, model} = {
+                model: caquiModel,
+                name: this.props.name
+            };
+
             if (model) {
                 model.setValue(name, value);
             } else {
@@ -89,7 +110,12 @@ export default (WrappedElement) => {
         }
 
         getValue() {
-            const {name, model} = this.props;
+            const {caquiModel} = this.context;
+            const {name, model} = {
+                model: caquiModel,
+                name: this.props.name
+            };
+
             if (model) {
                 return model.getValue(name);
             } else {
