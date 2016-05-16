@@ -26,11 +26,11 @@ iconsElement.style.display = "none";
 iconsElement.innerHTML = iconsFile;
 body.appendChild(iconsElement);
 
-export const reducer = combineReducers(reducers)
+export const reducer = combineReducers(reducers);
 
 export const bind = (dispatch, creators = actions) => {
   return bindActionCreators(creators, dispatch);
-}
+};
 
 export const request = (() => {
   const instance = axios.create();
