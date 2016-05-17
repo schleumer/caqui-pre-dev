@@ -2,19 +2,11 @@ import axios from 'axios';
 
 import * as reducers from './reducers';
 
-import { 
-  createStore,
-  compose,
-  combineReducers,
-  applyMiddleware,
-  bindActionCreators
-} from 'redux';
-
-import thunk from 'redux-thunk';
+import { combineReducers, bindActionCreators } from 'redux';
 
 import * as actions from './actions';
 
-import { is } from './helpers';
+import {is} from './helpers';
 
 // THIS IS WRONG, THIS IS SO WRONG
 // https://www.youtube.com/v/bW8FbKswSRU&start=101&end=128
@@ -29,30 +21,29 @@ body.appendChild(iconsElement);
 export const reducer = combineReducers(reducers);
 
 export const bind = (dispatch, creators = actions) => {
-  return bindActionCreators(creators, dispatch);
+    return bindActionCreators(creators, dispatch);
 };
 
 export const request = (() => {
-  const instance = axios.create();
+    const instance = axios.create();
 
-  instance.interceptors.response.use((response) => {
-    console.log("a");
-    return response;
-  }, (error) => {
-    return Promise.reject(error);
-  });
+    instance.interceptors.response.use((response) => {
+        return response;
+    }, (error) => {
+        return Promise.reject(error);
+    });
 
-  return instance;
+    return instance;
 })();
 
 export const bounceTime = 300;
 
 export const m = (...args) =>
-  args.reduce((left, right) =>
-    right 
-      ? Object.assign({}, left, right) 
-      : left
-  , {});
+    args.reduce((left, right) =>
+            right
+                ? Object.assign({}, left, right)
+                : left
+        , {});
 
 
 //window._store = store

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, {PropTypes} from 'react';
 
 import Base from '../base';
 
@@ -6,7 +6,7 @@ export default class Component extends Base {
     static childContextTypes = {
         caquiRelatedForm: React.PropTypes.string,
         caquiModel: React.PropTypes.any
-    }
+    };
 
     constructor(props) {
         super(props);

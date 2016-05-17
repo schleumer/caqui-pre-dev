@@ -5,36 +5,36 @@ import ColumnOffsets from '../helpers/columnOffsets'
 import Base from './base';
 
 class Column extends Base {
-  constructor(props) {
-    super(props);
-    this.displayName = 'Column';
-  }
-  render() {
-    // @todo better coding style
-
-    const offsets = this.props.offset;
-
-    let sizes = this.props.size;
-    let classes = [];
-
-    if (!sizes) {
-      sizes = Column.from()
+    constructor(props) {
+        super(props);
+        this.displayName = 'Column';
     }
 
-    if (sizes && (sizes instanceof ColumnBreakpoints)) {
-      classes = classes.concat(sizes.toArray());
-    }
+    render() {
+        // TODO: better coding style
+        const offsets = this.props.offset;
 
-    if (offsets && (offsets instanceof ColumnOffsets)) {
-      classes = classes.concat(offsets.toArray());
-    }
+        let sizes = this.props.size;
+        let classes = [];
 
-    return (
-      <div {...this.props} className={ classes.join(' ') } style={ {  ...this.props.style} }>
-        { this.props.children }
-      </div>
-      );
-  }
+        if (!sizes) {
+            sizes = Column.from()
+        }
+
+        if (sizes && (sizes instanceof ColumnBreakpoints)) {
+            classes = classes.concat(sizes.toArray());
+        }
+
+        if (offsets && (offsets instanceof ColumnOffsets)) {
+            classes = classes.concat(offsets.toArray());
+        }
+
+        return (
+            <div {...this.props} className={ classes.join(' ') } style={ {  ...this.props.style} }>
+                { this.props.children }
+            </div>
+        );
+    }
 }
 
 

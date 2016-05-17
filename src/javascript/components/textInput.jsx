@@ -45,7 +45,7 @@ class TextInput extends Base {
     static contextTypes = {
         caquiRelatedForm: React.PropTypes.string,
         caquiModel: React.PropTypes.any
-    }
+    };
 
     constructor(props) {
         super(props);
@@ -56,7 +56,7 @@ class TextInput extends Base {
         this.displayName = 'TextInput';
         this.state = {
             value: null
-        }
+        };
 
         this.onChange = this.onChange.bind(this);
 
@@ -64,7 +64,7 @@ class TextInput extends Base {
     }
 
     onChange(evt) {
-        const newValue = evt.target.value;
+        const newValue = evt.target.value || null;
 
         this.setValue(newValue);
 
@@ -82,7 +82,7 @@ class TextInput extends Base {
     }
 
     getImmediateValue() {
-        return this.refs.input.value;
+        return this.refs.input.value || null;
     }
 
     setValue(value) {

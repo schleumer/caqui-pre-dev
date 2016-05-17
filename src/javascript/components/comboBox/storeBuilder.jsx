@@ -1,6 +1,5 @@
-import { createStore, compose, applyMiddleware } from 'redux';
-
-import thunk from 'redux-thunk';
+import {createStore, compose, applyMiddleware} from "redux";
+import thunk from "redux-thunk";
 
 const actionsBuilder = (base) => {
     return {
@@ -17,7 +16,7 @@ const actionsBuilder = (base) => {
         filter(data) {
             return dispatch => {
                 base.filter(data);
-            }
+            };
             //return {
             //  type: 'FILTER',
             //  data
@@ -84,10 +83,10 @@ const storeBuilder = (base) => {
             // XXX: THIS IS WRONG
             return data.loading ? 'Carregando' : (
                 filter
-              ? `Filtrado ${data.items.length} de ${data.total}`
-              : `Monstrando ${data.items.length} de ${data.total}`
+                    ? `Filtrado ${data.items.length} de ${data.total}`
+                    : `Monstrando ${data.items.length} de ${data.total}`
             )
-        }
+        };
 
         switch (type) {
             case 'BASE_UPDATED':
@@ -99,43 +98,43 @@ const storeBuilder = (base) => {
                     total: data.total,
                     filter: data.filter,
                     status: getStatus(data.filter, data)
-                }
+                };
             case 'OPEN':
                 return {
                     ...state,
                     open: true
-                }
+                };
             case 'CLOSE':
                 return {
                     ...state,
                     open: false
-                }
+                };
             case 'UP':
                 return {
                     ...state,
                     position: state.position > 0 ? state.position - 1 : state.position
-                }
+                };
             case 'DOWN':
                 return {
                     ...state,
                     position: state.position < (state.items.length - 1) ? state.position + 1 : state.position
-                }
+                };
             case 'FILTER':
                 return {
                     ...state,
                     filter: data,
                     status: getStatus(data, state)
-                }
+                };
             case 'SELECT':
                 return {
                     ...state,
                     selected: data
-                }
+                };
             default:
                 return state;
         }
 
-    }
+    };
 
     const store = compose(
         applyMiddleware(thunk)
@@ -155,6 +154,6 @@ const storeBuilder = (base) => {
         touch: base.touch.bind(base),
         actions
     };
-}
+};
 
 export default storeBuilder;

@@ -5,18 +5,18 @@ import Menu from './menu';
 import Base from '../../base';
 
 class Container extends Base {
-  constructor(props) {
-    super(props);
-    this.displayName = 'Page.Container';
-  }
+    constructor(props) {
+        super(props);
+        this.displayName = 'Page.Container';
+    }
 
-  render() {
-    return (
-      <div className="caqui-page-container">
-        { this.props.children }
-      </div>
-      );
-  }
+    render() {
+        return (
+            <div className="caqui-page-container">
+                { this.props.children }
+            </div>
+        );
+    }
 }
 
 Container.Menu = Menu;

@@ -1,125 +1,96 @@
-import { OrderedMap } from 'immutable';
+import {OrderedMap} from 'immutable';
 
-import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
+import {createStore} from 'redux';
 
-import thunk from 'redux-thunk';
-
-import undoable, { ActionCreators } from 'redux-undo'
+import undoable, {ActionCreators} from 'redux-undo'
 
 import slowUndo from './slowUndo'
 
 const actions = {
-  setValue(field, value, version) {
-    return {
-      type: 'SET_VALUE',
-      data: {
-        field,
-        value,
-        version
-      }
+    setValue(field, value) {
+        return {
+            type: 'SET_VALUE',
+            data: {
+                field,
+                value
+            }
+        }
+    },
+    set(newData) {
+        return {
+            type: 'SET',
+            data: newData
+        }
     }
-  },
-  set(newData, version) {
-    return {
-      type: 'SET',
-      data: {
-        newData,
-        version
-      }
-    }
-  }
-}
+};
 
 function buildStore(initial) {
-  const initialState = new OrderedMap(initial);
+    const initialState = new OrderedMap(initial);
 
-  const reducer = function(state = initialState, action) {
-    const {type, data} = action;
+    const reducer = function (state = initialState, action) {
+        const {type, data} = action;
 
-    switch (type) {
-      case "SET_VALUE":
-        const newValue = state
-          .set("version", data.version)
-          .setIn(data.field.split('.'), data.value);
-        return newValue;
-      case "SET":
-        return new OrderedMap(data.newData)
-          .set("version", data.version)
-      default:
-        return state;
-    }
-  }
+        switch (type) {
+            case "SET_VALUE":
+                return state.setIn(data.field.split('.'), data.value);
+            case "SET":
+                return new OrderedMap(data.newData);
+            default:
+                return state;
+        }
+    };
 
-  const reducers = undoable(reducer, {
-    limit: 10,
-    initialState,
-    debug: false,
-    filter: slowUndo
-  });
+    const reducers = undoable(reducer, {
+        limit: 10,
+        initialState,
+        debug: false,
+        filter: slowUndo
+    });
 
-  const store = compose(
-    applyMiddleware(thunk)
-  )(createStore)(reducers);
-
-  return store;
+    return createStore(reducers);
 }
 
 class Model {
-  constructor(initial = {}) {
-    this.store = buildStore({
-      ...initial,
-      version: 0
-    });
-    this.version = 0;
-  }
-
-  getValue(name) {
-    const state = this.store.getState();
-    if (name) {
-      return state.present.getIn(name.split('.'));
-    } else {
-      return state.present.toJS();
+    constructor(initial = {}) {
+        this.store = buildStore({
+            ...initial
+        });
     }
-  }
 
-  onChange(name, before = null) {
-    const {store} = this;
-
-    return function({event, target, data}) {
-      this.version = this.version + 1;
-
-      store.dispatch(actions.setValue(name, data, this.version));
+    getValue(name) {
+        const state = this.store.getState();
+        if (name) {
+            return state.present.getIn(name.split('.'));
+        } else {
+            return state.present.toJS();
+        }
     }
-  }
 
-  setValue(name, data) {
-    this.version = this.version + 1;
+    onChange(name, before = null) {
+        const {store} = this;
 
-    this.store.dispatch(actions.setValue(name, data, this.version));
-  }
+        return function ({event, target, data}) {
+            store.dispatch(actions.setValue(name, data));
+        }
+    }
 
-  set(data) {
-    this.version = this.version + 1;
+    setValue(name, data) {
+        this.store.dispatch(actions.setValue(name, data));
+    }
 
-    this.store.dispatch(actions.set(data, this.version));
-  }
+    set(data) {
+        this.store.dispatch(actions.set(data));
+    }
 
-  getVersion() {
-    const state = this.store.getState();
-    return state.present.get('version');
-  }
+    subscribe(fn) {
+        return this.store.subscribe(fn);
+    }
 
-  subscribe(fn) {
-    return this.store.subscribe(fn);
-  }
-
-  undo() {
-    return this.store.dispatch(ActionCreators.undo());
-  }
+    undo() {
+        return this.store.dispatch(ActionCreators.undo());
+    }
 }
 
-export default (initial = {
-    version: 0
-  }) => {
-  return new Model(initial);
+export default (initial = {}) => {
+    return new Model(initial);
 }

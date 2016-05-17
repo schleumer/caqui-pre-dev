@@ -1,12 +1,10 @@
 const initialState = {
-  because: null
-}
+    because: null
+};
 
-export default function(state = initialState, action = {}) {
-  const {type} = action;
-
-  switch (type) {
-    default:
-      return state;
-  }
+export default function (state = initialState, action = {}) {
+    switch (action.type) {
+        default:
+            return state;
+    }
 }

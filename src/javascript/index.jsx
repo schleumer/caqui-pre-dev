@@ -7,6 +7,6 @@ export * as System from './system';
 export * as Styles from './styles';
 
 export const DefaultState = {
-  errors: [],
-  messages: []
+    errors: [],
+    messages: []
 };

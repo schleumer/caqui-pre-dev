@@ -7,7 +7,7 @@ class Cage extends React.Component {
     static childContextTypes = {
         caquiRelatedForm: React.PropTypes.string,
         caquiModel: React.PropTypes.any
-    }
+    };
 
     constructor(props) {
         super(props);
@@ -15,10 +15,10 @@ class Cage extends React.Component {
     }
 
     getChildContext() {
-      return {
-        caquiRelatedForm: null,
-        caquiModel: null
-      }
+        return {
+            caquiRelatedForm: null,
+            caquiModel: null
+        }
     }
 
     render() {

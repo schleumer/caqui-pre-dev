@@ -6,20 +6,21 @@ import Right from './right';
 import Base from '../../../base';
 
 class Menu extends Base {
-  constructor(props) {
-    super(props);
-    this.displayName = 'Page.Container.Menu';
-  }
-  render() {
+    constructor(props) {
+        super(props);
+        this.displayName = 'Page.Container.Menu';
+    }
 
-    return (
-      <div className="row" style={ {  marginBottom: '15px',  marginTop: '5px'} }>
-        <div className="col-xs-12">
-          { this.props.children }
-        </div>
-      </div>
-      );
-  }
+    render() {
+
+        return (
+            <div className="row" style={ {  marginBottom: '15px',  marginTop: '5px'} }>
+                <div className="col-xs-12">
+                    { this.props.children }
+                </div>
+            </div>
+        );
+    }
 }
 
 Menu.Left = Left;

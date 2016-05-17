@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
 
-import { createStore, compose, applyMiddleware } from 'redux';
+import {createStore, compose, applyMiddleware} from 'redux';
 
 import thunk from 'redux-thunk';
 
@@ -156,7 +156,8 @@ const dataStore = (data, userOptions = {}, itemsPerPage = 15, page = 1) => {
                     filter: action.data,
                     items: filterItems(action.data)
                 });
-            default: return state
+            default:
+                return state
         }
     }
 

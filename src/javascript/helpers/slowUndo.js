@@ -4,9 +4,11 @@
 
 let filter;
 export default function slowUndo(action, currentState, previousState) {
-  if (!filter) {
-    filter = setTimeout(() => { filter = false }, 1000);
-    return true;
-  }
-  return false;
+    if (!filter) {
+        filter = setTimeout(() => {
+            filter = false
+        }, 1000);
+        return true;
+    }
+    return false;
 }

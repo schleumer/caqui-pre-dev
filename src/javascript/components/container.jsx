@@ -4,26 +4,25 @@ import cx from 'classnames';
 import Base from './base';
 
 class Container extends Base {
-  constructor(props) {
-    super(props);
-    this.displayName = 'Container';
-  }
-  render() {
-    // @todo coding style
+    constructor(props) {
+        super(props);
+        this.displayName = 'Container';
+    }
 
-    //if (this.props.className) {
-    //  className.push(this.props.className);
-    //}
+    render() {
+        // @todo coding style
 
-    return (
-      <div {...this.props} className={cx(this.props.className, {
-        "caqui-container": !this.props.fluid,
-        "caqui-container-fluid": this.props.fluid
-      })}>
-        { this.props.children }
-      </div>
-      );
-  }
+        const classes = cx(this.props.className, {
+            "caqui-container": !this.props.fluid,
+            "caqui-container-fluid": this.props.fluid
+        });
+
+        return (
+            <div {...this.props} className={classes}>
+                { this.props.children }
+            </div>
+        );
+    }
 }
 
 export default Container;

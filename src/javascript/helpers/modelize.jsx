@@ -14,8 +14,7 @@ export default (WrappedElement) => {
         static contextTypes = {
             caquiRelatedForm: React.PropTypes.string,
             caquiModel: React.PropTypes.any
-        }
-
+        };
 
         constructor(props) {
             super(props);
@@ -24,7 +23,6 @@ export default (WrappedElement) => {
 
             // just to avoid useless re-render;
             this.guardedValue = null;
-            this.lastVersion = 0;
         }
 
         componentDidMount() {
@@ -47,15 +45,6 @@ export default (WrappedElement) => {
                 // TODO: um jeito mais simples e mais performatico de verificar mudanças
                 // XXX: nem sei se isso é certo.
                 this.unsubscribe = model.subscribe(() => {
-                    //console.info("[%s, %s] ModelizeWrapper.subscribe %s %s", name, WrappedElement.name, this.lastVersion, model.getVersion());
-
-                    // ???: provavelmente fiz isso para ver se já não ocorreu o setValue antes
-                    // if (this.lastVersion === model.getVersion()) {
-                    //   return;
-                    // }
-
-                    this.lastVersion = model.getVersion();
-
                     const value = model.getValue(name);
                     const {element} = this.refs;
 
@@ -64,8 +53,6 @@ export default (WrappedElement) => {
                     // XXX: e também para que não renderize caso o valor não mude na hora de fazer undo ou redo :)
                     // XXX: é uma gambiarra quente
                     if (value != this.guardedValue) {
-                        //console.info("[willUpdated][%s, %s] ModelizeWrapper.subscribe %s %s", name, WrappedElement.name, this.lastVersion, model.getVersion());
-
                         this.guardedValue = value;
                         element.setValue(value);
                     }
@@ -141,7 +128,7 @@ export default (WrappedElement) => {
 
             return (
                 <div>
-                    <WrappedElement {...newProps} ref="element" />
+                    <WrappedElement {...newProps} ref="element"/>
                 </div>
             );
         }

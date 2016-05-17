@@ -22,7 +22,7 @@ class Search extends React.Component {
         const state = adapter.store.getState();
 
         const {filter} = state;
-        
+
         return (
             <div>
                 <TextInput placeholder="Buscar..." ref="search" value={ filter }/>

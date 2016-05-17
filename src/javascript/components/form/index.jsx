@@ -9,58 +9,50 @@ import Footer from './footer';
 import Button from '../button';
 
 class Form extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.displayName = 'Form';
-    this.created = new Date();
+        this.displayName = 'Form';
+        this.created = new Date();
 
-    this.submit = this.submit.bind(this);
-    this.undo = this.undo.bind(this);
-  }
-
-  submit(e) {
-    e.preventDefault();
-
-    const {model} = this.props;
-    let value = null;
-
-    if (model) {
-      value = model.getValue();
+        this.submit = this.submit.bind(this);
+        this.undo = this.undo.bind(this);
     }
 
-    this.props.onSubmit && this.props.onSubmit(value, e);
-  }
+    submit(evt) {
+        evt.preventDefault();
 
-  undo() {
-    const {model} = this.props;
+        const {model} = this.props;
+        let value = null;
 
-    if (model) {
-      model.undo();
-    }
-  }
+        if (model) {
+            value = model.getValue();
+        }
 
-  render() {
-    let children = this.props.children;
-
-    //if (Array.isArray(children)) {
-    //  children = this.walkThroughChildren(children);
-    //} else {
-    //  children = this.walkThroughChildren([children]);
-    //}
-
-    const props = {
-      ...this.props,
-      onSubmit: this.submit
+        this.props.onSubmit && this.props.onSubmit(value, e);
     }
 
-    return (
-      <form {...props}>
-        <AlertBox namespace={ this.props.name } />
-        { children }
-      </form>
-      );
-  }
+    undo() {
+        const {model} = this.props;
+
+        if (model) {
+            model.undo();
+        }
+    }
+
+    render() {
+        const props = {
+            ...this.props,
+            onSubmit: this.submit
+        };
+
+        return (
+            <form {...props}>
+                <AlertBox namespace={ props.name }/>
+                { props.children }
+            </form>
+        );
+    }
 }
 
 
