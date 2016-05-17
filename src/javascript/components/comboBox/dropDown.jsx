@@ -6,6 +6,10 @@ import TextInput from '../textInput';
 import Cage from '../cage';
 
 export default class Dropdown extends React.Component {
+    static defaultProps = {
+        footer: true
+    };
+
     constructor(props) {
         super(props);
 
@@ -103,8 +107,18 @@ export default class Dropdown extends React.Component {
                     </a>
                 </li>
             )
+        });
+
+        let footer = null;
+
+        if (this.props.footer) {
+            footer = [
+                <li key="_divider" role="separator" className="caqui-combobox-dropdown-list-separator"></li>,
+                <li key="_footer" className="caqui-combobox-dropdown-list-text">
+                    { data.status }
+                </li>
+            ]
         }
-        );
 
         if (items.length < 1) {
             popupMessage = <li className="caqui-combobox-dropdown-list-text">Não há resultados</li>
@@ -130,10 +144,7 @@ export default class Dropdown extends React.Component {
                             </li>
                             { items }
                             { popupMessage }
-                            <li role="separator" className="caqui-combobox-dropdown-list-separator"></li>
-                            <li className="caqui-combobox-dropdown-list-text">
-                                { data.status }
-                            </li>
+                            { footer }
                         </ul>
                     </div>
                 </div>

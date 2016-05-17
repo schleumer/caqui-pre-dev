@@ -9,6 +9,7 @@ export default class Shadow extends React.Component {
         super(props);
 
         this.displayFocused = this.displayFocused.bind(this);
+        this.trash = this.trash.bind(this);
     }
 
     displayFocused(evt, a, b, c) {
@@ -27,8 +28,14 @@ export default class Shadow extends React.Component {
         this.refs.displayer.dispatch('focus');
     }
 
+    trash() {
+        if (this.props.onTrash) {
+            this.props.onTrash();
+        }
+    }
+
     render() {
-        const {itemKey, itemLabel, store, xd} = this.props;
+        const {itemKey, itemLabel, store} = this.props;
 
         const data = store.getState();
 
@@ -37,6 +44,22 @@ export default class Shadow extends React.Component {
 
         if (data.selected) {
             value = itemLabel(data.selected);
+        }
+
+        let icon = null;
+
+        if (data.selected) {
+            icon = (
+                <div className="caqui-combobox-trash-icon" onClick={this.trash}>
+                    <Icon name="trash" />
+                </div>
+            )
+        } else {
+            icon = (
+                <div className="caqui-combobox-shadow-icon">
+                    <Icon name="magnify" />
+                </div>
+            )
         }
 
         //<span className="caqui-combobox-shadow">{ label }</span>
@@ -53,9 +76,7 @@ export default class Shadow extends React.Component {
                         placeholder={label}>
                     </FakeTextInput>
                 </Cage>
-                <div className="caqui-combobox-shadow-icon">
-                    <Icon name="magnify" />
-                </div>
+                { icon }
             </div>
         );
     }

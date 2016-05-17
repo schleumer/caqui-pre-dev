@@ -31,6 +31,7 @@ class ComboBox extends React.Component {
 
         this.onDropDownBlur = this.onDropDownBlur.bind(this);
         this.onDropDownChange = this.onDropDownChange.bind(this);
+        this.clearSelected = this.clearSelected.bind(this);
     }
 
     componentWillMount() {
@@ -90,6 +91,10 @@ class ComboBox extends React.Component {
         }, 1);
     }
 
+    clearSelected() {
+        this.onDropDownChange(null);
+    }
+
     render() {
         const data = this.state;
 
@@ -108,7 +113,8 @@ class ComboBox extends React.Component {
         const childProps = {
             itemKey,
             itemLabel,
-            store: this.store
+            store: this.store,
+            footer: this.props.footer
         };
 
         if (data.open) {
@@ -119,7 +125,7 @@ class ComboBox extends React.Component {
             <Form.Group>
                 { label }
                 <div className={ classNames } ref="holder">
-                    <Shadow {...childProps} ref="shadow" />
+                    <Shadow {...childProps} ref="shadow" onTrash={this.clearSelected} />
                     <div>
                         { dropdown }
                     </div>

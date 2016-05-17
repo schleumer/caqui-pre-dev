@@ -13,6 +13,11 @@ const actionsBuilder = (base) => {
                 type: 'CLOSE'
             }
         },
+        clear() {
+            return {
+                type: 'CLEAR'
+            }
+        },
         filter(data) {
             return dispatch => {
                 base.filter(data);
@@ -108,6 +113,11 @@ const storeBuilder = (base) => {
                 return {
                     ...state,
                     open: false
+                };
+            case 'CLEAR':
+                return {
+                    ...state,
+                    selected: null
                 };
             case 'UP':
                 return {

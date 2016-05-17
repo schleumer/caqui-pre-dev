@@ -7578,6 +7578,15 @@ textarea.caqui-fake-text-input {
 .caqui-combobox-holder {
   position: relative;
 }
+.caqui-combobox-trash-icon {
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  height: 16px;
+  margin-top: -8px;
+  right: 15px;
+  cursor: pointer;
+}
 .caqui-combobox-shadow {
   color: #999;
 }
