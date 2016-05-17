@@ -40,8 +40,9 @@ const m = (a1 = null, a2 = null) => {
     }
 };
 
-const dataStore = (_source, responseFilter = _ => _, itemsPerPage = 15, page = 1) => {
+const dataStore = (_source, responseFilter = _ => _, _request = null, itemsPerPage = 15, page = 1) => {
     const source = new URLSource(_source);
+    const request = _request || axios;
 
     const actions = {
         isLoading(state = true) {
@@ -60,8 +61,11 @@ const dataStore = (_source, responseFilter = _ => _, itemsPerPage = 15, page = 1
 
                 dispatch(actions.isLoading());
 
-                return axios.get(source.build(filter, itemsPerPage, page)).then((response) => {
+                return request.get(source.build(filter, itemsPerPage, page)).then((response) => {
+
                     const {items, total} = responseFilter(response);
+
+                    console.log(items, total);
 
                     dispatch(actions.setItems(items.slice(0, itemsPerPage), total));
                     dispatch(actions.isLoading(false));

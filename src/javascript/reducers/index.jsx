@@ -1,4 +1,2 @@
-export errors from './errors';
-export loading from './loading';
-export messages from './messages';
-export system from './system';
+export caquiErrors from './errors';
+export caquiMessages from './messages';

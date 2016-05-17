@@ -7934,9 +7934,10 @@ textarea.caqui-fake-text-input {
   color: #999;
 }
 .caqui-icon {
+  display: inline-block;
   width: 16px;
   height: 16px;
-  vertical-align: bottom;
+  vertical-align: middle;
   position: relative;
   fill: currentColor;
 }

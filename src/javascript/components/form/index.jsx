@@ -29,7 +29,7 @@ class Form extends Component {
             value = model.getValue();
         }
 
-        this.props.onSubmit && this.props.onSubmit(value, e);
+        this.props.onSubmit && this.props.onSubmit(value, evt);
     }
 
     undo() {

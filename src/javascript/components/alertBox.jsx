@@ -13,8 +13,8 @@ import Base from './base';
 const select = createSelector(
     (state, props) => {
         return {
-            errors: state.errors.filter(_ => _.field.indexOf(props.namespace) > -1),
-            messages: state.messages.filter(_ => _.field.indexOf(props.namespace) > -1)
+            errors: state.caquiErrors.filter(_ => _.field.indexOf(props.namespace) > -1),
+            messages: state.caquiMessages.filter(_ => _.field.indexOf(props.namespace) > -1)
         };
     },
     _ => _
