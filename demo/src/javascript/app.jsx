@@ -73,7 +73,7 @@ class KitchenSink2 extends Component {
         };
 
         return (
-            <Row>
+            <Row style={{paddingTop: 20}}>
                 <Column>
                     <Table adapter={this.test1Adapter}>
                         <Table.Column name={ "Nome" } cell={ <Table.SimpleCell valueKey="name" /> }/>
@@ -101,7 +101,7 @@ class KitchenSink extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{paddingTop: 20}}>
                 <Row>
                     <Column size={ Column.from(4) }>
                         <TextInput name="test_1" label="Campo de Teste 1"/>
@@ -198,42 +198,23 @@ class App extends Component {
 
     render() {
         return (
-            <Row>
-                <Column size={ Column.from(6) }>
-                    <Page header="Teste de Componentes" icon="home">
-                        <Page.Container>
-                            <Form model={ this.formModel } name="tests">
-                                <ValuedTabs name="page">
-                                    <KitchenSink id="page1" header="Pagina 1"/>
-                                    <KitchenSink2 id="page2" header="Pagina 2"/>
-                                </ValuedTabs>
-                                <Row>
-                                    <Column>
-                                        <ModelDump />
-                                    </Column>
-                                </Row>
-                            </Form>
-                        </Page.Container>
-                    </Page>
-                </Column>
-                <Column size={ Column.from(6) }>
-                    <Page header="Teste de Componentes" icon="home">
-                        <Page.Container>
-                            <Form model={ this.formModel2 } name="tests">
-                                <ValuedTabs name="page">
-                                    <KitchenSink id="page1" header="Pagina 1"/>
-                                    <KitchenSink2 id="page2" header="Pagina 2"/>
-                                </ValuedTabs>
-                                <Row>
-                                    <Column>
-                                        <ModelDump />
-                                    </Column>
-                                </Row>
-                            </Form>
-                        </Page.Container>
-                    </Page>
-                </Column>
-            </Row>
+            <Container>
+                <Page header="Teste de Componentes" icon="home">
+                    <Page.Container>
+                        <Form model={ this.formModel } name="tests">
+                            <ValuedTabs name="page">
+                                <KitchenSink id="page1" header="Pagina 1"/>
+                                <KitchenSink2 id="page2" header="Pagina 2"/>
+                            </ValuedTabs>
+                            <Row>
+                                <Column>
+                                    <ModelDump />
+                                </Column>
+                            </Row>
+                        </Form>
+                    </Page.Container>
+                </Page>
+            </Container>
         );
     }
 }
