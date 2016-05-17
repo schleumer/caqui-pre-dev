@@ -2,7 +2,7 @@ import axios from 'axios';
 
 import * as reducers from './reducers';
 
-import { combineReducers, bindActionCreators } from 'redux';
+import {combineReducers, bindActionCreators} from 'redux';
 
 import * as actions from './actions';
 

@@ -265,17 +265,17 @@ class Table extends Base {
                 <div style={ {  textAlign: 'center',  'marginBottom': '20px'} }>
                     <ul className="pagination">
                         <PaginationButton disabled={ !this.hasFirst() } onClick={ this.firstPage }>
-                            <Icon name="rewind"/>
+                            <Icon name="rewind" style={{height: 20}}/>
                         </PaginationButton>
                         <PaginationButton disabled={ !this.hasPrev() } onClick={ this.prevPage }>
-                            <Icon name="backward"/>
+                            <Icon name="backward" style={{height: 20}}/>
                         </PaginationButton>
                         { pageButtons }
                         <PaginationButton disabled={ !this.hasNext() } onClick={ this.nextPage }>
-                            <Icon name="forward"/>
+                            <Icon name="forward" style={{height: 20}}/>
                         </PaginationButton>
                         <PaginationButton disabled={ !this.hasLast() } onClick={ this.lastPage }>
-                            <Icon name="fast-forward"/>
+                            <Icon name="fast-forward" style={{height: 20}}/>
                         </PaginationButton>
                     </ul>
                 </div>

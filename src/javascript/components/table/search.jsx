@@ -3,6 +3,7 @@ import React from 'react';
 import Button from '../button';
 import TextInput from '../textInput';
 import Icon from '../icon';
+import Cage from '../cage';
 
 class Search extends React.Component {
     constructor(props) {
@@ -25,7 +26,9 @@ class Search extends React.Component {
 
         return (
             <div>
-                <TextInput placeholder="Buscar..." ref="search" value={ filter }/>
+                <Cage>
+                    <TextInput placeholder="Buscar..." ref="search" value={ filter }/>
+                </Cage>
                 <div style={ {  position: 'absolute',  right: '15px',  top: '0px'} }>
                     <button className="btn btn-link" type="button" onClick={ this.doTheFilter }>
                         <Icon name="magnify" style={ {  width: '20px',  'height': '20px'} }/>

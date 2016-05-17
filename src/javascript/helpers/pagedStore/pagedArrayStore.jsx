@@ -51,7 +51,7 @@ const m = (a1 = null, a2 = null) => {
         //console.log(a1);
         return a1;
     }
-}
+};
 
 const dataStore = (data, userOptions = {}, itemsPerPage = 15, page = 1) => {
     const options = {
@@ -113,7 +113,7 @@ const dataStore = (data, userOptions = {}, itemsPerPage = 15, page = 1) => {
 
         const filterItems = (query) => {
             return data.filter((item) => options.getLabel(item).indexOf(query) > -1)
-        }
+        };
 
         switch (action.type) {
             case 'FIRST_PAGE':
@@ -159,7 +159,7 @@ const dataStore = (data, userOptions = {}, itemsPerPage = 15, page = 1) => {
             default:
                 return state
         }
-    }
+    };
 
     const store = compose(
         applyMiddleware(thunk)
@@ -222,6 +222,6 @@ const dataStore = (data, userOptions = {}, itemsPerPage = 15, page = 1) => {
             return store.dispatch(actions.setQuery(query));
         }
     };
-}
+};
 
 export default dataStore;

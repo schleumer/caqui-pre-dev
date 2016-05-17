@@ -38,7 +38,7 @@ const m = (a1 = null, a2 = null) => {
         //console.log(a1);
         return a1;
     }
-}
+};
 
 const dataStore = (_source, responseFilter = _ => _, itemsPerPage = 15, page = 1) => {
     const source = new URLSource(_source);

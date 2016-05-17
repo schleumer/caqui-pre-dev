@@ -71,7 +71,8 @@ class ValuedTabs extends Base {
         let active = null;
 
         for (const item of this.props.children) {
-            let className = ""
+            // TODO: use classnames
+            let className = "";
 
             if (item.props.id == this.state.activeTab) {
                 className += "active";
