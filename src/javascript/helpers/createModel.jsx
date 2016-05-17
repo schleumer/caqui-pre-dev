@@ -34,7 +34,7 @@ function buildStore(initial) {
             case "SET_VALUE":
                 return state.setIn(data.field.split('.'), data.value);
             case "SET":
-                return new OrderedMap(data.newData);
+                return new OrderedMap(data);
             default:
                 return state;
         }
