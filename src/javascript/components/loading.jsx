@@ -2,12 +2,6 @@ import React, {Component} from 'react';
 
 import {connect} from 'react-redux';
 
-const select = function select(state) {
-    return {
-        loading: state.loading
-    }
-};
-
 import Base from './base';
 
 class Loading extends Base {
@@ -17,25 +11,26 @@ class Loading extends Base {
     }
 
     render() {
-        const {loading} = this.props;
+        const {state, message, subMessage} = this.props;
 
-        if (!loading.state)
-            return null;
-
-        return (
-            <div className="caqui-loading">
-                <div className="caqui-loading-holder">
-                    <div className="caqui-logo-loading">
-                        <div className="circle-1"></div>
-                        <div className="circle-2"></div>
+        if (state) {
+            return (
+                <div className="caqui-loading">
+                    <div className="caqui-loading-holder">
+                        <div className="caqui-spinner">
+                          <div className="caqui-bounce1"></div>
+                          <div className="caqui-bounce2"></div>
+                          <div className="caqui-bounce3"></div>
+                        </div>
+                        <div><b>{ message }</b></div>
+                        <div><b>{ subMessage }</b></div>
                     </div>
-                    <div>Carregando...</div>
-                    <div><b>{ loading.message }</b></div>
-                    <div><b>{ loading.subMessage }</b></div>
                 </div>
-            </div>
-        );
+            );
+        }
+
+        return this.props.children;
     }
 }
 
-export default connect(select)(Loading);
+export default Loading;
