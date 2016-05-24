@@ -9,6 +9,8 @@ TODO
 =============================
 
 - TODO list
+- CheckBox list for tagging and stuff a la select2 using adapters
+- RadioGroup using adapters
 - generify every `style` and `className` attribute, being possible to set its values from library initializer
 - expose reducer for bind to another store, instead of use an private store
 - centralize every reducer
@@ -20,3 +22,9 @@ TODO
 - modularize every component
 - swap every list and dictionary with Immutable's respective 
 - more TODO list items
+- tests
+- tests
+- tests
+- tests
+- demo page
+- tests

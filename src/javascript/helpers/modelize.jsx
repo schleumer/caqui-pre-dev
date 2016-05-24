@@ -72,12 +72,12 @@ export default (WrappedElement) => {
             };
 
             return ({event, target, data}) => {
-                if (before) {
-                    before(event, data);
-                }
-
                 if (model && name) {
                     model.setValue(name, data);
+                }
+                
+                if (before) {
+                    before(event, data);
                 }
             }
         }

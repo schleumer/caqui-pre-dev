@@ -21,3 +21,4 @@ export ModelDump from './modelDump';
 export ComboBox from './comboBox';
 export ListOfItems from './listOfItems';
 export DateTime from './dateTime';
+export BlockUI from './blockUi';

@@ -46,3 +46,28 @@
 .caqui-scroll-disabled {
   overflow: hidden;
 }
+
+.caqui-blocked-ui {
+  transition: .3s all easy-in;
+  position: relative;
+  transform: scale(.95);
+  opacity: .6;
+}
+
+.caqui-block-ui {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2;
+  background-color: rgba(0,0,0,0);
+  & > .caqui-block-ui-holder {
+    padding: 15px;
+    width: 200px;
+    margin: 40px auto;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 6px;
+  }
+}
