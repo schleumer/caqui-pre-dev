@@ -11,11 +11,20 @@ class Search extends React.Component {
         this.displayName = 'Search';
 
         this.doTheFilter = this.doTheFilter.bind(this);
+        this.searchKeyDown = this.searchKeyDown.bind(this);
     }
 
     doTheFilter(e) {
         this.props.adapter.filter(this.refs.search.getValue());
         e.preventDefault();
+    }
+
+    searchKeyDown(e) {
+        switch(e.which) {
+            case 13:
+                this.doTheFilter(e);
+                return;
+        }
     }
 
     render() {
@@ -27,7 +36,7 @@ class Search extends React.Component {
         return (
             <div>
                 <Cage>
-                    <TextInput placeholder="Buscar..." ref="search" value={ filter }/>
+                    <TextInput placeholder="Buscar..." ref="search" value={ filter } onKeyDown={this.searchKeyDown}/>
                 </Cage>
                 <div style={ {  position: 'absolute',  right: '15px',  top: '0px'} }>
                     <button className="btn btn-link" type="button" onClick={ this.doTheFilter }>
