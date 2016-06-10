@@ -25,7 +25,9 @@ const {
         FakeTextInput,
         Table,
         Password,
-        ValuedTabs
+        ValuedTabs,
+        Picker,
+        Modal
     },
     Helpers: {
         createModel, PagedStore: {pagedRemoteStore}
@@ -56,13 +58,48 @@ const githubApiResponse = (res) => {
     return ({items: data.items, total: data.total_count})
 };
 
+class KitchenSink3 extends Component {
+    constructor() {
+        super();
+
+        this.displayName = 'KitchenSink3';
+
+        this.test1Adapter = pagedRemoteStore(githubApi, githubApiResponse, null, 30);
+
+        this.state = {
+            modalVisible: true
+        };
+    }
+
+    render() {
+        return (
+            <Row>
+                <Column>
+                    <Picker adapter={this.test1Adapter} />
+                </Column>
+                <Column>
+                    <Modal isVisible={this.state.modalVisible}>
+                        <Modal.Header>Hell</Modal.Header>
+                        <Modal.Body>
+                            Top
+                        </Modal.Body>
+                        <Modal.Footer>
+                            hehe
+                        </Modal.Footer>
+                    </Modal>
+                </Column>
+            </Row>
+        );
+    }
+}
+
 class KitchenSink2 extends Component {
     constructor() {
         super();
 
         this.displayName = 'KitchenSink2';
 
-        this.test1Adapter = pagedRemoteStore(githubApi, githubApiResponse, 30);
+        this.test1Adapter = pagedRemoteStore(githubApi, githubApiResponse, null, 30);
     }
 
     render() {
@@ -205,6 +242,7 @@ class App extends Component {
                             <ValuedTabs name="page">
                                 <KitchenSink id="page1" header="Pagina 1"/>
                                 <KitchenSink2 id="page2" header="Pagina 2"/>
+                                <KitchenSink3 id="page3" header="Pagina 3"/>
                             </ValuedTabs>
                             <Row>
                                 <Column>
