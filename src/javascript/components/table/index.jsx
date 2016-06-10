@@ -58,6 +58,21 @@ class PaginationButton extends Base {
     }
 }
 
+const PrintTable = ({rows, header}) => {
+    return (
+        <table className="table table-bordered table-striped">
+            <thead>
+            <tr>
+                { header }
+            </tr>
+            </thead>
+            <tbody>
+            { rows }
+            </tbody>
+        </table>
+    )
+}
+
 
 class Table extends Base {
     static defaultProps = {
@@ -249,38 +264,40 @@ class Table extends Base {
 
         // onSubmit={ this.doTheFilter }
 
-        return (
-            <div>
-                {search}
-                <table className="table table-bordered table-striped">
-                    <thead>
-                    <tr>
-                        { header }
-                    </tr>
-                    </thead>
-                    <tbody>
-                    { rows }
-                    </tbody>
-                </table>
-                <div style={ {  textAlign: 'center',  'marginBottom': '20px'} }>
-                    <ul className="pagination">
-                        <PaginationButton disabled={ !this.hasFirst() } onClick={ this.firstPage }>
-                            <Icon name="rewind"/>
-                        </PaginationButton>
-                        <PaginationButton disabled={ !this.hasPrev() } onClick={ this.prevPage }>
-                            <Icon name="backward"/>
-                        </PaginationButton>
-                        { pageButtons }
-                        <PaginationButton disabled={ !this.hasNext() } onClick={ this.nextPage }>
-                            <Icon name="forward"/>
-                        </PaginationButton>
-                        <PaginationButton disabled={ !this.hasLast() } onClick={ this.lastPage }>
-                            <Icon name="fast-forward"/>
-                        </PaginationButton>
-                    </ul>
+        if (rows.length) {
+            return (
+                <div>
+                    {search}
+                    <PrintTable rows={rows} header={header} />
+                    <div style={ {  textAlign: 'center',  'marginBottom': '20px'} }>
+                        <ul className="pagination">
+                            <PaginationButton disabled={ !this.hasFirst() } onClick={ this.firstPage }>
+                                <Icon name="rewind"/>
+                            </PaginationButton>
+                            <PaginationButton disabled={ !this.hasPrev() } onClick={ this.prevPage }>
+                                <Icon name="backward"/>
+                            </PaginationButton>
+                            { pageButtons }
+                            <PaginationButton disabled={ !this.hasNext() } onClick={ this.nextPage }>
+                                <Icon name="forward"/>
+                            </PaginationButton>
+                            <PaginationButton disabled={ !this.hasLast() } onClick={ this.lastPage }>
+                                <Icon name="fast-forward"/>
+                            </PaginationButton>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return (
+                <div className="caqui-row-fluid">
+                    {search}
+                    <div className="text-center">
+                        <b>Nada encontrado...</b>
+                    </div>
+                </div>
+            )
+        }
     }
 }
 

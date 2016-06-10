@@ -41,7 +41,7 @@ gulp.task('copy-files', () => {
 });
 
 gulp.task('dev-less', () => {
-    return gulp.src('./demo/src/less/app.less')
+    return gulp.src('./demo/src/less/dist.less')
         .pipe(plumber(end()))
         .pipe(less({
             paths: [ path.join(__dirname, 'node_modules') ]

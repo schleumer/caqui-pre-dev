@@ -65,8 +65,6 @@ const dataStore = (_source, responseFilter = _ => _, _request = null, itemsPerPa
 
                     const {items, total} = responseFilter(response);
 
-                    console.log(items, total);
-
                     dispatch(actions.setItems(items.slice(0, itemsPerPage), total));
                     dispatch(actions.isLoading(false));
                 }).catch((ex) => {
@@ -161,7 +159,11 @@ const dataStore = (_source, responseFilter = _ => _, _request = null, itemsPerPa
             };
         },
         touch() {
-            return dispatch => {
+            return (dispatch, getState) => {
+                const state = getState();
+                if (state.touched) {
+                    return Promise.resolve(getState());
+                }
                 dispatch({
                     type: 'TOUCH',
                     data: {}
