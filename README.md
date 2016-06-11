@@ -9,6 +9,7 @@ TODO
 =============================
 
 - TODO list
+- SASS, Stylus, etc. version just for fun
 - CheckBox list for tagging and stuff a la select2 using adapters
 - RadioGroup using adapters
 - generify every `style` and `className` attribute, being possible to set its values from library initializer
