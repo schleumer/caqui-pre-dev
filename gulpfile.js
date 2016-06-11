@@ -45,9 +45,9 @@ gulp.task('babel', () => {
 })
 
 gulp.task('copy-files', () => {
-  return gulp.src([ './src/javascript/icons.svg' ])
+  return gulp.src([ './demo/src/example.json', './demo/src/index.html' ])
     .pipe(plumber())
-    .pipe(gulp.dest('lib'))
+    .pipe(gulp.dest('./demo/dist'))
 })
 
 gulp.task('dev-less', () => {
