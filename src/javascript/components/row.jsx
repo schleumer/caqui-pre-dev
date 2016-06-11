@@ -1,27 +1,34 @@
-import React from 'react';
+import React from 'react'
+import Base from './base'
 
-import Base from './base';
-
+/**
+ * TODO: PropTypes, classnames
+ */
 class Row extends Base {
-    constructor(props) {
-        super(props);
-        this.displayName = 'Row';
+  constructor(props) {
+    super(props)
+    this.displayName = 'Row'
+  }
+
+  render() {
+    // @todo coding style
+    const className = [
+      this.props.fluid ? 'row-fluid' : 'row'
+    ]
+
+    if (this.props.className) {
+      className.push(this.props.className)
     }
 
-    render() {
-        // @todo coding style
-        const className = [this.props.fluid ? "row-fluid" : "row"];
-
-        if (this.props.className) {
-            className.push(this.props.className);
-        }
-
-        return (
-            <div {...this.props} className={ className.join(' ') } style={ {  ...this.props.style} }>
-                { this.props.children }
-            </div>
-        );
-    }
+    return (
+      <div
+        {...this.props}
+        className={ className.join( ' ' ) }
+        style={ { ...this.props.style } }>
+        { this.props.children }
+      </div>
+    )
+  }
 }
 
-export default Row;
+export default Row

@@ -1,175 +1,181 @@
-import React, {PropTypes} from 'react';
-import cx from 'classnames';
+import React  from 'react'
+import cx from 'classnames'
+import Form from './form'
+import Icon from './icon'
+import AlertBox from './alertBox'
+import Base from './base'
+import { createEvent, modelize } from '../helpers'
+import * as Styles from '../styles'
 
-import Form from './form';
-
-import Icon from './icon';
-
-import AlertBox from './alertBox';
-
-import Base from './base';
-
-import {createEvent, modelize} from '../helpers';
-
-import * as system from '../system';
-
-import * as Styles from '../styles';
-
-const styles = Styles.textInput;
-const m = system.m;
+const styles = Styles.textInput
 
 /// XXX: ?????????????
-let objectId = 1;
+let objectId = 1
 
+/**
+ * TODO: PropTypes
+ */
 class TextInput extends Base {
-    static propTypes = {
-        label: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.element
-        ]),
-        hint: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.element
-        ]),
-        placeholder: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.element
-        ])
-    };
-    
-    static defaultProps = {
-        label: null,
-        placeholder: null
-    };
+  static propTypes = {
+    label: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.element
+    ]),
+    hint: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.element
+    ]),
+    placeholder: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.element
+    ])
+  }
 
-    static contextTypes = {
-        caquiRelatedForm: React.PropTypes.string,
-        caquiModel: React.PropTypes.any
-    };
+  static defaultProps = {
+    label: null,
+    placeholder: null
+  }
 
-    constructor(props) {
-        super(props);
-        // just for control
+  static contextTypes = {
+    caquiRelatedForm: React.PropTypes.string,
+    caquiModel: React.PropTypes.any
+  }
 
-        this.objectId = objectId++;
+  constructor(props) {
+    super(props)
+    // just for control
 
-        this.displayName = 'TextInput';
-        this.state = {
-            value: null
-        };
+    this.objectId = objectId++
 
-        this.onChange = this.onChange.bind(this);
-
-        this.inputDebounce = null;
+    this.displayName = 'TextInput'
+    this.state = {
+      value: null
     }
 
-    onChange(evt) {
-        const newValue = evt.target.value || null;
+    this.onChange = this.onChange.bind(this)
 
-        this.setValue(newValue);
+    this.inputDebounce = null
+  }
 
-        if (this.inputDebounce) {
-            clearTimeout(this.inputDebounce);
-        }
+  onChange(evt) {
+    const newValue = evt.target.value || null
 
-        if (this.props.onChange) {
-            this.props.onChange(createEvent(evt, this, newValue));
-        }
+    this.setValue(newValue)
+
+    if (this.inputDebounce) {
+      clearTimeout(this.inputDebounce)
     }
 
-    getValue() {
-        return this.state.value;
+    if (this.props.onChange) {
+      this.props.onChange(createEvent(evt, this, newValue))
+    }
+  }
+
+  getValue() {
+    return this.state.value
+  }
+
+  getImmediateValue() {
+    return this.refs.input.value || null
+  }
+
+  setValue(value) {
+    this.setState({
+      value: value,
+      focused: false
+    })
+  }
+
+  makeId() {
+    const { caquiRelatedForm, caquiModel } = this.context
+
+    const nextId = [
+      caquiRelatedForm,
+      caquiModel
+    ].filter(x => !!x)
+
+    if (nextId.length) {
+      this.id = nextId.join('.')
+    } else {
+      this.id = null
+    }
+  }
+
+  componentWillReceiveProps(props) {
+    this.makeId(props)
+  }
+
+  componentWillMount() {
+    this.state.value = this.props.value || null
+    this.makeId(this.props)
+  }
+
+  focus() {
+    const { input } = this.refs
+
+    input.focus()
+
+    input.selectionStart = input.selectionEnd = input.value.length
+  }
+
+  render() {
+    const props = {
+        ...this.props
+      },
+      { label, placeholder, className, hint } = props
+
+    // @todo helper
+    const classNames = cx('caqui-form-control', className)
+
+    let alertBox = null
+    let hintBox = null
+
+    if (this.id) {
+      alertBox = (
+        <AlertBox
+        silence={ true }
+        namespace={ this.id }/>
+      )
     }
 
-    getImmediateValue() {
-        return this.refs.input.value || null;
+    if (hint) {
+      hintBox = (
+        <div className="caqui-form-control-hint">
+          <Icon
+            name="help"
+            className="hint-icon"/>
+          <div className="hint">
+            { hint }
+          </div>
+        </div>
+      )
     }
 
-    setValue(value) {
-        this.setState({
-            value: value,
-            focused: false
-        });
+    if (!props.hasOwnProperty('defaultValue')) {
+      props.value = this.state.value || ''
     }
 
-    makeId(props) {
-        const {caquiRelatedForm, caquiModel} = this.context;
-
-        const nextId = [caquiRelatedForm, caquiModel].filter(x => !!x);
-
-        if (nextId.length) {
-            this.id = nextId.join('.');
-        } else {
-            this.id = null;
-        }
-    }
-
-    componentWillReceiveProps(props) {
-        this.makeId(props);
-    }
-
-    componentWillMount() {
-        this.state.value = this.props.value || null;
-        this.makeId(this.props);
-    }
-
-    focus() {
-        const {input} = this.refs;
-
-        input.focus();
-
-        input.selectionStart = input.selectionEnd = input.value.length;
-    }
-
-    render() {
-        const props = {...this.props},
-            {label, placeholder, className, hint} = props;
-
-        // @todo helper
-        const classNames = cx('caqui-form-control', className);
-
-        let alertBox = null;
-        let hintBox = null;
-
-        if (this.id) {
-            alertBox = <AlertBox silence={ true } namespace={ this.id }/>;
-        }
-
-        if (hint) {
-            hintBox =
-                (
-                    <div className="caqui-form-control-hint">
-                        <Icon name="help" className="hint-icon"/>
-                        <div className="hint">{hint}</div>
-                    </div>
-                )
-        }
-
-        if (!props.hasOwnProperty("defaultValue")) {
-            props.value = this.state.value || "";
-        }
-
-        return (
-            <Form.Group>
-                { label && <label style={styles.label}>
-                    { label }
-                </label> }
-                <div className="caqui-form-control-holder">
-                    <input
-                        {...props}
-                        type={props.type || "text"}
-                        className={ classNames }
-                        placeholder={ placeholder || label }
-                        onChange={ this.onChange }
-                        ref="input"/>
-                    { hintBox }
-                </div>
-                <div className="caqui-form-control-footer">
-                    { alertBox }
-                </div>
-            </Form.Group>
-        );
-    }
+    return (
+      <Form.Group>
+        { label && <label style={ styles.label }>
+          { label }
+        </label> }
+        <div className="caqui-form-control-holder">
+          <input
+            {...props}
+            type={ props.type || 'text' }
+            className={ classNames }
+            placeholder={ placeholder || label }
+            onChange={ this.onChange }
+            ref="input"/>
+          { hintBox }
+        </div>
+        <div className="caqui-form-control-footer">
+          { alertBox }
+        </div>
+      </Form.Group>
+    )
+  }
 }
 
-export default modelize(TextInput);
+export default modelize(TextInput)

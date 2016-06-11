@@ -1,19 +1,19 @@
-import React from 'react';
+import React from 'react'
 
 class Provider extends React.Component {
-    static childContextTypes = {};
+  static childContextTypes = {}
 
-    constructor(props) {
-        super(props);
-    }
+  constructor(props) {
+    super(props)
+  }
 
-    getChildContext() {
-        return {};
-    }
+  getChildContext() {
+    return {}
+  }
 
-    render() {
-        return this.props.children;
-    }
+  render() {
+    return this.props.children
+  }
 }
 
-export default Provider;
+export default Provider

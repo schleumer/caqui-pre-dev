@@ -1,20 +1,22 @@
-import React from 'react';
+import React from 'react'
+import Base from '../base'
 
-import Base from '../base';
-
+/**
+ * TODO: PropTypes
+ */
 class SimpleCell extends Base {
-    constructor(props) {
-        super(props);
-        this.displayName = 'Table.SimpleCell';
-    }
+  constructor(props) {
+    super(props)
+    this.displayName = 'Table.SimpleCell'
+  }
 
-    render() {
-        return (
-            <div>
-                { this.props.row[this.props.valueKey] }
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        { this.props.row[this.props.valueKey] }
+      </div>
+    )
+  }
 }
 
-export default SimpleCell;
+export default SimpleCell

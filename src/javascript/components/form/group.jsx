@@ -1,23 +1,24 @@
-import React from 'react';
-import cx from 'classnames';
-
-import Base from '../base';
+import React from 'react'
+import cx from 'classnames'
+import Base from '../base'
 
 class Group extends Base {
-    constructor(props) {
-        super(props);
-        this.displayName = 'Form.Group';
-    }
+  constructor(props) {
+    super(props)
+    this.displayName = 'Form.Group'
+  }
 
-    render() {
-        const children = this.props.children;
+  render() {
+    const children = this.props.children
 
-        return (
-            <div {...this.props} className={cx("caqui-form-group", this.props.className)}>
-                { children }
-            </div>
-        );
-    }
+    return (
+      <div
+        {...this.props}
+        className={ cx( 'caqui-form-group', this.props.className ) }>
+        { children }
+      </div>
+    )
+  }
 }
 
-export default Group;
+export default Group

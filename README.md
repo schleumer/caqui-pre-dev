@@ -28,3 +28,4 @@ TODO
 - tests
 - demo page
 - tests
+- Check all licenses, include'em.

@@ -1,11 +1,13 @@
-import React from 'react';
-import TextInput from './textInput';
+import TextInput from './textInput'
 
+/**
+ * TODO: PropTypes
+ */
 class Password extends TextInput {
-    static defaultProps = {
-        ...TextInput.defaultProps,
-        type: 'password'
-    }
+  static defaultProps = {
+    ...TextInput.defaultProps,
+    type: 'password'
+  }
 }
 
-export default Password;
+export default Password

@@ -1,3 +1,3 @@
-export caquiErrors from './errors';
-export caquiMessages from './messages';
-export caquiLoading from './loading';
+export caquiErrors from './errors'
+export caquiMessages from './messages'
+export caquiLoading from './loading'

@@ -1,5 +1,4 @@
-import * as constants from '../constants';
-import * as system from '../system';
+import * as constants from '../constants'
 
 export function loading(state, message = null, subMessage = null) {
   return {
@@ -12,4 +11,4 @@ export function loading(state, message = null, subMessage = null) {
   }
 }
 
-export * as messages from './messages';
+export * as messages from './messages'

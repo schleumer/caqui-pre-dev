@@ -5,6 +5,7 @@ const changed = require('gulp-changed');
 const watch = require('gulp-watch');
 const plumber = require('gulp-plumber');
 const less = require('gulp-less');
+const eslint = require('gulp-eslint');
 
 const babelConfig = {
     "plugins": [
@@ -26,7 +27,15 @@ const end = () => ({
     }
 });
 
-gulp.task('babel', () => {
+gulp.task('lint', function () {
+    return gulp.src(['src/**/*.js', 'src/**/*.jsx'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
+});
+
+
+gulp.task('babel', ['lint'], () => {
     return gulp.src(['src/javascript/**/*.js', 'src/javascript/**/*.jsx'])
         .pipe(plumber())
         .pipe(changed('lib', {extension: '.js'}))
@@ -41,7 +50,7 @@ gulp.task('copy-files', () => {
 });
 
 gulp.task('dev-less', () => {
-    return gulp.src('./demo/src/less/dist.less')
+    return gulp.src('./demo/src/less/app.less')
         .pipe(plumber(end()))
         .pipe(less({
             paths: [ path.join(__dirname, 'node_modules') ]

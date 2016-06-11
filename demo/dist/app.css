@@ -7521,6 +7521,8 @@ textarea.caqui-form-control {
   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   line-height: inherit;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .caqui-fake-text-input:focus {
   border-color: #66afe9;

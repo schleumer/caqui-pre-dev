@@ -1,34 +1,40 @@
-import React from 'react';
+import React from 'react'
+import { /*createEvent, */modelize } from '../helpers'
 
-import {createEvent, modelize} from '../helpers';
-
+/**
+ * TODO: PropTypes
+ */
 class Picker extends React.Component {
-    constructor(props) {
-        super(props);
-        this.displayName = 'Picker';
+  constructor(props) {
+    super(props)
+    this.displayName = 'Picker'
 
-        this.state = {
-          value: null
-        };
+    this.state = {
+      value: null
     }
+  }
 
-    getValue() {
-        return this.state.value;
-    }
+  getValue() {
+    return this.state.value
+  }
 
-    getImmediateValue() {
-        return this.state.value || null;
-    }
+  getImmediateValue() {
+    return this.state.value || null
+  }
 
-    setValue(value) {
-        this.setState({
-            value: value
-        });
-    }
+  setValue(value) {
+    this.setState({
+      value: value
+    })
+  }
 
-    render() {
-        return <div>Picker</div>;
-    }
+  render() {
+    return (
+      <div>
+        Picker
+      </div>
+    )
+  }
 }
 
-export default modelize(Picker);
+export default modelize(Picker)

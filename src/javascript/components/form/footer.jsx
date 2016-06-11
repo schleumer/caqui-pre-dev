@@ -1,34 +1,33 @@
-import React from 'react';
-
-import Base from '../base';
+import React from 'react'
+import Base from '../base'
 
 class Footer extends Base {
-    constructor(props) {
-        super(props);
-        this.displayName = 'Form.Footer';
+  constructor(props) {
+    super(props)
+    this.displayName = 'Form.Footer'
+  }
+
+  render() {
+    const props = {
+      ...this.props
     }
 
-    render() {
-        const props = {
-            ...this.props
-        };
-
-        const style = {
-            ...props.style
-        };
-
-        if (this.props.gravity) {
-            style.textAlign = this.props.gravity;
-        }
-
-        props.style = style;
-
-        return (
-            <div {...props}>
-                { this.props.children }
-            </div>
-        );
+    const style = {
+      ...props.style
     }
+
+    if (this.props.gravity) {
+      style.textAlign = this.props.gravity
+    }
+
+    props.style = style
+
+    return (
+      <div {...props}>
+        { this.props.children }
+      </div>
+    )
+  }
 }
 
-export default Footer;
+export default Footer
