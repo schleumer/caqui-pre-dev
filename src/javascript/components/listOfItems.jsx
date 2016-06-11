@@ -49,6 +49,8 @@ class ListOfItems extends React.Component {
   onAdd() {
     const newItem = this.props.before(this.refs.input.getValue())
 
+    if (!newItem) return
+
     let { uniqueBy, itemKey } = this.props
 
     uniqueBy = uniqueBy || itemKey

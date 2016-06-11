@@ -24,9 +24,7 @@ export const request = (() => {
 
   instance.interceptors.response.use((response) => {
     return response
-  }, (error) => {
-    return Promise.reject(error)
-  })
+  }, (error) => Promise.reject(error))
 
   return instance
 })()
@@ -37,7 +35,6 @@ export const m = (...args) => args.reduce((left, right) => right
     ? Object.assign({}, left, right)
     : left
   , {})
-
 
 //window._store = store
 //window._actions = actions

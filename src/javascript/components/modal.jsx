@@ -1,40 +1,71 @@
 import React from 'react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 /**
  * TODO: PropTypes
  */
 class Body extends React.Component {
   render() {
-    // if (this.props.children) {
-    // }
     return (
       <div>
-        Modal Body
+        {this.props.children}
       </div>
     )
   }
 }
 
-/**
- * TODO: PropTypes
- */
 class Footer extends React.Component {
-  render() {
-    if (this.props.children) {
-      //return ()
+  constructor(props) {
+    super(props)
+
+    this.secondaryClicked = this.secondaryClicked.bind(this)
+    this.primaryClicked = this.primaryClicked.bind(this)
+  }
+
+  primaryClicked() {
+    if (this.props.onPrimaryClick) {
+      this.props.onPrimaryClick()
     }
-    return (
-      <div>
+  }
+
+  secondaryClicked() {
+    if (this.props.onSecondaryClick) {
+      this.props.onSecondaryClick()
+    }
+  }
+
+  render() {
+    let secondaryButton = null
+
+    if (this.props.withSecondary) {
+      secondaryButton = (
         <button
           type="button"
           className="btn btn-default"
-          data-dismiss="modal">
-          Close
+          data-dismiss="modal"
+          onClick={this.secondaryClicked}>
+          {this.props.secondaryText}
         </button>
+      )
+    }
+
+    if (this.props.children) {
+      return (
+        <div>
+          {secondaryButton}
+          {this.props.children}
+        </div>
+      )
+    }
+
+    return (
+      <div className="modal-footer">
+        {secondaryButton}
         <button
           type="button"
-          className="btn btn-primary">
-          Save changes
+          className="btn btn-primary"
+          onClick={this.primaryClicked}>
+          {this.props.primaryText}
         </button>
       </div>
     )
@@ -45,6 +76,18 @@ class Footer extends React.Component {
  * TODO: PropTypes
  */
 class Header extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.onClose = this.onClose.bind(this)
+  }
+
+  onClose() {
+    if (this.props.onClose) {
+      this.props.onClose()
+    }
+  }
+
   render() {
     if (this.props.children) {
       return (
@@ -53,8 +96,9 @@ class Header extends React.Component {
             type="button"
             className="close"
             data-dismiss="modal"
-            aria-label="Close">
-            <span aria-hidden="true">&times</span>
+            aria-label="Close"
+            onClick={this.onClose}>
+            <span aria-hidden="true">&times;</span>
           </button>
           { this.props.children }
         </div>
@@ -68,7 +112,7 @@ class Header extends React.Component {
           className="close"
           data-dismiss="modal"
           aria-label="Close">
-          <span aria-hidden="true">&times</span>
+          <span aria-hidden="true">&times;</span>
         </button>
         <h4 className="modal-title">Modal title</h4>
       </div>
@@ -84,19 +128,67 @@ class Modal extends React.Component {
   static Body = Body
   static Footer = Footer
 
+  static defaultProps = {
+    secondaryText: 'Close',
+    primaryText: 'Ok',
+    onPrimaryClick: null,
+    onSecondaryClick: null,
+    withSecondary: true,
+    isVisible: false,
+    title: null
+  }
+
   constructor(props) {
     super(props)
     this.displayName = 'Modal'
+
+    this.onClose = this.onClose.bind(this)
+    this.onClickOut = this.onClickOut.bind(this)
+    this.primaryClicked = this.primaryClicked.bind(this)
+    this.secondaryClicked = this.secondaryClicked.bind(this)
+  }
+
+  onClickOut(evt) {
+    if (this.refs.holder === evt.target) {
+      this.onClose(evt)
+    }
+  }
+
+  onClose() {
+    if (this.props.onClose) {
+      this.props.onClose()
+    }
+  }
+
+  primaryClicked() {
+    if (this.props.onPrimaryClick) {
+      this.props.onPrimaryClick()
+    }
+  }
+
+  secondaryClicked() {
+    if (this.props.onSecondaryClick) {
+      this.props.onSecondaryClick()
+    } else {
+      this.props.onClose()
+    }
   }
 
   getHeader(children) {
     if (Array.isArray(children)) {
       const el = children.filter((comp) => comp.type.name == 'Header').shift()
       if (el) {
-        return el
+        return React.cloneElement(el, {
+          onClose: this.onClose
+        })
       }
     }
-    return <Header />
+
+    return (
+      <Header onClose={this.onClose}>
+        {children}
+      </Header>
+    )
   }
 
   getBody(children) {
@@ -106,17 +198,29 @@ class Modal extends React.Component {
         return el
       }
     }
-    return <Body />
+
+    return (
+      <Body>{children}</Body>
+    )
   }
 
   getFooter(children) {
     if (Array.isArray(children)) {
       const el = children.filter((comp) => comp.type.name == 'Footer').shift()
       if (el) {
+        console.log(el.props)
         return el
       }
     }
-    return <Footer />
+
+    return (
+      <Footer
+        secondaryText={this.props.secondaryText}
+        primaryText={this.props.primaryText}
+        withSecondary={this.props.withSecondary}
+        onSecondaryClick={this.secondaryClicked}
+        onPrimaryClick={this.primaryClicked}/>
+    )
   }
 
   render() {
@@ -124,34 +228,49 @@ class Modal extends React.Component {
       overflow: 'auto'
     }
 
-    const { children } = this.props
+    let modal = null
 
-    const header = this.getHeader(children)
-    const body = this.getBody(children)
-    const footer = this.getFooter(children)
+    if (this.props.isVisible) {
 
-    return (
-      <div style={ { display: this.props.isVisible ? 'block' : 'none' } }>
-        <div className="modal-backdrop fade in"></div>
-        <div
-          className="modal show"
-          tabindex="-1"
-          role="dialog"
-          style={ style }>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header">
-                { header }
-              </div>
-              <div className="modal-body">
-                { body }
-              </div>
-              <div className="modal-footer">
+      const { children } = this.props
+      const header = this.getHeader(this.props.title || children)
+      const body = this.getBody(children)
+      const footer = this.getFooter(children)
+      modal = (
+        <div>
+          <div className="modal-backdrop fade in"></div>
+          <div
+            ref="holder"
+            className="modal show"
+            tabindex="-1"
+            role="dialog"
+            onClick={this.onClickOut}
+            style={ style }>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  { header }
+                </div>
+                <div className="modal-body">
+                  { body }
+                </div>
+
                 { footer }
               </div>
             </div>
           </div>
         </div>
+      )
+    }
+
+    return (
+      <div>
+        <ReactCSSTransitionGroup
+          transitionName="caqui-modal-anim"
+          transitionEnterTimeout={350}
+          transitionLeaveTimeout={350}>
+          {modal}
+        </ReactCSSTransitionGroup>
       </div>
     )
   }

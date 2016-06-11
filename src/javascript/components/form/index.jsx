@@ -8,6 +8,16 @@ import Footer from './footer'
  * TODO: PropTypes
  */
 class Form extends Component {
+
+  static contextTypes = {
+    caquiRelatedForm: React.PropTypes.string,
+    caquiModel: React.PropTypes.any
+  }
+
+  static defaultProps = {
+    form: true
+  }
+
   constructor(props) {
     super(props)
 
@@ -31,6 +41,12 @@ class Form extends Component {
     this.props.onSubmit && this.props.onSubmit(value, evt)
   }
 
+  componentWillMount() {
+    if (this.props.resetOnMount) {
+      this.props.model.reset()
+    }
+  }
+
   undo() {
     const { model } = this.props
 
@@ -45,15 +61,23 @@ class Form extends Component {
       onSubmit: this.submit
     }
 
-    return (
-      <form {...props}>
-        <AlertBox namespace={ props.name }/>
-        { props.children }
-      </form>
-    )
+    if (this.props.form) {
+      return (
+        <form {...props}>
+          <AlertBox namespace={ props.name }/>
+          { props.children }
+        </form>
+      )
+    } else {
+      return (
+        <div {...props}>
+          <AlertBox namespace={ props.name }/>
+          { props.children }
+        </div>
+      )
+    }
   }
 }
-
 
 Form.Group = Group
 Form.Footer = Footer

@@ -34,7 +34,7 @@ export default class Header extends React.Component {
                 type="button"
                 onClick={ this.prevMonth }
                 className="caqui-button caqui-button-default caqui-button-xs">
-                &lt
+                &lt;
               </button>
             </td>
             <td className="caqui-datetime-header-current-day-holder">
@@ -49,7 +49,7 @@ export default class Header extends React.Component {
                 type="button"
                 onClick={ this.nextMonth }
                 className="caqui-button caqui-button-default caqui-button-xs">
-                &gt
+                &gt;
               </button>
             </td>
           </tr>

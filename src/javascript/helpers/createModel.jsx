@@ -18,10 +18,17 @@ const actions = {
       type: 'SET',
       data: newData
     }
+  },
+  reset() {
+    return {
+      type: 'RESET',
+      data: null
+    }
   }
 }
 
 function buildStore(initial) {
+  const pastState = new OrderedMap(initial)
   const initialState = new OrderedMap(initial)
 
   const reducer = function (state = initialState, action) {
@@ -32,6 +39,8 @@ function buildStore(initial) {
         return state.setIn(data.field.split('.'), data.value)
       case 'SET':
         return new OrderedMap(data)
+      case 'RESET':
+        return new OrderedMap(pastState)
       default:
         return state
     }
@@ -49,6 +58,7 @@ function buildStore(initial) {
 
 class Model {
   constructor(initial = {}) {
+
     this.store = buildStore({
       ...initial
     })
@@ -77,6 +87,10 @@ class Model {
 
   set(data) {
     this.store.dispatch(actions.set(data))
+  }
+
+  reset() {
+    this.store.dispatch(actions.reset())
   }
 
   subscribe(fn) {

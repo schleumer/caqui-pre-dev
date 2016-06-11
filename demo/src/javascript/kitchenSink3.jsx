@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import * as Caqui from '../../../lib/index'
 
-const { Components: { Row, Column, Picker, Modal }, Helpers: { PagedStore: { pagedRemoteStore } } } = Caqui
+const { Components: { Form, Button, Row, Column, Picker, Modal, TextInput, ModelDump }, Helpers: { createModel, PagedStore: { pagedRemoteStore } } } = Caqui
 
-const githubApi = ( /*query, limit, page*/ ) => '/example.json'
-  //`https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&page=${page}`;
-  
+const githubApi = (/*query, limit, page*/) => '/example.json'
+//`https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&page=${page}`;
+
 
 const githubApiResponse = ({ data }) => ({
   items: data.items,
@@ -21,37 +20,58 @@ class KitchenSink3 extends Component {
 
     this.displayName = 'KitchenSink3'
 
-    this.test1Adapter = pagedRemoteStore( githubApi, githubApiResponse, null, 30 )
+    this.test1Adapter = pagedRemoteStore(githubApi, githubApiResponse, null, 30)
 
     this.state = {
-      modalVisible: true
+      modalVisible: false
     }
+
+    this.launchModal = this.launchModal.bind(this)
+    this.closeModal = this.closeModal.bind(this)
+
+    this.formModel = createModel({
+      test_1: 'WE DO ACCEPT NESTED FORMS YEAH'
+    })
+  }
+
+  launchModal() {
+    this.setState({ modalVisible: true })
+  }
+
+  closeModal() {
+    this.setState({ modalVisible: false })
   }
 
   render() {
     return (
       <Row>
         <Column>
-          <Picker adapter={ this.test1Adapter } />
+          <Picker adapter={ this.test1Adapter }/>
         </Column>
         <Column>
-          <Modal isVisible={ this.state.modalVisible }>
-            <Modal.Header>
-              Hell
-            </Modal.Header>
-            <Modal.Body>
-              Top
-            </Modal.Body>
-            <Modal.Footer>
-              hehe
-            </Modal.Footer>
+          <TextInput
+            name="test_1"
+            label="Campo de Teste 1"/>
+          <Modal
+            isVisible={ this.state.modalVisible }
+            title="Teste"
+            onClose={ this.closeModal }
+            withSecondary={ false }
+            onPrimaryClick={ this.closeModal }>
+            <Form model={ this.formModel } form={false} resetOnMount={true}>
+              <TextInput
+                name="test_1"
+                label="Campo de Teste 1"/>
+              <ModelDump />
+            </Form>
           </Modal>
+          <Button onClick={ this.launchModal }>Launch Modal</Button>
         </Column>
       </Row>
-      )
+    )
   }
 }
 
 const select = (state) => state
 
-export default connect( select )( KitchenSink3 )
+export default connect(select)(KitchenSink3)
