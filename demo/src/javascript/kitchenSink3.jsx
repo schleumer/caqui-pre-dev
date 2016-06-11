@@ -4,7 +4,7 @@ import * as Caqui from '../../../lib/index'
 
 const { Components: { Form, Button, Row, Column, Picker, Modal, TextInput, ModelDump }, Helpers: { createModel, PagedStore: { pagedRemoteStore } } } = Caqui
 
-const githubApi = (/*query, limit, page*/) => '/example.json'
+const githubApi = (/*query, limit, page*/) => 'example.json'
 //`https://api.github.com/search/repositories?q=${query}&sort=stars&order=desc&page=${page}`;
 
 
