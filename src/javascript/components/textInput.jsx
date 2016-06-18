@@ -5,9 +5,6 @@ import Icon from './icon'
 import AlertBox from './alertBox'
 import Base from './base'
 import { createEvent, modelize } from '../helpers'
-import * as Styles from '../styles'
-
-const styles = Styles.textInput
 
 /// XXX: ?????????????
 let objectId = 1
@@ -157,7 +154,7 @@ class TextInput extends Base {
 
     return (
       <Form.Group>
-        { label && <label style={ styles.label }>
+        { label && <label>
           { label }
         </label> }
         <div className="caqui-form-control-holder">

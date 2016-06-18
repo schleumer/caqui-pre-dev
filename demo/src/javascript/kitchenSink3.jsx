@@ -44,9 +44,9 @@ class KitchenSink3 extends Component {
 
   render() {
     return (
-      <Row>
+      <Row style={ { paddingTop: 20 } }>
         <Column>
-          <Picker adapter={ this.test1Adapter }/>
+          <Picker name="test_tags" label="Teste de Tags" adapter={ this.test1Adapter }/>
         </Column>
         <Column>
           <TextInput
