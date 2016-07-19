@@ -51,7 +51,19 @@ class Button extends Base {
   }
 
   render() {
-    const { type, className, icon, size, to, submit, text, children, block } = this.props
+    const { type, className } = this.props
+
+    const {
+      label,
+      submit,
+      to,
+      icon,
+      size,
+      text,
+      block,
+      children,
+      ...buttonProps
+    } = this.props;
 
     const classNames = cx('caqui-button', type, className, size, {
       'caqui-button-block': block
@@ -67,27 +79,19 @@ class Button extends Base {
       )
     }
 
-    const props = {
-      ...this.props,
-      type: null,
-      size: null,
-      to: null,
-      submit: null,
-      className: classNames
-    }
-
     if (!to) {
       return (
         <button
-          {...props}
-          type={ submit ? 'submit' : 'button' }>
+          {...buttonProps}
+          type={ submit ? 'submit' : 'button' }
+          className={classNames}>
           <span>{ iconEl }</span>
           <span>{ children || text }</span>
         </button>
       )
     } else {
       return (
-        <Link {...props}>
+        <Link {...buttonProps} className={classNames}>
           <span>{ iconEl }</span>
           <span>{ children || text }</span>
         </Link>

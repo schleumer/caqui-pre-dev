@@ -2,6 +2,8 @@ import { createStore, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 const actionsBuilder = (base) => {
+  console.log(base);
+
   return {
     clear() {
       return {
@@ -91,11 +93,9 @@ const storeBuilder = (base, valuedBy, itemKey) => {
       case 'BASE_UPDATED':
         return {
           ...state,
+          ...data,
           items: data.items.map(itemify),
           position: 0,
-          loading: data.loading,
-          total: data.total,
-          filter: data.filter,
           status: getStatus(data.filter, data)
         }
       case 'CLEAR':
@@ -182,6 +182,33 @@ const storeBuilder = (base, valuedBy, itemKey) => {
     },
     update(value) {
       store.dispatch(actions.update(value))
+    },
+    firstPage() {
+      return base.firstPage();
+    },
+    goToPage(num) {
+      return base.goToPage(num);
+    },
+    hasFirst() {
+      return base.hasFirst();
+    },
+    hasLast() {
+      return base.hasLast();
+    },
+    hasNext() {
+      return base.hasNext();
+    },
+    hasPrev() {
+      return base.hasPrev();
+    },
+    lastPage() {
+      return base.lastPage();
+    },
+    nextPage() {
+      return base.nextPage();
+    },
+    prevPage() {
+      return base.prevPage();
     },
     actions
   }

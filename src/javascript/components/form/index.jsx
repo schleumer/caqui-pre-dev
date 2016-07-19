@@ -61,16 +61,23 @@ class Form extends Component {
       onSubmit: this.submit
     }
 
+    const {
+      model,
+      caquiModel,
+      caquiRelatedForm,
+      ...formProps
+    } = props;
+
     if (this.props.form) {
       return (
-        <form {...props}>
+        <form {...formProps}>
           <AlertBox namespace={ props.name }/>
           { props.children }
         </form>
       )
     } else {
       return (
-        <div {...props}>
+        <div {...formProps}>
           <AlertBox namespace={ props.name }/>
           { props.children }
         </div>

@@ -131,7 +131,7 @@ class Modal extends React.Component {
           <div
             ref="holder"
             className="modal show"
-            tabindex="-1"
+            tabIndex="-1"
             role="dialog"
             onClick={this.onClickOut}
             style={ style }>

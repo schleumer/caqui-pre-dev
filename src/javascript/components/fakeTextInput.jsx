@@ -8,9 +8,8 @@ import * as system from '../system'
 /// XXX: ?????????????
 let objectId = 1
 
-class TextInput extends Base {
+class FakeTextInput extends Base {
   static propTypes = {
-    caquiRelatedForm: PropTypes.string,
     label: React.PropTypes.oneOfType([
       React.PropTypes.string,
       React.PropTypes.element
@@ -22,7 +21,6 @@ class TextInput extends Base {
   }
 
   static defaultProps = {
-    caquiRelatedForm: null,
     label: null,
     placeholder: null
   }
@@ -143,4 +141,4 @@ class TextInput extends Base {
   }
 }
 
-export default modelize(TextInput)
+export default modelize(FakeTextInput)
