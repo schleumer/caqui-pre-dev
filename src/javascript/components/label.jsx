@@ -16,9 +16,22 @@ class Label extends React.Component {
 
     let hintBox = null
 
+    if (hint) {
+      hintBox = (
+        <div className="caqui-label-hint">
+          <Icon
+            name="help-circle"
+            className="hint-icon"/>
+          <div className="hint">
+            { hint }
+          </div>
+        </div>
+      )
+    }
+
     return (
-      <div>
-        {text}{hintBox}
+      <div className="caqui-label">
+        <label>{text}</label>{hintBox}
       </div>
     )
   }

@@ -6,7 +6,7 @@ import * as actions from './actions'
 // THIS IS WRONG, THIS IS SO WRONG
 // https://www.youtube.com/v/bW8FbKswSRU&start=101&end=128
 // TODO: Another way to do this!
-const iconsFile = require('./icons.js')
+const iconsFile = require('./icons')
 const body = document.getElementsByTagName('body')[0]
 const iconsElement = document.createElement('div')
 iconsElement.style.display = 'none'

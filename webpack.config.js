@@ -19,7 +19,7 @@ const vendorPackages = [
   'reselect',
   'classnames',
   'react-addons-css-transition-group',
-  path.resolve(__dirname, './lib/index')
+  path.resolve(__dirname, './src/javascript/index')
 ]
 
 module.exports = {
@@ -59,7 +59,8 @@ module.exports = {
         loader: 'babel',
 
         include: [
-          path.resolve(__dirname, 'demo', 'src', 'javascript')
+          path.resolve(__dirname, 'demo', 'src', 'javascript'),
+          path.resolve(__dirname, 'src', 'javascript')
         ],
 
         test: /\.jsx?$/

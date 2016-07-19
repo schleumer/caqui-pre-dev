@@ -31,7 +31,14 @@ class App extends Component {
     this.displayName = 'App'
 
     this.formModel = createModel({
-      page: 'page1'
+      page: 'page1',
+      test_checkbox2: true,
+      test_tags2: [
+        {
+          'id': 1,
+          'name': 'hehe'
+        }
+      ]
     })
   }
 
@@ -46,15 +53,15 @@ class App extends Component {
               model={ this.formModel }
               name="tests">
               <ValuedTabs name="page">
-                <KitchenSink1
+                <KitchenSink3
                   id="page1"
+                  header="Pagina 3"/>
+                <KitchenSink1
+                  id="page2"
                   header="Pagina 1"/>
                 <KitchenSink2
-                  id="page2"
-                  header="Pagina 2"/>
-                <KitchenSink3
                   id="page3"
-                  header="Pagina 3"/>
+                  header="Pagina 2"/>
               </ValuedTabs>
               <Row>
                 <Column>

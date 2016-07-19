@@ -42,7 +42,7 @@ class Header extends React.Component {
           aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 className="modal-title">Modal title</h4>
+        <h4 className="modal-title">{this.props.title || 'Selecione os valores'}</h4>
       </div>
     )
   }

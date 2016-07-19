@@ -46,3 +46,32 @@
 .caqui-fake-text-input-placeholder {
   color: @input-color-placeholder;
 }
+
+.caqui-label {
+  &-hint {
+    display: inline-block;
+    
+    .hint {
+      .tooltip-inner();
+
+      display: none;
+      position: absolute;
+      top: -3px;
+      max-width: none;
+      min-width: 100px;
+
+      &-icon {
+        width: 18px;
+        height: 18px;
+        margin-left: 4px;
+        top: -2px;
+      }
+    }
+
+    &:hover {
+      .hint {
+        display: block;
+      }
+    }
+  }
+}

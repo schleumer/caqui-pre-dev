@@ -61,7 +61,7 @@ class Modal extends React.Component {
     if (this.props.onSecondaryClick) {
       this.props.onSecondaryClick()
     } else {
-      this.props.onClose()
+      this.onClose()
     }
   }
 
@@ -76,9 +76,7 @@ class Modal extends React.Component {
     }
 
     return (
-      <Header onClose={this.onClose}>
-        {children}
-      </Header>
+      <Header onClose={this.onClose} title={this.props.title} />
     )
   }
 
