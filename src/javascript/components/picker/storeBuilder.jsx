@@ -2,8 +2,6 @@ import { createStore, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 const actionsBuilder = (base) => {
-  console.log(base);
-
   return {
     clear() {
       return {
@@ -176,6 +174,9 @@ const storeBuilder = (base, valuedBy, itemKey) => {
     },
     showModal() {
       store.dispatch(actions.showModal())
+    },
+    hideModal() {
+      store.dispatch(actions.hideModal())
     },
     toggleModal() {
       store.dispatch(actions.toggleModal())

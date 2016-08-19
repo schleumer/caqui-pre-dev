@@ -86,6 +86,7 @@ class Picker extends React.Component {
     const newState = store.getState()
     this.props.onChange && this.props.onChange(createEvent(null, this, newState.checked))
     this.setState({ value: newState.checked })
+    this.store.hideModal()
   }
 
   render() {
@@ -117,4 +118,3 @@ class Picker extends React.Component {
 }
 
 export default modelize(Picker)
-

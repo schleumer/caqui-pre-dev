@@ -203,65 +203,75 @@ class Modal extends React.Component {
       )
     })
 
-    let pageButtons = Range(1, totalOfPages + 1)
-      .filter(item => {
-        return ((item <= 3 && page < 3) || (item <= page + 1 && item >= page - 1)) || (item > (totalOfPages - 3))
-      }).map((item) => {
-        return (
-          <PaginationButton
-            active={ (item) == page }
-            disabled={ (item) == page }
-            key={ `page.${item}` }
-            onClick={ this.goToPage( item ) }>
-            { item }
-          </PaginationButton>
-        )
-      }).toJS()
+    let pagination = null
 
-    if (pageButtons.length == 6) {
-      pageButtons = [
-        ... pageButtons.slice(0, 3),
-        <PaginationButton
-          disabled={ true }
-          key="...">
-          ...
-        </PaginationButton>,
-        ... pageButtons.slice(3, 6)
-      ]
+    if (totalOfPages > 1) {
+      let pageButtons = Range(1, totalOfPages + 1)
+        .filter(item => {
+          return ((item <= 3 && page < 3) || (item <= page + 1 && item >= page - 1)) || (item > (totalOfPages - 3))
+        }).map((item) => {
+          return (
+            <PaginationButton
+              active={ (item) == page }
+              disabled={ (item) == page }
+              key={ `page.${item}` }
+              onClick={ this.goToPage( item ) }>
+              { item }
+            </PaginationButton>
+          )
+        }).toJS()
+
+      if (pageButtons.length == 6) {
+        pageButtons = [
+          ... pageButtons.slice(0, 3),
+          <PaginationButton
+            disabled={ true }
+            key="...">
+            ...
+          </PaginationButton>,
+          ... pageButtons.slice(3, 6)
+        ]
+      }
+
+      pagination = (
+        <div>
+          <div style={ { textAlign: 'center' } }>
+            <ul className="pagination" style={ { padding: '5px', margin: 0 } }>
+              <PaginationButton
+                disabled={ !this.hasFirst() }
+                onClick={ this.firstPage }>
+                <Icon name="rewind"/>
+              </PaginationButton>
+              <PaginationButton
+                disabled={ !this.hasPrev() }
+                onClick={ this.prevPage }>
+                <Icon name="backward"/>
+              </PaginationButton>
+              { pageButtons }
+              <PaginationButton
+                disabled={ !this.hasNext() }
+                onClick={ this.nextPage }>
+                <Icon name="forward"/>
+              </PaginationButton>
+              <PaginationButton
+                disabled={ !this.hasLast() }
+                onClick={ this.lastPage }>
+                <Icon name="fast-forward"/>
+              </PaginationButton>
+            </ul>
+          </div>
+        </div>
+      )
     }
 
     return (
       <div>
-        <CaquiModal isVisible={this.props.isVisible} onClose={this.props.onClose}>
+        <CaquiModal isVisible={this.props.isVisible} onClose={this.props.onClose} onPrimaryClick={this.props.onConfirm}>
           <div>
             { items }
           </div>
           <div>
-            <div style={ { textAlign: 'center', 'marginBottom': '20px' } }>
-              <ul className="pagination">
-                <PaginationButton
-                  disabled={ !this.hasFirst() }
-                  onClick={ this.firstPage }>
-                  <Icon name="rewind"/>
-                </PaginationButton>
-                <PaginationButton
-                  disabled={ !this.hasPrev() }
-                  onClick={ this.prevPage }>
-                  <Icon name="backward"/>
-                </PaginationButton>
-                { pageButtons }
-                <PaginationButton
-                  disabled={ !this.hasNext() }
-                  onClick={ this.nextPage }>
-                  <Icon name="forward"/>
-                </PaginationButton>
-                <PaginationButton
-                  disabled={ !this.hasLast() }
-                  onClick={ this.lastPage }>
-                  <Icon name="fast-forward"/>
-                </PaginationButton>
-              </ul>
-            </div>
+            { pagination }
           </div>
         </CaquiModal>
       </div>
