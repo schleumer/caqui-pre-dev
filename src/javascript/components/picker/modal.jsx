@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react'
 import CaquiModal from '../modal'
 import CheckBox from '../checkBox'
+import TextInput from '../textInput'
+import Button from '../button'
 import Cage from '../cage'
 import Icon from '../icon'
 import { Range } from 'immutable'
@@ -122,6 +124,30 @@ class Modal extends React.Component {
     this.nextPage = this.nextPage.bind(this)
     this.lastPage = this.lastPage.bind(this)
     this.goToPage = this.goToPage.bind(this)
+    this.close = this.close.bind(this)
+    this.search = this.search.bind(this)
+    this.searchKeyDown = this.searchKeyDown.bind(this)
+    this.searchDebounce = null
+  }
+
+  searchKeyDown(event) {
+    switch(event.which) {
+      case 27:
+        this.props.adapter.hideModal()
+        break
+    }
+  }
+
+  search(event) {
+    const query = event.target.value
+
+    if (this.searchDebounce) {
+      clearTimeout(this.searchDebounce)
+    }
+
+    this.searchDebounce = setTimeout(() => {
+      this.props.adapter.filter(query)
+    }, 300)
   }
 
   onItemChecked() {
@@ -184,6 +210,10 @@ class Modal extends React.Component {
     return () => {
       this.adapterWillChange(this.props.adapter.goToPage(page))
     }
+  }
+
+  close() {
+    this.props.adapter.hideModal()
   }
 
   render() {
@@ -266,13 +296,30 @@ class Modal extends React.Component {
 
     return (
       <div>
-        <CaquiModal isVisible={this.props.isVisible} onClose={this.props.onClose} onPrimaryClick={this.props.onConfirm}>
-          <div>
-            { items }
-          </div>
-          <div>
-            { pagination }
-          </div>
+        <CaquiModal
+          isVisible={this.props.isVisible}
+          onClose={this.props.onClose}>
+          <CaquiModal.Body>
+            <div>
+              <Cage>
+                <TextInput
+                  onKeyDown={this.searchKeyDown}
+                  onChange={this.search}
+                  placeholder="Buscar..."
+                  autoFocus />
+              </Cage>
+            </div>
+            <div>
+              { items }
+            </div>
+            <div>
+              { pagination }
+            </div>
+          </CaquiModal.Body>
+          <CaquiModal.Footer>
+            <Button style={{marginRight: 5}} onClick={this.close}>Cancelar</Button>
+            <Button type={Button.Primary} onClick={this.props.onConfirm}>Salvar</Button>
+          </CaquiModal.Footer>
         </CaquiModal>
       </div>
     )

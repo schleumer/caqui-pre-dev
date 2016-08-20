@@ -97,7 +97,6 @@ class Modal extends React.Component {
     if (Array.isArray(children)) {
       const el = children.filter((comp) => comp.type.name == 'Footer').shift()
       if (el) {
-        console.log(el.props)
         return el
       }
     }

@@ -211,6 +211,9 @@ const storeBuilder = (base, valuedBy, itemKey) => {
     prevPage() {
       return base.prevPage();
     },
+    filter(query) {
+      return base.filter(query);
+    },
     actions
   }
 }

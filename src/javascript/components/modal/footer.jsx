@@ -46,7 +46,7 @@ class Footer extends React.Component {
 
     if (this.props.children) {
       return (
-        <div>
+        <div className="modal-footer">
           {secondaryButton}
           {this.props.children}
         </div>
