@@ -28,7 +28,7 @@ const end = () => ({
 })
 
 gulp.task('lint', function () {
-  return gulp.src([ 'src/javascript/**/*.js', 'src/javascript/**/*.jsx' ])
+  return gulp.src([ 'src/**/*.js', 'src/**/*.jsx' ])
     .pipe(changed('lib', { extension: '.js' }))
     .pipe(eslint())
     .pipe(eslint.format())
