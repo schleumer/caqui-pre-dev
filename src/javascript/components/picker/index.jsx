@@ -6,6 +6,13 @@ import { modelize, createEvent } from '../../helpers'
 import Modal from './modal'
 import storeBuilder from './storeBuilder'
 
+
+class Tooltip extends React.Component {
+  render() {
+    return this.props.children;
+  }
+}
+
 /**
  * TODO: PropTypes
  */
@@ -95,6 +102,18 @@ class Picker extends React.Component {
       },
       { label } = props
 
+    let choosen = []
+
+    if(Array.isArray(this.state.value)) {
+      choosen = this.state.value.map((item) =>
+          <Tooltip content={"Okok"}>
+            <Button style={{ marginRight: 4 }}
+                    className="caqui-picker-showcase-button">{props.itemLabel(item)}
+            </Button>
+          </Tooltip>
+      )
+    }
+
     return (
       <Form.Group>
         <Label text={label} hint={"gtfo"}/>
@@ -110,6 +129,7 @@ class Picker extends React.Component {
             checkedItems={this.state.checked}
             onChange={this.onChange}
             onConfirm={this.onConfirm}/>
+          {choosen}
           <Button onClick={this.toggleModal}>Selecionar</Button>
         </div>
       </Form.Group>
