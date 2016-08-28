@@ -1,0 +1,1 @@
+This utils were extracted from [`react-bootstrap`](https://github.com/react-bootstrap/react-bootstrap)

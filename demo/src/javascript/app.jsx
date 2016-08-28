@@ -10,7 +10,7 @@ import KitchenSink1 from './kitchenSink1'
 import KitchenSink2 from './kitchenSink2'
 import KitchenSink3 from './kitchenSink3'
 
-const { Components: { Page, Form, Row, Column, ModelDump, Container, ValuedTabs }, Helpers: { createModel } } = Caqui
+const { Components: { Page, Form, Container, ValuedTabs }, Helpers: { createModel } } = Caqui
 
 export const reducer = combineReducers(Object.assign({}, {
   routing: routerReducer
@@ -63,11 +63,11 @@ class App extends Component {
                   id="page3"
                   header="Pagina 2"/>
               </ValuedTabs>
-              <Row>
-                <Column>
-                  <ModelDump />
-                </Column>
-              </Row>
+              {/*<Row>*/}
+                {/*<Column>*/}
+                  {/*<ModelDump />*/}
+                {/*</Column>*/}
+              {/*</Row>*/}
             </Form>
           </Page.Container>
         </Page>

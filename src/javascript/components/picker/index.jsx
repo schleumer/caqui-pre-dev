@@ -5,13 +5,9 @@ import Label from '../label'
 import { modelize, createEvent } from '../../helpers'
 import Modal from './modal'
 import storeBuilder from './storeBuilder'
-
-
-class Tooltip extends React.Component {
-  render() {
-    return this.props.children;
-  }
-}
+import { OverlayTrigger } from '../overlay'
+import Tooltip from '../tooltip'
+import Icon from '../icon'
 
 /**
  * TODO: PropTypes
@@ -46,6 +42,7 @@ class Picker extends React.Component {
     this.toggleModal = this.toggleModal.bind(this)
     this.onChange = this.onChange.bind(this)
     this.onConfirm = this.onConfirm.bind(this)
+    this.removeItem = this.removeItem.bind(this)
   }
 
   componentWillMount() {
@@ -96,21 +93,38 @@ class Picker extends React.Component {
     this.store.hideModal()
   }
 
+  removeItem(item) {
+    return () => {
+      const newValues = this.state.value.filter((baseItem) => {
+        return baseItem != item
+      })
+      this.props.onChange && this.props.onChange(createEvent(null, this, newValues))
+      this.setState({ value: newValues })
+    }
+  }
+
   render() {
     const props = {
         ...this.props
       },
       { label } = props
 
-    let choosen = []
+    let chosen = []
 
-    if(Array.isArray(this.state.value)) {
-      choosen = this.state.value.map((item) =>
-          <Tooltip content={"Okok"}>
-            <Button style={{ marginRight: 4 }}
-                    className="caqui-picker-showcase-button">{props.itemLabel(item)}
-            </Button>
-          </Tooltip>
+    const tooltip = (text) => {
+      return (<Tooltip id="tooltip">{text}</Tooltip>)
+    }
+
+    if (Array.isArray(this.state.value)) {
+      chosen = this.state.value.map((item) =>
+        <OverlayTrigger placement="top" overlay={tooltip('Clique para remover')} key={props.itemKey(item)}>
+          <Button style={{ marginRight: 4 }}
+                  className="caqui-picker-showcase-button"
+                  onClick={this.removeItem(item)}>
+            {props.itemLabel(item)}
+            <Icon name="close" style={ { marginLeft: 4, opacity: .5 } } />
+          </Button>
+        </OverlayTrigger>
       )
     }
 
@@ -129,7 +143,7 @@ class Picker extends React.Component {
             checkedItems={this.state.checked}
             onChange={this.onChange}
             onConfirm={this.onConfirm}/>
-          {choosen}
+          {chosen}
           <Button onClick={this.toggleModal}>Selecionar</Button>
         </div>
       </Form.Group>
