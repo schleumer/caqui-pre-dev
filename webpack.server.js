@@ -28,7 +28,7 @@ app.use(require('webpack-dev-middleware')(compiler, {
 
 app.use(require('webpack-hot-middleware')(compiler))
 
-app.use(express.static(path.join(__dirname, 'demo', 'dist')))
+app.use(express.static(path.join(__dirname, 'docs')))
 
 app.listen(3001, 'localhost', function (err) {
   if (err) {
