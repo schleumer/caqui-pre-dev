@@ -37,7 +37,7 @@ module.exports = {
     vendor: vendorPackages
   },
   output: {
-    path: path.join(__dirname, 'demo', 'dist')
+    path: path.join(__dirname, 'docs')
   },
   resolve: {
     extensions: [ '', '.js', '.jsx' ]

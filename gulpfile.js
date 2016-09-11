@@ -47,7 +47,7 @@ gulp.task('babel', () => {
 gulp.task('copy-files', () => {
   return gulp.src([ './demo/src/example.json', './demo/src/index.html' ])
     .pipe(plumber())
-    .pipe(gulp.dest('./demo/dist'))
+    .pipe(gulp.dest('./docs'))
 })
 
 gulp.task('dev-less', () => {
@@ -56,7 +56,7 @@ gulp.task('dev-less', () => {
     .pipe(less({
       paths: [ path.join(__dirname, 'node_modules') ]
     }))
-    .pipe(gulp.dest('./demo/dist/'))
+    .pipe(gulp.dest('./docs/'))
 })
 
 gulp.task('watch-javascript', () => {
