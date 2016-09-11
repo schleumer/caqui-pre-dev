@@ -9,6 +9,7 @@ import * as Caqui from '../../../lib/index'
 import KitchenSink1 from './kitchenSink1'
 import KitchenSink2 from './kitchenSink2'
 import KitchenSink3 from './kitchenSink3'
+import KitchenSink4 from './kitchenSink4'
 
 const { Components: { Page, Form, Container, ValuedTabs }, Helpers: { createModel } } = Caqui
 
@@ -31,7 +32,7 @@ class App extends Component {
     this.displayName = 'App'
 
     this.formModel = createModel({
-      page: 'page1',
+      page: 'page4',
       test_checkbox2: true,
       test_tags2: [
         {
@@ -53,15 +54,18 @@ class App extends Component {
               model={ this.formModel }
               name="tests">
               <ValuedTabs name="page">
+                <KitchenSink4
+                  id="page4"
+                  header="Pagina 4"/>
                 <KitchenSink3
-                  id="page1"
-                  header="Pagina 3"/>
-                <KitchenSink1
-                  id="page2"
-                  header="Pagina 1"/>
-                <KitchenSink2
                   id="page3"
+                  header="Pagina 3"/>
+                <KitchenSink2
+                  id="page2"
                   header="Pagina 2"/>
+                <KitchenSink1
+                  id="page1"
+                  header="Pagina 1"/>
               </ValuedTabs>
               {/*<Row>*/}
                 {/*<Column>*/}

@@ -1,10 +1,10 @@
-import React  from 'react'
+import React from 'react'
 import cx from 'classnames'
 import Form from './form'
 import Icon from './icon'
 import AlertBox from './alertBox'
 import Base from './base'
-import { createEvent, modelize } from '../helpers'
+import { createEvent, modelize, cleanProps } from '../helpers'
 
 /// XXX: ?????????????
 let objectId = 1
@@ -116,7 +116,7 @@ class TextInput extends Base {
   }
 
   render() {
-    const props = {
+    let props = {
         ...this.props
       },
       { label, placeholder, className, hint } = props
@@ -130,8 +130,8 @@ class TextInput extends Base {
     if (this.id) {
       alertBox = (
         <AlertBox
-        silence={ true }
-        namespace={ this.id }/>
+          silence={ true }
+          namespace={ this.id }/>
       )
     }
 
@@ -151,6 +151,8 @@ class TextInput extends Base {
     if (!props.hasOwnProperty('defaultValue')) {
       props.value = this.state.value || ''
     }
+
+    props = cleanProps(props, TextInput.propTypes)
 
     return (
       <Form.Group>
