@@ -23,7 +23,21 @@ const compiler = webpack(config)
 
 app.use(require('webpack-dev-middleware')(compiler, {
   noInfo: false,
-  publicPath: '/'
+  publicPath: '/',
+  stats: {
+    hash: false,
+    timings: true,
+    chunks: false,
+    chunkModules: false,
+    modules: false,
+    children: true,
+    version: true,
+    cached: false,
+    cachedAssets: false,
+    reasons: false,
+    source: false,
+    errorDetails: false
+  }
 }))
 
 app.use(require('webpack-hot-middleware')(compiler))

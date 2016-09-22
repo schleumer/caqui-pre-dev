@@ -1,0 +1,26 @@
+/*
+ * Copyright (c) 2016, Globo.com (https://github.com/globocom)
+ *
+ * License: MIT
+ */
+
+.media__message {
+  &--error {
+    background-color: @brand-danger;
+    color: #fff;
+  }
+
+  &--warning {
+    background-color: #fff7d8;
+    color: @brand-warning;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+.media__message-text {
+  text-align: left;
+  padding: 8px;
+  font-size: @font-size-base;
+  line-height: 16px;
+  font-weight: bold;
+}

@@ -9,13 +9,15 @@ class ListOfItems extends React.Component {
   static propTypes = {
     caquiRelatedForm: PropTypes.string,
     uniqueBy: PropTypes.func,
-    before: PropTypes.func
+    before: PropTypes.func,
+    filter: PropTypes.func
   }
 
   static defaultProps = {
     itemLabel: _ => _,
     itemKey: _ => btoa(JSON.stringify(_)),
-    before: _ => _
+    before: _ => _,
+    filter: _ => _
   }
 
   // TODO: ???
@@ -107,7 +109,7 @@ class ListOfItems extends React.Component {
     let info = null
 
     if (this.state.items) {
-      items = this.state.items.map(item => (
+      items = this.state.items.filter(this.props.filter).map(item => (
         <tr key={ itemKey( item ) }>
           <td style={ { width: '100%' } }>
             { itemLabel(item) }
